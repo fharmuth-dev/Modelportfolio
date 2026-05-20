@@ -409,20 +409,101 @@
       font-family:Georgia, 'Times New Roman', serif;
     }
 
-    .gallery-note{
-      max-width:420px;
-      color:var(--muted);
-      line-height:1.65;
-      font-size:14px;
+    .gallery-chem{
+      position:relative;
+      display:grid;
+      grid-template-columns:72px 1fr;
+      gap:16px;
+      align-items:stretch;
+      max-width:470px;
+      background:rgba(228,218,203,.52);
+      border:1px solid rgba(23,20,17,.18);
+      box-shadow:0 10px 24px rgba(23,20,17,.08);
+      overflow:hidden;
     }
 
-    .gallery-note strong{
-      display:block;
-      color:var(--text);
+    .gallery-chem::before{
+      content:"MONOCHROME SERIES";
+      position:absolute;
+      right:12px;
+      top:7px;
+      font-size:8px;
+      letter-spacing:.2em;
+      color:rgba(23,20,17,.38);
+      text-transform:uppercase;
+      z-index:3;
+    }
+
+    .gallery-chem::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.2),
+        transparent
+      );
+      transform:translateX(-120%);
+      animation:entrySweep 7s ease-in-out infinite;
+    }
+
+    .gallery-chem-symbol{
+      position:relative;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:var(--green);
+      color:var(--green-light);
       font-family:Georgia, 'Times New Roman', serif;
-      font-weight:400;
+      font-size:22px;
+      letter-spacing:-.03em;
+      min-height:72px;
+    }
+
+    .gallery-chem-symbol::before{
+      content:"04";
+      position:absolute;
+      top:6px;
+      left:7px;
+      font-size:9px;
+      font-family:Arial, Helvetica, sans-serif;
+      opacity:.7;
+    }
+
+    .gallery-chem-symbol::after{
+      content:"";
+      position:absolute;
+      right:6px;
+      bottom:6px;
+      width:7px;
+      height:7px;
+      border:1px solid rgba(233,244,220,.6);
+      opacity:.7;
+    }
+
+    .gallery-chem-content{
+      padding:22px 16px 13px 0;
+      position:relative;
+      z-index:2;
+    }
+
+    .gallery-chem-title{
+      font-family:Georgia, 'Times New Roman', serif;
       font-size:18px;
       margin-bottom:4px;
+      color:var(--text);
+    }
+
+    .gallery-chem-title span{
+      color:var(--accent);
+    }
+
+    .gallery-chem-line{
+      font-size:12.5px;
+      line-height:1.5;
+      color:var(--muted);
     }
 
     .grid{
@@ -616,8 +697,15 @@
         display:block;
       }
 
-      .gallery-note{
+      .gallery-chem{
         margin-top:18px;
+        grid-template-columns:64px 1fr;
+        max-width:100%;
+      }
+
+      .gallery-chem-symbol{
+        min-height:70px;
+        font-size:20px;
       }
 
       .grid{
@@ -716,14 +804,28 @@
     <div class="gallery-top">
 
       <h2>
-        Schwarzweiß<br>
+        Schwarz Weiß<br>
         Serie
       </h2>
 
-      <div class="gallery-note">
-        <strong>S/W</strong>
-        Eine Komposition aus schwarzer und weißer Farbe;
-        reduziert auf Licht, Schatten, Haltung und Ausdruck.
+      <div class="gallery-chem">
+
+        <div class="gallery-chem-symbol">
+          S/W
+        </div>
+
+        <div class="gallery-chem-content">
+
+          <div class="gallery-chem-title">
+            Schwarz<span>|</span>Weiß
+          </div>
+
+          <div class="gallery-chem-line">
+            Eine Komposition aus schwarzer und weißer Farbe · reduziert auf Licht, Schatten, Haltung und Ausdruck.
+          </div>
+
+        </div>
+
       </div>
 
     </div>
