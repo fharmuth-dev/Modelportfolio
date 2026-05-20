@@ -251,24 +251,74 @@
     }
 
     .dictionary{
-      border-left:1px solid var(--line);
-      padding-left:22px;
-      color:var(--muted);
-      line-height:1.7;
-      margin-bottom:34px;
-      max-width:580px;
-      background:rgba(238,231,219,.28);
-      backdrop-filter:blur(10px);
-      padding-top:12px;
-      padding-bottom:12px;
-      padding-right:18px;
-    }
+  position:relative;
+  border-left:1px solid var(--line);
+  padding:14px 20px 14px 22px;
+  color:var(--muted);
+  line-height:1.58;
+  margin-bottom:34px;
+  max-width:620px;
+  background:rgba(238,231,219,.32);
+  backdrop-filter:blur(10px);
+  overflow:hidden;
+}
 
-    .phonetic{
-      color:var(--text);
-      margin-bottom:4px;
-      font-family:Georgia, 'Times New Roman', serif;
-    }
+.dictionary::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-40%;
+  width:40%;
+  height:100%;
+  background:linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,.28),
+    transparent
+  );
+  animation:textSweep 6s ease-in-out infinite;
+}
+
+.dict-entry{
+  position:relative;
+  z-index:2;
+  margin-bottom:10px;
+}
+
+.dict-entry:last-child{
+  margin-bottom:0;
+}
+
+.dict-word{
+  color:var(--text);
+  font-family:Georgia, 'Times New Roman', serif;
+  font-size:17px;
+  letter-spacing:.02em;
+}
+
+.dict-word span{
+  color:var(--accent);
+}
+
+.dict-line{
+  font-size:13px;
+}
+
+@keyframes textSweep{
+  0%, 55%{
+    transform:translateX(0);
+    opacity:0;
+  }
+
+  70%{
+    opacity:.8;
+  }
+
+  100%{
+    transform:translateX(380%);
+    opacity:0;
+  }
+}
 
     .definition{
       font-size:clamp(28px, 3.6vw, 50px);
@@ -540,18 +590,35 @@
       </h1>
 
       <div class="dictionary">
-        <div class="phonetic">
-          /faːbi̯an ˈhaʁmuːt/
-        </div>
 
-        <div>
-          Künstlername · Ace
-        </div>
+  <div class="dict-entry">
+    <div class="dict-word">
+      Fa<span>|</span>bi<span>|</span>an
+    </div>
+    <div class="dict-line">
+      Bedeutung: männlicher Vorname · Grammatik: Fabian; Genitiv: Fabian, Fabians; Plural: die Fabians
+    </div>
+  </div>
 
-        <div>
-          maskulin · 29 · Male Model · Ulm
-        </div>
-      </div>
+  <div class="dict-entry">
+    <div class="dict-word">
+      Har<span>|</span>muth
+    </div>
+    <div class="dict-line">
+      Bedeutung: Familienname · Herkunft: deutschsprachig · Form: charakterstark, markant, selten
+    </div>
+  </div>
+
+  <div class="dict-entry">
+    <div class="dict-word">
+      Ace
+    </div>
+    <div class="dict-line">
+      Künstlername · Kurzform einer visuellen Identität · klar, prägnant, einprägsam
+    </div>
+  </div>
+
+</div>
 
       <div class="definition">
         Ein Gesicht für Kontraste:<br>
