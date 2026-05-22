@@ -6,51 +6,30 @@
 
 <title>Fabian Harmuth — Male Model aus Ulm</title>
 
-<meta
-  name="description"
-  content="Fabian Harmuth — Male Model aus Ulm. Editorial Portfolio mit charakterstarker visueller Präsenz."
-/>
+<meta name="description" content="Fabian Harmuth — Male Model aus Ulm. Editorial Portfolio mit charakterstarker visueller Präsenz."/>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 
 <style>
-
 :root{
   --bg:#18130f;
   --bg2:#120e0b;
-  --surface:#221b15;
-  --surface-soft:rgba(34,27,21,.68);
-
   --text:#eee5d8;
-  --text-soft:#d2c5b6;
   --text-dim:#9d8d7b;
-
-  --line:rgba(238,229,216,.08);
-
   --accent:#995732;
   --accent-light:#c07a49;
-
   --green:#1f3b2d;
   --green-light:#d7ebc7;
-
   --beige:#cab89f;
   --off:#f2eadf;
-
   --gallery:#c6b59d;
   --gallery2:#dfd1bf;
 }
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+*{margin:0;padding:0;box-sizing:border-box;}
 
-html{
-  scroll-behavior:smooth;
-  background:var(--bg);
-}
+html{scroll-behavior:smooth;background:var(--bg);}
 
 body{
   background:var(--bg);
@@ -60,15 +39,8 @@ body{
   cursor:none;
 }
 
-img{
-  display:block;
-  max-width:100%;
-}
-
-a{
-  color:inherit;
-  text-decoration:none;
-}
+img{display:block;max-width:100%;}
+a{color:inherit;text-decoration:none;}
 
 #cursor{
   position:fixed;
@@ -136,9 +108,7 @@ a{
   transition:.3s;
 }
 
-.nav-links a:hover{
-  opacity:1;
-}
+.nav-links a:hover{opacity:1;}
 
 .nav-links a::after{
   content:'';
@@ -151,9 +121,7 @@ a{
   transition:.4s;
 }
 
-.nav-links a:hover::after{
-  width:100%;
-}
+.nav-links a:hover::after{width:100%;}
 
 .hero{
   position:relative;
@@ -218,11 +186,7 @@ a{
   height:100%;
   object-fit:cover;
   object-position:center top;
-  filter:
-    grayscale(.08)
-    contrast(1.03)
-    brightness(.84)
-    sepia(.04);
+  filter:grayscale(.08) contrast(1.03) brightness(.84) sepia(.04);
   transform:scale(1.035);
   animation:slowZoom 22s ease-in-out infinite alternate;
 }
@@ -242,8 +206,7 @@ a{
   inset:-50%;
   z-index:4;
   opacity:.03;
-  background-image:
-    radial-gradient(circle, rgba(255,255,255,.35) 1px, transparent 1px);
+  background-image:radial-gradient(circle, rgba(255,255,255,.35) 1px, transparent 1px);
   background-size:3px 3px;
   animation:grain .9s steps(3) infinite;
 }
@@ -340,23 +303,13 @@ a{
   content:'';
   position:absolute;
   inset:0;
-  background:linear-gradient(
-    100deg,
-    transparent,
-    rgba(255,255,255,.05),
-    transparent
-  );
+  background:linear-gradient(100deg, transparent, rgba(255,255,255,.05), transparent);
   transform:translateX(-115%);
   animation:cardShimmer 10s ease-in-out infinite;
 }
 
-.chem-entry:nth-child(2)::after{
-  animation-delay:.7s;
-}
-
-.chem-entry:nth-child(3)::after{
-  animation-delay:1.4s;
-}
+.chem-entry:nth-child(2)::after{animation-delay:.7s;}
+.chem-entry:nth-child(3)::after{animation-delay:1.4s;}
 
 .chem-symbol{
   position:relative;
@@ -403,9 +356,7 @@ a{
   font-family:'EB Garamond',serif;
 }
 
-.dict-word span{
-  color:var(--accent-light);
-}
+.dict-word span{color:var(--accent-light);}
 
 .dict-line{
   font-size:10.5px;
@@ -437,13 +388,7 @@ a{
 
 .gallery{
   padding:110px 48px 135px;
-  background:
-    linear-gradient(
-      180deg,
-      var(--gallery) 0%,
-      var(--gallery2) 40%,
-      #c0ab92 100%
-    );
+  background:linear-gradient(180deg,var(--gallery) 0%,var(--gallery2) 40%,#c0ab92 100%);
   color:#171411;
 }
 
@@ -491,12 +436,7 @@ a{
   content:'';
   position:absolute;
   inset:0;
-  background:linear-gradient(
-    100deg,
-    transparent,
-    rgba(255,255,255,.16),
-    transparent
-  );
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.16),transparent);
   transform:translateX(-115%);
   animation:cardShimmer 11s ease-in-out infinite;
 }
@@ -544,9 +484,7 @@ a{
   font-family:'EB Garamond',serif;
 }
 
-.gallery-chem-title span{
-  color:var(--accent);
-}
+.gallery-chem-title span{color:var(--accent);}
 
 .gallery-chem-line{
   position:relative;
@@ -593,9 +531,7 @@ a{
 }
 
 .card:nth-child(2),
-.card:nth-child(4){
-  margin-top:65px;
-}
+.card:nth-child(4){margin-top:65px;}
 
 .card img{
   width:100%;
@@ -608,10 +544,7 @@ a{
 
 .card:hover img{
   transform:scale(1.085);
-  filter:
-    grayscale(.55)
-    contrast(1.08)
-    brightness(1.03);
+  filter:grayscale(.55) contrast(1.08) brightness(1.03);
 }
 
 .card span{
@@ -634,102 +567,117 @@ a{
   color:rgba(23,20,17,.48);
 }
 
-@keyframes slowZoom{
-  from{
-    transform:scale(1.035);
-  }
+/* STREETSTYLE EDITORIAL */
 
-  to{
-    transform:scale(1.085) translateX(-.6%);
-  }
+.street-gallery{
+  background:
+    radial-gradient(circle at 16% 72%, rgba(153,87,50,.18), transparent 32%),
+    radial-gradient(circle at 82% 24%, rgba(31,59,45,.32), transparent 34%),
+    linear-gradient(180deg,#110d0a 0%,#221711 48%,#100b08 100%);
+  color:var(--text);
+}
+
+.street-gallery .gallery-top{
+  flex-direction:row-reverse;
+  border-top:1px solid rgba(238,229,216,.1);
+}
+
+.street-gallery .gallery-top h2{
+  color:var(--off);
+  text-align:right;
+}
+
+.street-gallery .gallery-chem{
+  background:rgba(34,27,21,.72);
+  border:1px solid rgba(238,229,216,.08);
+}
+
+.street-gallery .gallery-chem::before{
+  content:"STREET EDITORIAL";
+  color:rgba(238,229,216,.28);
+}
+
+.street-gallery .gallery-chem-title{
+  color:var(--off);
+}
+
+.street-gallery .gallery-chem-line{
+  color:rgba(238,229,216,.58);
+}
+
+.street-gallery .gallery-chem-title span{
+  color:var(--accent-light);
+}
+
+.street-gallery .ink-splatter{
+  filter:invert(1);
+  opacity:.18;
+}
+
+.street-gallery .card{
+  background:#16110e;
+  border:1px solid rgba(238,229,216,.08);
+  box-shadow:0 24px 60px rgba(0,0,0,.42);
+}
+
+.street-gallery .card img{
+  filter:contrast(1.03) saturate(.9) brightness(.9);
+}
+
+.street-gallery .card:hover img{
+  filter:contrast(1.08) saturate(1.08) brightness(1.02);
+}
+
+.street-gallery .gallery-credit{
+  color:rgba(238,229,216,.44);
+  text-align:left;
+}
+
+@keyframes slowZoom{
+  from{transform:scale(1.035);}
+  to{transform:scale(1.085) translateX(-.6%);}
 }
 
 @keyframes grain{
-  from{
-    transform:translate(0,0);
-  }
-
-  to{
-    transform:translate(-3%,2%);
-  }
+  from{transform:translate(0,0);}
+  to{transform:translate(-3%,2%);}
 }
 
 @keyframes heroShimmer{
-  0%,58%{
-    transform:translateX(-70%);
-    opacity:0;
-  }
-
-  72%{
-    opacity:.65;
-  }
-
-  100%{
-    transform:translateX(70%);
-    opacity:0;
-  }
+  0%,58%{transform:translateX(-70%);opacity:0;}
+  72%{opacity:.65;}
+  100%{transform:translateX(70%);opacity:0;}
 }
 
 @keyframes cardShimmer{
-  0%,60%{
-    transform:translateX(-115%);
-    opacity:0;
-  }
-
-  73%{
-    opacity:.7;
-  }
-
-  100%{
-    transform:translateX(115%);
-    opacity:0;
-  }
+  0%,60%{transform:translateX(-115%);opacity:0;}
+  73%{opacity:.7;}
+  100%{transform:translateX(115%);opacity:0;}
 }
 
 @keyframes fadeUp{
-  from{
-    opacity:0;
-    transform:translateY(16px);
-  }
-
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
+  from{opacity:0;transform:translateY(16px);}
+  to{opacity:1;transform:translateY(0);}
 }
 
 @media(prefers-reduced-motion:reduce){
-
-  *{
-    animation:none!important;
-    transition:none!important;
-    scroll-behavior:auto!important;
-  }
+  *{animation:none!important;transition:none!important;scroll-behavior:auto!important;}
 }
 
 @media(max-width:980px){
-
-  body{
-    cursor:auto;
-  }
+  body{cursor:auto;}
 
   #cursor,
-  #cursor-ring{
-    display:none;
-  }
+  #cursor-ring{display:none;}
 
-  .nav{
-    padding:18px 20px;
-  }
+  .nav{padding:18px 20px;}
 
   .nav-links{
     gap:16px;
     padding:10px 14px;
   }
 
-  .nav-links a{
-    font-size:9px;
-  }
+  .nav-links a{font-size:9px;}
 
   .hero-image-panel{
     right:0;
@@ -748,38 +696,28 @@ a{
   }
 
   .title-top,
-  .title-bottom{
-    font-size:clamp(62px,17vw,96px);
-  }
+  .title-bottom{font-size:clamp(62px,17vw,96px);}
 
-  .title-bottom{
-    margin-left:clamp(22px,9vw,60px);
-  }
+  .title-bottom{margin-left:clamp(22px,9vw,60px);}
 
-  .chem-dictionary::before{
-    display:none;
-  }
+  .chem-dictionary::before{display:none;}
 
-  .definition{
-    font-size:clamp(30px,7vw,44px);
-  }
+  .definition{font-size:clamp(30px,7vw,44px);}
 
-  .gallery{
-    padding:80px 20px 105px;
-  }
+  .gallery{padding:80px 20px 105px;}
 
-  .gallery-top{
-    display:block;
-  }
+  .gallery-top{display:block;}
 
   .gallery-chem{
     margin-top:22px;
     max-width:100%;
   }
 
-  .grid{
-    grid-template-columns:1fr;
+  .street-gallery .gallery-top h2{
+    text-align:left;
   }
+
+  .grid{grid-template-columns:1fr;}
 
   .card,
   .card:nth-child(2),
@@ -793,7 +731,6 @@ a{
     margin-top:22px;
   }
 }
-
 </style>
 </head>
 
@@ -801,117 +738,57 @@ a{
 
 <div id="cursor"></div>
 <div id="cursor-ring"></div>
-
 <div class="hero-grain"></div>
 
 <nav class="nav">
-
   <div class="nav-links">
     <a href="#">01 Portfolio</a>
     <a href="#">02 About</a>
     <a href="#">03 Kontakt</a>
   </div>
-
 </nav>
 
 <section class="hero">
-
   <div class="hero-bg"></div>
 
   <div class="hero-image-panel" id="imagePanel">
-
-    <img
-      src="images/hero.jpeg"
-      alt="Fabian Harmuth Male Model"
-      class="hero-image"
-    >
-
+    <img src="images/hero.jpeg" alt="Fabian Harmuth Male Model" class="hero-image">
     <div class="image-vignette"></div>
-
     <div class="image-grain"></div>
-
   </div>
 
   <div class="hero-content">
-
-    <div class="kicker">
-      Editorial Portfolio · Ulm
-    </div>
+    <div class="kicker">Editorial Portfolio · Ulm</div>
 
     <h1 class="hero-title">
-
-      <span class="title-top">
-        Fabian
-      </span>
-
-      <span class="title-bottom">
-        Harmuth
-      </span>
-
+      <span class="title-top">Fabian</span>
+      <span class="title-bottom">Harmuth</span>
     </h1>
 
     <div class="chem-dictionary">
-
       <div class="chem-entry">
-
-        <div class="chem-symbol">
-          Fa
-        </div>
-
+        <div class="chem-symbol">Fa</div>
         <div class="chem-content">
-
-          <div class="dict-word">
-            Fa<span>|</span>bi<span>|</span>an
-          </div>
-
-          <div class="dict-line">
-            Bedeutung: männlicher Vorname · Genitiv: Fabian, Fabians · Plural: die Fabians
-          </div>
-
+          <div class="dict-word">Fa<span>|</span>bi<span>|</span>an</div>
+          <div class="dict-line">Bedeutung: männlicher Vorname · Genitiv: Fabian, Fabians · Plural: die Fabians</div>
         </div>
-
       </div>
 
       <div class="chem-entry">
-
-        <div class="chem-symbol">
-          Ha
-        </div>
-
+        <div class="chem-symbol">Ha</div>
         <div class="chem-content">
-
-          <div class="dict-word">
-            Har<span>|</span>muth
-          </div>
-
-          <div class="dict-line">
-            Familienname · deutschsprachig · charakterstark, markant, selten
-          </div>
-
+          <div class="dict-word">Har<span>|</span>muth</div>
+          <div class="dict-line">Familienname · deutschsprachig · charakterstark, markant, selten</div>
         </div>
-
       </div>
 
       <div class="chem-entry">
-
-        <div class="chem-symbol">
-          Ac
-        </div>
-
+        <div class="chem-symbol">Ac</div>
         <div class="chem-content">
-
-          <div class="dict-word">
-            Ace
-          </div>
-
-          <div class="dict-line">
-            Künstlername · visuelle Identität · klar, prägnant, einprägsam
-          </div>
-
+          <div class="dict-word">Ace</div>
+          <div class="dict-line">Künstlername · visuelle Identität · klar, prägnant, einprägsam</div>
         </div>
-
       </div>
-
     </div>
 
     <div class="definition">
@@ -920,46 +797,30 @@ a{
     </div>
 
     <div class="editorial-line"></div>
-
   </div>
-
 </section>
 
 <section class="gallery">
-
   <div class="gallery-top">
-
     <h2>
       Schwarz Weiß<br>
       Serie
     </h2>
 
     <div class="gallery-chem">
-
-      <div class="gallery-chem-symbol">
-        S/W
-      </div>
+      <div class="gallery-chem-symbol">S/W</div>
 
       <div class="gallery-chem-content">
-
-        <div class="gallery-chem-title">
-          Schwarz<span>|</span>Weiß
-        </div>
-
+        <div class="gallery-chem-title">Schwarz<span>|</span>Weiß</div>
         <div class="gallery-chem-line">
           Eine Komposition aus schwarzer und weißer Farbe · reduziert auf Licht, Schatten, Haltung und Ausdruck.
         </div>
-
         <div class="ink-splatter"></div>
-
       </div>
-
     </div>
-
   </div>
 
   <div class="grid">
-
     <div class="card">
       <img src="images/best-01.jpeg" alt="">
       <span>Frame 01</span>
@@ -979,28 +840,70 @@ a{
       <img src="images/best-04.jpeg" alt="">
       <span>Frame 04</span>
     </div>
-
   </div>
 
   <div class="gallery-credit">
     Photography · apanachii_fotoart24
   </div>
+</section>
 
+<section class="gallery street-gallery">
+  <div class="gallery-top">
+    <h2>
+      Streetstyle<br>
+      Editorial
+    </h2>
+
+    <div class="gallery-chem">
+      <div class="gallery-chem-symbol">St</div>
+
+      <div class="gallery-chem-content">
+        <div class="gallery-chem-title">Street<span>|</span>Editorial</div>
+        <div class="gallery-chem-line">
+          Eine farbige Serie zwischen urbaner Haltung, Bewegung und kontrollierter Lässigkeit.
+        </div>
+        <div class="ink-splatter"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <img src="images/best-05.jpg" alt="">
+      <span>Frame 05</span>
+    </div>
+
+    <div class="card">
+      <img src="images/best-06.jpg" alt="">
+      <span>Frame 06</span>
+    </div>
+
+    <div class="card">
+      <img src="images/best-07.jpg" alt="">
+      <span>Frame 07</span>
+    </div>
+
+    <div class="card">
+      <img src="images/best-08.jpg" alt="">
+      <span>Frame 08</span>
+    </div>
+  </div>
+
+  <div class="gallery-credit">
+    Photography · Sven.Valentin
+  </div>
 </section>
 
 <script>
-
 const cursor = document.getElementById('cursor');
 const ring = document.getElementById('cursor-ring');
 
 let mx = 0;
 let my = 0;
-
 let rx = 0;
 let ry = 0;
 
 document.addEventListener('mousemove', e => {
-
   mx = e.clientX;
   my = e.clientY;
 
@@ -1009,7 +912,6 @@ document.addEventListener('mousemove', e => {
 });
 
 function animateCursor(){
-
   rx += (mx - rx) * .09;
   ry += (my - ry) * .09;
 
@@ -1022,40 +924,30 @@ function animateCursor(){
 animateCursor();
 
 document.querySelectorAll('a,.chem-entry,.card').forEach(el => {
-
   el.addEventListener('mouseenter', () => {
-
     cursor.style.width = '12px';
     cursor.style.height = '12px';
-
     ring.style.width = '42px';
     ring.style.height = '42px';
-
     ring.style.borderColor = 'rgba(192,122,73,.38)';
   });
 
   el.addEventListener('mouseleave', () => {
-
     cursor.style.width = '6px';
     cursor.style.height = '6px';
-
     ring.style.width = '26px';
     ring.style.height = '26px';
-
     ring.style.borderColor = 'rgba(202,184,159,.2)';
   });
-
 });
 
 const panel = document.getElementById('imagePanel');
 const hero = document.querySelector('.hero');
 
 hero.addEventListener('mousemove', e => {
-
   if(window.innerWidth <= 980) return;
 
   const r = hero.getBoundingClientRect();
-
   const cx = (e.clientX - r.left) / r.width - .5;
   const cy = (e.clientY - r.top) / r.height - .5;
 
@@ -1064,12 +956,9 @@ hero.addEventListener('mousemove', e => {
 });
 
 hero.addEventListener('mouseleave', () => {
-
   if(window.innerWidth <= 980) return;
-
   panel.style.transform = 'translateY(-50%)';
 });
-
 </script>
 
 </body>
