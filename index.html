@@ -3,13 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
 <title>Fabian Harmuth — Male Model aus Ulm</title>
-
 <meta name="description" content="Fabian Harmuth — Male Model aus Ulm. Editorial Portfolio mit charakterstarker visueller Präsenz."/>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 
 <style>
 :root{
@@ -25,20 +20,21 @@
   --off:#f2eadf;
   --gallery:#c6b59d;
   --gallery2:#dfd1bf;
+  --dark:#110d0a;
+  --dark2:#221711;
+  --serif: Georgia, "Times New Roman", serif;
+  --mono: "Courier New", Courier, monospace;
 }
 
 *{margin:0;padding:0;box-sizing:border-box;}
-
 html{scroll-behavior:smooth;background:var(--bg);}
-
 body{
   background:var(--bg);
   color:var(--text);
   overflow-x:hidden;
-  font-family:'Share Tech Mono',monospace;
+  font-family:var(--mono);
   cursor:none;
 }
-
 img{display:block;max-width:100%;}
 a{color:inherit;text-decoration:none;}
 
@@ -238,7 +234,7 @@ a{color:inherit;text-decoration:none;}
   flex-direction:column;
   margin-bottom:52px;
   line-height:.84;
-  font-family:'Cormorant Garamond',serif;
+  font-family:var(--serif);
   opacity:0;
   animation:fadeUp .9s .38s ease forwards;
 }
@@ -319,7 +315,7 @@ a{color:inherit;text-decoration:none;}
   min-height:56px;
   background:var(--green);
   color:var(--green-light);
-  font-family:'EB Garamond',serif;
+  font-family:var(--serif);
   font-size:25px;
   border-right:1px solid rgba(255,255,255,.06);
 }
@@ -331,6 +327,7 @@ a{color:inherit;text-decoration:none;}
   left:6px;
   font-size:8px;
   opacity:.55;
+  font-family:var(--mono);
 }
 
 .chem-symbol::after{
@@ -353,7 +350,7 @@ a{color:inherit;text-decoration:none;}
   margin-bottom:3px;
   font-size:17px;
   color:var(--off);
-  font-family:'EB Garamond',serif;
+  font-family:var(--serif);
 }
 
 .dict-word span{color:var(--accent-light);}
@@ -370,7 +367,7 @@ a{color:inherit;text-decoration:none;}
   line-height:1.05;
   letter-spacing:-.04em;
   color:var(--text);
-  font-family:'Cormorant Garamond',serif;
+  font-family:var(--serif);
   font-style:italic;
   font-weight:300;
   opacity:0;
@@ -406,7 +403,7 @@ a{color:inherit;text-decoration:none;}
   font-size:clamp(42px,5.7vw,88px);
   line-height:.9;
   letter-spacing:-.06em;
-  font-family:'Cormorant Garamond',serif;
+  font-family:var(--serif);
   font-weight:400;
 }
 
@@ -415,7 +412,7 @@ a{color:inherit;text-decoration:none;}
   display:grid;
   grid-template-columns:68px 1fr;
   overflow:hidden;
-  max-width:500px;
+  max-width:560px;
   background:rgba(255,255,255,.18);
   border:1px solid rgba(23,20,17,.1);
   backdrop-filter:blur(4px);
@@ -450,7 +447,7 @@ a{color:inherit;text-decoration:none;}
   background:var(--green);
   color:var(--green-light);
   font-size:20px;
-  font-family:'EB Garamond',serif;
+  font-family:var(--serif);
 }
 
 .gallery-chem-symbol::before{
@@ -460,6 +457,7 @@ a{color:inherit;text-decoration:none;}
   left:7px;
   font-size:8px;
   opacity:.58;
+  font-family:var(--mono);
 }
 
 .gallery-chem-symbol::after{
@@ -481,7 +479,7 @@ a{color:inherit;text-decoration:none;}
 .gallery-chem-title{
   margin-bottom:4px;
   font-size:17px;
-  font-family:'EB Garamond',serif;
+  font-family:var(--serif);
 }
 
 .gallery-chem-title span{color:var(--accent);}
@@ -492,6 +490,23 @@ a{color:inherit;text-decoration:none;}
   line-height:1.55;
   color:rgba(23,20,17,.6);
   z-index:2;
+}
+
+.location-line{
+  margin-top:10px;
+  font-size:9px;
+  line-height:1.45;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:rgba(23,20,17,.42);
+  position:relative;
+  z-index:3;
+}
+
+.street-gallery .location-line,
+.adapt-gallery .location-line,
+.character-gallery .location-line{
+  color:rgba(238,229,216,.42);
 }
 
 .ink-splatter{
@@ -521,6 +536,10 @@ a{color:inherit;text-decoration:none;}
   gap:18px;
 }
 
+.character-grid{
+  grid-template-columns:repeat(3,1fr);
+}
+
 .card{
   position:relative;
   overflow:hidden;
@@ -532,6 +551,14 @@ a{color:inherit;text-decoration:none;}
 
 .card:nth-child(2),
 .card:nth-child(4){margin-top:65px;}
+
+.character-grid .card:nth-child(2){
+  margin-top:65px;
+}
+
+.character-grid .card:nth-child(3){
+  margin-top:0;
+}
 
 .card img{
   width:100%;
@@ -556,6 +583,7 @@ a{color:inherit;text-decoration:none;}
   text-transform:uppercase;
   color:rgba(255,255,255,.82);
   text-shadow:0 2px 10px rgba(0,0,0,.62);
+  z-index:4;
 }
 
 .gallery-credit{
@@ -567,9 +595,11 @@ a{color:inherit;text-decoration:none;}
   color:rgba(23,20,17,.48);
 }
 
-/* STREETSTYLE EDITORIAL */
+/* DARK SERIES */
 
-.street-gallery{
+.street-gallery,
+.adapt-gallery,
+.character-gallery{
   background:
     radial-gradient(circle at 16% 72%, rgba(153,87,50,.18), transparent 32%),
     radial-gradient(circle at 82% 24%, rgba(31,59,45,.32), transparent 34%),
@@ -577,17 +607,30 @@ a{color:inherit;text-decoration:none;}
   color:var(--text);
 }
 
-.street-gallery .gallery-top{
+.street-gallery .gallery-top,
+.character-gallery .gallery-top{
   flex-direction:row-reverse;
   border-top:1px solid rgba(238,229,216,.1);
 }
 
-.street-gallery .gallery-top h2{
+.adapt-gallery .gallery-top{
+  border-top:1px solid rgba(238,229,216,.1);
+}
+
+.street-gallery .gallery-top h2,
+.adapt-gallery .gallery-top h2,
+.character-gallery .gallery-top h2{
   color:var(--off);
+}
+
+.street-gallery .gallery-top h2,
+.character-gallery .gallery-top h2{
   text-align:right;
 }
 
-.street-gallery .gallery-chem{
+.street-gallery .gallery-chem,
+.adapt-gallery .gallery-chem,
+.character-gallery .gallery-chem{
   background:rgba(34,27,21,.72);
   border:1px solid rgba(238,229,216,.08);
 }
@@ -597,40 +640,127 @@ a{color:inherit;text-decoration:none;}
   color:rgba(238,229,216,.28);
 }
 
-.street-gallery .gallery-chem-title{
+.adapt-gallery .gallery-chem::before{
+  content:"ADAPTIVE INDEX";
+  color:rgba(238,229,216,.28);
+}
+
+.character-gallery .gallery-chem::before{
+  content:"CHARACTER INDEX";
+  color:rgba(238,229,216,.28);
+}
+
+.street-gallery .gallery-chem-title,
+.adapt-gallery .gallery-chem-title,
+.character-gallery .gallery-chem-title{
   color:var(--off);
 }
 
-.street-gallery .gallery-chem-line{
+.street-gallery .gallery-chem-line,
+.adapt-gallery .gallery-chem-line,
+.character-gallery .gallery-chem-line{
   color:rgba(238,229,216,.58);
 }
 
-.street-gallery .gallery-chem-title span{
+.street-gallery .gallery-chem-title span,
+.adapt-gallery .gallery-chem-title span,
+.character-gallery .gallery-chem-title span{
   color:var(--accent-light);
 }
 
-.street-gallery .ink-splatter{
+.street-gallery .ink-splatter,
+.adapt-gallery .ink-splatter,
+.character-gallery .ink-splatter{
   filter:invert(1);
   opacity:.18;
 }
 
-.street-gallery .card{
+.street-gallery .card,
+.adapt-gallery .card,
+.character-gallery .card{
   background:#16110e;
   border:1px solid rgba(238,229,216,.08);
   box-shadow:0 24px 60px rgba(0,0,0,.42);
 }
 
-.street-gallery .card img{
+.street-gallery .card img,
+.adapt-gallery .card img{
   filter:contrast(1.03) saturate(.9) brightness(.9);
 }
 
-.street-gallery .card:hover img{
+.street-gallery .card:hover img,
+.adapt-gallery .card:hover img{
   filter:contrast(1.08) saturate(1.08) brightness(1.02);
 }
 
-.street-gallery .gallery-credit{
+.street-gallery .gallery-credit,
+.adapt-gallery .gallery-credit,
+.character-gallery .gallery-credit{
   color:rgba(238,229,216,.44);
   text-align:left;
+}
+
+.adapt-gallery .gallery-chem{
+  max-width:640px;
+}
+
+.adapt-gallery .gallery-chem-line,
+.character-gallery .gallery-chem-line{
+  font-size:10.8px;
+}
+
+.dual-card{
+  min-height:470px;
+}
+
+.dual-card img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.dual-card .base-img{
+  z-index:1;
+  filter:grayscale(1) contrast(1.12) brightness(.82);
+}
+
+.dual-card .color-img{
+  z-index:2;
+  opacity:0;
+  filter:contrast(1.08) saturate(1.12) brightness(.98);
+  transform:scale(1.06);
+  mix-blend-mode:normal;
+}
+
+.dual-card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:3;
+  opacity:0;
+  pointer-events:none;
+  background:
+    linear-gradient(110deg, transparent 0 35%, rgba(215,235,199,.18) 48%, transparent 62%),
+    radial-gradient(circle at 50% 50%, transparent 40%, rgba(0,0,0,.25) 100%);
+  transform:translateX(-60%);
+  transition:opacity .4s ease, transform .9s ease;
+}
+
+.dual-card:hover .base-img{
+  opacity:.18;
+  transform:scale(1.08);
+}
+
+.dual-card:hover .color-img{
+  opacity:1;
+  transform:scale(1.03);
+}
+
+.dual-card:hover::after{
+  opacity:1;
+  transform:translateX(60%);
 }
 
 @keyframes slowZoom{
@@ -713,15 +843,21 @@ a{color:inherit;text-decoration:none;}
     max-width:100%;
   }
 
-  .street-gallery .gallery-top h2{
+  .street-gallery .gallery-top h2,
+  .character-gallery .gallery-top h2{
     text-align:left;
   }
 
-  .grid{grid-template-columns:1fr;}
+  .grid,
+  .character-grid{
+    grid-template-columns:1fr;
+  }
 
   .card,
   .card:nth-child(2),
-  .card:nth-child(4){
+  .card:nth-child(4),
+  .character-grid .card:nth-child(2),
+  .character-grid .card:nth-child(3){
     margin-top:0;
     min-height:500px;
   }
@@ -815,6 +951,9 @@ a{color:inherit;text-decoration:none;}
         <div class="gallery-chem-line">
           Eine Komposition aus schwarzer und weißer Farbe · reduziert auf Licht, Schatten, Haltung und Ausdruck.
         </div>
+        <div class="location-line">
+          Göppingen · 48°42′12.74″N · 9°39′7.52″E
+        </div>
         <div class="ink-splatter"></div>
       </div>
     </div>
@@ -822,22 +961,22 @@ a{color:inherit;text-decoration:none;}
 
   <div class="grid">
     <div class="card">
-      <img src="images/best-01.jpeg" alt="">
+      <img src="images/best-01.jpeg" alt="" loading="lazy">
       <span>Frame 01</span>
     </div>
 
     <div class="card">
-      <img src="images/best-02.jpeg" alt="">
+      <img src="images/best-02.jpeg" alt="" loading="lazy">
       <span>Frame 02</span>
     </div>
 
     <div class="card">
-      <img src="images/best-03.jpeg" alt="">
+      <img src="images/best-03.jpeg" alt="" loading="lazy">
       <span>Frame 03</span>
     </div>
 
     <div class="card">
-      <img src="images/best-04.jpeg" alt="">
+      <img src="images/best-04.jpeg" alt="" loading="lazy">
       <span>Frame 04</span>
     </div>
   </div>
@@ -862,6 +1001,9 @@ a{color:inherit;text-decoration:none;}
         <div class="gallery-chem-line">
           Eine farbige Serie zwischen urbaner Haltung, Bewegung und kontrollierter Lässigkeit.
         </div>
+        <div class="location-line">
+          Ulm · 48°23′54.28″N · 9°59′29.58″E
+        </div>
         <div class="ink-splatter"></div>
       </div>
     </div>
@@ -869,28 +1011,126 @@ a{color:inherit;text-decoration:none;}
 
   <div class="grid">
     <div class="card">
-      <img src="images/best-05.jpg" alt="">
+      <img src="images/best-05.jpg" alt="" loading="lazy">
       <span>Frame 05</span>
     </div>
 
     <div class="card">
-      <img src="images/best-06.jpg" alt="">
+      <img src="images/best-06.jpg" alt="" loading="lazy">
       <span>Frame 06</span>
     </div>
 
     <div class="card">
-      <img src="images/best-07.jpg" alt="">
+      <img src="images/best-07.jpg" alt="" loading="lazy">
       <span>Frame 07</span>
     </div>
 
     <div class="card">
-      <img src="images/best-08.jpg" alt="">
+      <img src="images/best-08.jpg" alt="" loading="lazy">
       <span>Frame 08</span>
     </div>
   </div>
 
   <div class="gallery-credit">
     Photography · Sven.Valentin
+  </div>
+</section>
+
+<section class="gallery adapt-gallery">
+  <div class="gallery-top">
+    <h2>
+      Wandlungs<br>
+      Fähig
+    </h2>
+
+    <div class="gallery-chem">
+      <div class="gallery-chem-symbol">Wa</div>
+
+      <div class="gallery-chem-content">
+        <div class="gallery-chem-title">Wand<span>|</span>lungs<span>|</span>fähig</div>
+        <div class="gallery-chem-line">
+          Adjektiv · Fähigkeit zur sichtbaren Veränderung. Wechsel zwischen Rolle, Haltung und Ausdruck, ohne die eigene Kontur zu verlieren. Im Office-Kontext: kontrolliert, präsent, präzise und anpassungsfähig.
+        </div>
+        <div class="location-line">
+          Stuttgart · 48°46′56.3″N · 9°10.621′E
+        </div>
+        <div class="ink-splatter"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <img src="images/best-09.jpg" alt="" loading="lazy">
+      <span>Frame 09</span>
+    </div>
+
+    <div class="card">
+      <img src="images/best-10.jpg" alt="" loading="lazy">
+      <span>Frame 10</span>
+    </div>
+
+    <div class="card">
+      <img src="images/best-11.jpg" alt="" loading="lazy">
+      <span>Frame 11</span>
+    </div>
+
+    <div class="card">
+      <img src="images/best-12.jpg" alt="" loading="lazy">
+      <span>Frame 12</span>
+    </div>
+  </div>
+
+  <div class="gallery-credit">
+    Photography · 4m.fotografie
+  </div>
+</section>
+
+<section class="gallery character-gallery">
+  <div class="gallery-top">
+    <h2>
+      Charakter<br>
+      Stark
+    </h2>
+
+    <div class="gallery-chem">
+      <div class="gallery-chem-symbol">Ch</div>
+
+      <div class="gallery-chem-content">
+        <div class="gallery-chem-title">Charak<span>|</span>ter<span>|</span>stark</div>
+        <div class="gallery-chem-line">
+          Adjektiv · Präsenz mit Widerstand. Ein Ausdruck, der nicht glatt wirkt, sondern Tiefe, Spannung und Wiedererkennbarkeit trägt. Still im ersten Moment, intensiv im zweiten.
+        </div>
+        <div class="location-line">
+          Stuttgart · 48°46′56.3″N · 9°10.621′E
+        </div>
+        <div class="ink-splatter"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid character-grid">
+    <div class="card dual-card">
+      <img class="base-img" src="images/best-13.jpg" alt="" loading="lazy">
+      <img class="color-img" src="images/best-14.jpg" alt="" loading="lazy">
+      <span>Frame 13/14</span>
+    </div>
+
+    <div class="card dual-card">
+      <img class="base-img" src="images/best-15.jpg" alt="" loading="lazy">
+      <img class="color-img" src="images/best-16.jpg" alt="" loading="lazy">
+      <span>Frame 15/16</span>
+    </div>
+
+    <div class="card dual-card">
+      <img class="base-img" src="images/best-17.jpg" alt="" loading="lazy">
+      <img class="color-img" src="images/best-18.jpg" alt="" loading="lazy">
+      <span>Frame 17/18</span>
+    </div>
+  </div>
+
+  <div class="gallery-credit">
+    Photography · invisibleman73
   </div>
 </section>
 
