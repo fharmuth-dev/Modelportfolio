@@ -3,61 +3,104 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
   <title>Fabian Harmuth — Male Model aus Ulm</title>
-
-  <meta
-    name="description"
-    content="Fabian Harmuth — modernes Male Model aus Ulm. Editorial Portfolio mit charakterstarker visueller Präsenz."
-  />
+  <meta name="description" content="Fabian Harmuth — modernes Male Model aus Ulm. Editorial Portfolio mit charakterstarker visueller Präsenz." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg:#c5b8a6;
-      --paper:#e4dacb;
-      --text:#171411;
-      --muted:rgba(23,20,17,.68);
-      --line:rgba(23,20,17,.2);
-      --dark:#0e0d0c;
-      --accent:#6d5138;
-      --green:#1f3b2d;
-      --green-light:#e9f4dc;
-      --white:#f7f0e5;
+      --bg:#0a0f1a;
+      --bg2:#07111e;
+      --paper:#0d1828;
+      --text:#d8e8f5;
+      --text-dim:#8baac4;
+      --muted:rgba(180,210,235,.54);
+      --line:rgba(100,160,210,.18);
+      --line-bright:rgba(100,160,210,.38);
+      --accent:#4e91c8;
+      --accent2:#7ab8e0;
+      --green:#2a6033;
+      --green-light:#c8f0a0;
+      --white:#d8e8f5;
+      --grid-color:rgba(60,110,170,.13);
+      --grid-bright:rgba(60,110,170,.22);
+      --warm-orig:#c5b8a6;
+      --paper-orig:#e4dacb;
+      --text-orig:#171411;
+      --accent-orig:#6d5138;
+      --green-orig:#1f3b2d;
+      --green-light-orig:#e9f4dc;
     }
 
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-    }
+    *{ margin:0; padding:0; box-sizing:border-box; }
 
-    html{
-      background:var(--bg);
-      scroll-behavior:smooth;
-    }
+    html{ background:var(--bg); scroll-behavior:smooth; }
 
     body{
       background:var(--bg);
       color:var(--text);
-      font-family:Arial, Helvetica, sans-serif;
+      font-family:'Share Tech Mono', monospace;
       overflow-x:hidden;
+      cursor:none;
     }
 
-    img{
-      display:block;
-      max-width:100%;
+    /* ─── CUSTOM CURSOR ─── */
+    #cursor{
+      position:fixed;
+      width:12px;
+      height:12px;
+      background:var(--accent);
+      border-radius:50%;
+      pointer-events:none;
+      z-index:9999;
+      transform:translate(-50%,-50%);
+      transition:width .15s,height .15s,background .15s;
+      mix-blend-mode:screen;
     }
-
-    a{
-      text-decoration:none;
-      color:inherit;
+    #cursor-aura{
+      position:fixed;
+      width:48px;
+      height:48px;
+      border:1px solid rgba(78,145,200,.5);
+      border-radius:50%;
+      pointer-events:none;
+      z-index:9998;
+      transform:translate(-50%,-50%);
+      transition:transform .08s linear, width .3s, height .3s, opacity .3s;
+      opacity:.7;
     }
+    #cursor-crosshair{
+      position:fixed;
+      width:20px;
+      height:20px;
+      pointer-events:none;
+      z-index:9997;
+      transform:translate(-50%,-50%);
+    }
+    #cursor-crosshair::before,
+    #cursor-crosshair::after{
+      content:'';
+      position:absolute;
+      background:rgba(78,145,200,.4);
+    }
+    #cursor-crosshair::before{
+      width:1px; height:100%;
+      left:50%; top:0;
+    }
+    #cursor-crosshair::after{
+      width:100%; height:1px;
+      top:50%; left:0;
+    }
+    body:hover #cursor{ opacity:1; }
 
+    img{ display:block; max-width:100%; }
+    a{ text-decoration:none; color:inherit; }
+
+    /* ─── NAV ─── */
     .nav{
       position:fixed;
-      top:0;
-      left:0;
-      width:100%;
+      top:0; left:0; width:100%;
       padding:28px 42px;
       display:flex;
       justify-content:space-between;
@@ -66,74 +109,115 @@
     }
 
     .logo{
-      width:44px;
-      height:44px;
-      border:1px solid rgba(23,20,17,.34);
+      width:44px; height:44px;
+      border:1px solid var(--line-bright);
       display:flex;
       align-items:center;
       justify-content:center;
-      font-size:14px;
+      font-size:13px;
       letter-spacing:.12em;
-      background:rgba(228,218,203,.48);
+      background:rgba(10,15,26,.65);
       backdrop-filter:blur(14px);
+      color:var(--accent2);
+      font-family:'Share Tech Mono', monospace;
+      position:relative;
+      overflow:hidden;
+    }
+    .logo::before{
+      content:'';
+      position:absolute;
+      inset:-2px;
+      border:1px solid var(--accent);
+      opacity:0;
+      animation:logoPulse 3s ease-in-out infinite;
     }
 
     .nav-links{
       display:flex;
       gap:34px;
-      background:rgba(228,218,203,.54);
+      background:rgba(10,15,26,.65);
       backdrop-filter:blur(14px);
       padding:13px 16px;
-      border:1px solid rgba(23,20,17,.14);
+      border:1px solid var(--line);
     }
 
     .nav-links a{
       position:relative;
-      font-size:11px;
+      font-size:10px;
       text-transform:uppercase;
       letter-spacing:.2em;
-      opacity:.84;
+      opacity:.75;
       padding-bottom:6px;
+      color:var(--text-dim);
+      font-family:'Share Tech Mono', monospace;
+      transition:color .25s, opacity .25s;
     }
+    .nav-links a:hover{ color:var(--accent2); opacity:1; }
 
     .nav-links a::after{
       content:'';
       position:absolute;
-      left:0;
-      bottom:0;
-      width:0%;
-      height:1px;
-      background:var(--text);
+      left:0; bottom:0;
+      width:0%; height:1px;
+      background:var(--accent);
       transition:.35s ease;
+      box-shadow:0 0 6px var(--accent);
+    }
+    .nav-links a:hover::after{ width:100%; }
+
+    /* ─── COORDS DISPLAY ─── */
+    #coords{
+      position:fixed;
+      bottom:32px;
+      right:42px;
+      font-family:'Share Tech Mono', monospace;
+      font-size:10px;
+      letter-spacing:.16em;
+      color:rgba(78,145,200,.55);
+      z-index:200;
+      pointer-events:none;
+      opacity:0;
+      animation:fadeInCoords 2s 1.5s ease forwards;
     }
 
-    .nav-links a:hover::after{
-      width:100%;
-    }
-
+    /* ─── HERO ─── */
     .hero{
       position:relative;
       min-height:100vh;
       overflow:hidden;
-      background:
-        radial-gradient(circle at 72% 42%, rgba(255,255,255,.38), transparent 30%),
-        radial-gradient(circle at 12% 78%, rgba(109,81,56,.16), transparent 24%),
-        linear-gradient(135deg, #e4dacb 0%, #c5b8a6 48%, #a99983 100%);
+      background:var(--bg2);
     }
 
-    .hero::after{
-      content:"";
+    /* Blueprint grid */
+    .hero::before{
+      content:'';
       position:absolute;
       inset:0;
       background-image:
-        linear-gradient(rgba(23,20,17,.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(23,20,17,.045) 1px, transparent 1px);
-      background-size:48px 48px;
-      opacity:.42;
+        linear-gradient(var(--grid-bright) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-bright) 1px, transparent 1px),
+        linear-gradient(var(--grid-color) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+      background-size:120px 120px, 120px 120px, 24px 24px, 24px 24px;
+      opacity:1;
       pointer-events:none;
       z-index:0;
     }
 
+    /* Blueprint vignette */
+    .hero::after{
+      content:'';
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(ellipse at 72% 42%, rgba(30,74,106,.35), transparent 50%),
+        radial-gradient(ellipse at 15% 70%, rgba(10,15,26,.8), transparent 40%),
+        radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(7,17,30,.7) 100%);
+      pointer-events:none;
+      z-index:0;
+    }
+
+    /* Hero image panel */
     .hero-image-panel{
       position:absolute;
       right:clamp(18px, 5vw, 80px);
@@ -143,37 +227,58 @@
       transform:translateY(-50%);
       z-index:1;
       overflow:hidden;
-      border:1px solid rgba(23,20,17,.24);
+      border:1px solid rgba(78,145,200,.35);
       box-shadow:
-        0 40px 90px rgba(23,20,17,.32),
-        0 0 0 14px rgba(228,218,203,.22);
-      background:#161311;
+        0 40px 90px rgba(7,17,30,.8),
+        0 0 0 1px rgba(78,145,200,.12),
+        0 0 60px rgba(78,145,200,.08) inset;
+      background:#040a14;
+      transition:transform .06s linear;
     }
 
+    /* Corner brackets */
     .hero-image-panel::before{
-      content:"";
+      content:'';
       position:absolute;
-      inset:-2px;
-      z-index:4;
+      inset:0;
+      z-index:5;
       pointer-events:none;
-      border:1px solid rgba(255,255,255,.42);
+      border:0;
+      box-shadow:
+        inset 12px 12px 0 -11px var(--accent),
+        inset -12px 12px 0 -11px var(--accent),
+        inset 12px -12px 0 -11px var(--accent),
+        inset -12px -12px 0 -11px var(--accent);
+      opacity:.65;
       animation:borderPulse 4s ease-in-out infinite alternate;
     }
 
+    /* Scan lines sweep */
     .hero-image-panel::after{
-      content:"";
+      content:'';
       position:absolute;
-      inset:-40%;
-      z-index:5;
+      inset:0;
+      z-index:6;
       pointer-events:none;
-      background:linear-gradient(
-        115deg,
-        transparent 35%,
-        rgba(255,255,255,.14) 47%,
-        transparent 60%
+      background:repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 3px,
+        rgba(7,17,30,.18) 3px,
+        rgba(7,17,30,.18) 4px
       );
-      transform:translateX(-45%);
-      animation:lightSweep 7s ease-in-out infinite;
+    }
+
+    .scan-sweep{
+      position:absolute;
+      left:0;
+      width:100%;
+      height:3px;
+      background:linear-gradient(90deg, transparent, var(--accent), transparent);
+      z-index:7;
+      opacity:.5;
+      animation:scanLine 4s ease-in-out infinite;
+      box-shadow:0 0 12px 2px rgba(78,145,200,.4);
     }
 
     .hero-image{
@@ -181,9 +286,13 @@
       height:100%;
       object-fit:cover;
       object-position:center right;
-      filter:grayscale(1) contrast(1.07) brightness(.86);
+      filter:grayscale(1) contrast(1.1) brightness(.72) sepia(.12) hue-rotate(190deg);
       transform:scale(1.04);
       animation:slowZoom 16s ease-in-out infinite alternate;
+      transition:filter .5s ease;
+    }
+    .hero-image-panel:hover .hero-image{
+      filter:grayscale(.7) contrast(1.12) brightness(.82) sepia(.08) hue-rotate(190deg);
     }
 
     .image-fade{
@@ -191,23 +300,44 @@
       inset:0;
       z-index:2;
       background:
-        linear-gradient(90deg, rgba(22,19,17,.05), transparent 35%),
-        linear-gradient(180deg, transparent 55%, rgba(22,19,17,.34));
+        linear-gradient(90deg, rgba(7,17,30,.15), transparent 35%),
+        linear-gradient(180deg, transparent 55%, rgba(7,17,30,.55));
       pointer-events:none;
     }
 
     .grain{
       position:absolute;
       inset:-50%;
-      opacity:.075;
+      opacity:.055;
       z-index:3;
-      background-image:
-        radial-gradient(circle, rgba(23,20,17,.35) 1px, transparent 1px);
+      background-image:radial-gradient(circle, rgba(78,145,200,.35) 1px, transparent 1px);
       background-size:4px 4px;
       animation:grain .8s steps(2) infinite;
       pointer-events:none;
     }
 
+    /* Blueprint annotation on image */
+    .blueprint-tag{
+      position:absolute;
+      z-index:8;
+      font-family:'Share Tech Mono', monospace;
+      font-size:9px;
+      letter-spacing:.18em;
+      color:rgba(78,145,200,.6);
+      text-transform:uppercase;
+      pointer-events:none;
+    }
+    .blueprint-tag.top-right{ top:18px; right:18px; text-align:right; }
+    .blueprint-tag.bottom-left{ bottom:18px; left:18px; }
+    .blueprint-tag span{ display:block; margin-bottom:3px; }
+    .blueprint-tag .line{
+      width:40px; height:1px;
+      background:rgba(78,145,200,.35);
+      display:block;
+      margin-bottom:3px;
+    }
+
+    /* ─── HERO CONTENT ─── */
     .hero-content{
       position:relative;
       z-index:6;
@@ -222,10 +352,17 @@
 
     .kicker{
       margin-bottom:18px;
-      font-size:11px;
+      font-size:10px;
       text-transform:uppercase;
       letter-spacing:.28em;
-      color:var(--muted);
+      color:var(--accent);
+      font-family:'Share Tech Mono', monospace;
+      opacity:0;
+      animation:slideUp .7s .3s ease forwards;
+    }
+    .kicker::before{
+      content:'► ';
+      opacity:.5;
     }
 
     .hero-title{
@@ -234,13 +371,17 @@
       line-height:.82;
       font-weight:400;
       margin-bottom:36px;
-      font-family:Georgia, 'Times New Roman', serif;
+      font-family:'EB Garamond', Georgia, serif;
+      opacity:0;
+      animation:slideUp .8s .5s ease forwards;
     }
 
     .title-top{
       font-size:clamp(64px, 10vw, 150px);
       letter-spacing:-.075em;
       color:var(--text);
+      position:relative;
+      display:inline-block;
     }
 
     .title-bottom{
@@ -248,9 +389,20 @@
       letter-spacing:-.075em;
       margin-left:clamp(28px, 8vw, 130px);
       margin-top:-0.08em;
-      color:var(--accent);
+      color:#a0522d;
       transform:rotate(-2deg);
       transform-origin:left center;
+      display:inline-block;
+      position:relative;
+      text-shadow:0 0 40px rgba(160,82,45,.3);
+    }
+
+    /* Glitch on hover */
+    .hero-title:hover .title-top{
+      animation:glitch .4s ease;
+    }
+    .hero-title:hover .title-bottom{
+      animation:glitch2 .4s ease;
     }
 
     .chem-dictionary{
@@ -260,6 +412,8 @@
       gap:10px;
       max-width:690px;
       margin-bottom:34px;
+      opacity:0;
+      animation:slideUp .8s .75s ease forwards;
     }
 
     .chem-dictionary::before{
@@ -269,8 +423,9 @@
       top:-22px;
       font-size:9px;
       letter-spacing:.24em;
-      color:rgba(23,20,17,.42);
+      color:rgba(78,145,200,.42);
       text-transform:uppercase;
+      font-family:'Share Tech Mono', monospace;
     }
 
     .chem-entry{
@@ -279,43 +434,34 @@
       grid-template-columns:62px 1fr;
       gap:14px;
       align-items:stretch;
-      background:rgba(228,218,203,.5);
-      border:1px solid rgba(23,20,17,.22);
-      box-shadow:0 10px 26px rgba(23,20,17,.1);
+      background:rgba(10,20,36,.72);
+      border:1px solid rgba(78,145,200,.22);
+      box-shadow:0 10px 26px rgba(7,17,30,.4);
       overflow:hidden;
+      transition:border-color .3s, box-shadow .3s, transform .25s;
+      transform-style:preserve-3d;
       animation:chemFade .8s ease both;
     }
+    .chem-entry:nth-child(2){ animation-delay:.12s; }
+    .chem-entry:nth-child(3){ animation-delay:.24s; }
 
-    .chem-entry:nth-child(2){
-      animation-delay:.12s;
-    }
-
-    .chem-entry:nth-child(3){
-      animation-delay:.24s;
+    .chem-entry:hover{
+      border-color:rgba(78,145,200,.55);
+      box-shadow:0 12px 36px rgba(7,17,30,.5), 0 0 0 1px rgba(78,145,200,.15);
+      transform:perspective(600px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));
     }
 
     .chem-entry::after{
-      content:"";
+      content:'';
       position:absolute;
       inset:0;
       pointer-events:none;
-      background:linear-gradient(
-        90deg,
-        transparent,
-        rgba(255,255,255,.2),
-        transparent
-      );
+      background:linear-gradient(90deg, transparent, rgba(78,145,200,.12), transparent);
       transform:translateX(-120%);
       animation:entrySweep 6s ease-in-out infinite;
     }
-
-    .chem-entry:nth-child(2)::after{
-      animation-delay:.4s;
-    }
-
-    .chem-entry:nth-child(3)::after{
-      animation-delay:.8s;
-    }
+    .chem-entry:nth-child(2)::after{ animation-delay:.4s; }
+    .chem-entry:nth-child(3)::after{ animation-delay:.8s; }
 
     .chem-symbol{
       position:relative;
@@ -325,30 +471,26 @@
       justify-content:center;
       background:var(--green);
       color:var(--green-light);
-      font-family:Georgia, 'Times New Roman', serif;
+      font-family:'EB Garamond', Georgia, serif;
       font-size:28px;
       letter-spacing:-.04em;
-      border-right:1px solid rgba(23,20,17,.25);
+      border-right:1px solid rgba(78,145,200,.2);
     }
-
     .chem-symbol::before{
       content:"29";
       position:absolute;
       top:5px;
       left:6px;
       font-size:9px;
-      font-family:Arial, Helvetica, sans-serif;
+      font-family:'Share Tech Mono', monospace;
       opacity:.7;
     }
-
     .chem-symbol::after{
-      content:"";
+      content:'';
       position:absolute;
-      right:5px;
-      bottom:5px;
-      width:7px;
-      height:7px;
-      border:1px solid rgba(233,244,220,.6);
+      right:5px; bottom:5px;
+      width:7px; height:7px;
+      border:1px solid rgba(184,220,245,.5);
       opacity:.7;
     }
 
@@ -360,20 +502,19 @@
 
     .dict-word{
       color:var(--text);
-      font-family:Georgia, 'Times New Roman', serif;
+      font-family:'EB Garamond', Georgia, serif;
       font-size:18px;
       letter-spacing:.01em;
       margin-bottom:3px;
     }
-
-    .dict-word span{
-      color:var(--accent);
-    }
+    .dict-word span{ color:var(--accent); }
 
     .dict-line{
-      font-size:12.5px;
-      line-height:1.45;
+      font-size:11px;
+      line-height:1.5;
       color:var(--muted);
+      font-family:'Share Tech Mono', monospace;
+      letter-spacing:.02em;
     }
 
     .definition{
@@ -381,14 +522,48 @@
       line-height:1.02;
       letter-spacing:-.04em;
       max-width:660px;
-      font-family:Georgia, 'Times New Roman', serif;
+      font-family:'EB Garamond', Georgia, serif;
+      color:var(--text);
+      opacity:0;
+      animation:slideUp .8s 1s ease forwards;
     }
 
+    /* ─── TICKER ─── */
+    .ticker-wrap{
+      position:absolute;
+      bottom:0; left:0; right:0;
+      z-index:10;
+      overflow:hidden;
+      height:36px;
+      background:rgba(7,17,30,.85);
+      border-top:1px solid rgba(78,145,200,.2);
+      display:flex;
+      align-items:center;
+    }
+    .ticker{
+      display:flex;
+      gap:0;
+      white-space:nowrap;
+      animation:ticker 28s linear infinite;
+    }
+    .ticker-item{
+      font-family:'Share Tech Mono', monospace;
+      font-size:10px;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      color:rgba(78,145,200,.55);
+      padding:0 48px;
+    }
+    .ticker-item .sep{
+      color:rgba(78,145,200,.25);
+      margin:0 8px;
+    }
+
+    /* ─── GALLERY (original warm palette preserved) ─── */
     .gallery{
       padding:95px 42px 120px;
-      background:
-        linear-gradient(180deg, #c5b8a6, #e1d6c7 42%, #c1b19d);
-      color:var(--text);
+      background:linear-gradient(180deg, #c5b8a6, #e1d6c7 42%, #c1b19d);
+      color:var(--text-orig);
     }
 
     .gallery-top{
@@ -397,7 +572,7 @@
       align-items:flex-end;
       gap:40px;
       margin-bottom:42px;
-      border-top:1px solid var(--line);
+      border-top:1px solid rgba(23,20,17,.2);
       padding-top:18px;
     }
 
@@ -406,7 +581,8 @@
       font-weight:400;
       letter-spacing:-.06em;
       line-height:.92;
-      font-family:Georgia, 'Times New Roman', serif;
+      font-family:'EB Garamond', Georgia, serif;
+      color:var(--text-orig);
     }
 
     .gallery-chem{
@@ -421,89 +597,70 @@
       box-shadow:0 10px 24px rgba(23,20,17,.08);
       overflow:hidden;
     }
-
     .gallery-chem::before{
       content:"MONOCHROME SERIES";
       position:absolute;
-      right:12px;
-      top:7px;
+      right:12px; top:7px;
       font-size:8px;
       letter-spacing:.2em;
       color:rgba(23,20,17,.38);
       text-transform:uppercase;
       z-index:3;
+      font-family:'Share Tech Mono', monospace;
     }
-
     .gallery-chem::after{
-      content:"";
-      position:absolute;
-      inset:0;
+      content:'';
+      position:absolute; inset:0;
       pointer-events:none;
-      background:linear-gradient(
-        90deg,
-        transparent,
-        rgba(255,255,255,.2),
-        transparent
-      );
+      background:linear-gradient(90deg, transparent, rgba(255,255,255,.2), transparent);
       transform:translateX(-120%);
       animation:entrySweep 7s ease-in-out infinite;
     }
-
     .gallery-chem-symbol{
       position:relative;
       display:flex;
       align-items:center;
       justify-content:center;
-      background:var(--green);
-      color:var(--green-light);
-      font-family:Georgia, 'Times New Roman', serif;
+      background:var(--green-orig);
+      color:var(--green-light-orig);
+      font-family:'EB Garamond', Georgia, serif;
       font-size:22px;
       letter-spacing:-.03em;
       min-height:72px;
     }
-
     .gallery-chem-symbol::before{
       content:"04";
       position:absolute;
-      top:6px;
-      left:7px;
+      top:6px; left:7px;
       font-size:9px;
-      font-family:Arial, Helvetica, sans-serif;
+      font-family:'Share Tech Mono', monospace;
       opacity:.7;
     }
-
     .gallery-chem-symbol::after{
-      content:"";
+      content:'';
       position:absolute;
-      right:6px;
-      bottom:6px;
-      width:7px;
-      height:7px;
+      right:6px; bottom:6px;
+      width:7px; height:7px;
       border:1px solid rgba(233,244,220,.6);
       opacity:.7;
     }
-
     .gallery-chem-content{
       padding:22px 16px 13px 0;
       position:relative;
       z-index:2;
     }
-
     .gallery-chem-title{
-      font-family:Georgia, 'Times New Roman', serif;
+      font-family:'EB Garamond', Georgia, serif;
       font-size:18px;
       margin-bottom:4px;
-      color:var(--text);
+      color:var(--text-orig);
     }
-
-    .gallery-chem-title span{
-      color:var(--accent);
-    }
-
+    .gallery-chem-title span{ color:var(--accent-orig); }
     .gallery-chem-line{
       font-size:12.5px;
       line-height:1.5;
-      color:var(--muted);
+      color:rgba(23,20,17,.68);
+      font-family:'Share Tech Mono', monospace;
     }
 
     .grid{
@@ -511,7 +668,6 @@
       grid-template-columns:repeat(4,1fr);
       gap:18px;
     }
-
     .card{
       position:relative;
       overflow:hidden;
@@ -520,212 +676,158 @@
       border:1px solid rgba(23,20,17,.13);
       box-shadow:0 24px 50px rgba(23,20,17,.18);
     }
-
     .card:nth-child(2),
-    .card:nth-child(4){
-      margin-top:70px;
-    }
-
+    .card:nth-child(4){ margin-top:70px; }
     .card img{
       position:relative;
       z-index:1;
-      width:100%;
-      height:100%;
+      width:100%; height:100%;
       object-fit:cover;
       filter:grayscale(1) contrast(1.04);
       transition:1s ease;
       transform:scale(1.03);
     }
-
     .card:hover img{
       transform:scale(1.08);
       filter:grayscale(.75) contrast(1.1);
     }
-
     .card span{
       position:absolute;
       z-index:2;
-      left:14px;
-      bottom:14px;
+      left:14px; bottom:14px;
       font-size:10px;
       letter-spacing:.22em;
       text-transform:uppercase;
       color:var(--white);
       opacity:.82;
       text-shadow:0 2px 12px rgba(0,0,0,.65);
+      font-family:'Share Tech Mono', monospace;
     }
 
+    /* ─── MOUSE SPOTLIGHT ─── */
+    #spotlight{
+      position:fixed;
+      width:500px; height:500px;
+      border-radius:50%;
+      pointer-events:none;
+      z-index:0;
+      background:radial-gradient(circle, rgba(30,74,106,.12) 0%, transparent 70%);
+      transform:translate(-50%,-50%);
+      transition:transform .12s linear;
+    }
+
+    /* ─── KEYFRAMES ─── */
     @keyframes slowZoom{
-      from{
-        transform:scale(1.04);
-      }
-      to{
-        transform:scale(1.095) translateX(-1%);
-      }
+      from{ transform:scale(1.04); }
+      to{ transform:scale(1.095) translateX(-1%); }
     }
-
     @keyframes grain{
-      from{
-        transform:translate(0,0);
-      }
-      to{
-        transform:translate(-3%,2%);
-      }
+      from{ transform:translate(0,0); }
+      to{ transform:translate(-3%,2%); }
     }
-
     @keyframes borderPulse{
-      from{
-        opacity:.35;
-      }
-      to{
-        opacity:.9;
-      }
+      from{ opacity:.3; }
+      to{ opacity:.85; }
     }
-
-    @keyframes lightSweep{
-      0%, 58%{
-        transform:translateX(-55%);
-        opacity:0;
-      }
-      70%{
-        opacity:.65;
-      }
-      100%{
-        transform:translateX(55%);
-        opacity:0;
-      }
+    @keyframes scanLine{
+      0%{ top:-2%; opacity:0; }
+      5%{ opacity:.5; }
+      95%{ opacity:.5; }
+      100%{ top:102%; opacity:0; }
     }
-
     @keyframes chemFade{
-      from{
-        opacity:0;
-        transform:translateY(10px);
-      }
-      to{
-        opacity:1;
-        transform:translateY(0);
-      }
+      from{ opacity:0; transform:translateY(10px); }
+      to{ opacity:1; transform:translateY(0); }
     }
-
     @keyframes entrySweep{
-      0%, 58%{
-        transform:translateX(-120%);
-        opacity:0;
-      }
-      72%{
-        opacity:.8;
-      }
-      100%{
-        transform:translateX(120%);
-        opacity:0;
-      }
+      0%, 58%{ transform:translateX(-120%); opacity:0; }
+      72%{ opacity:.8; }
+      100%{ transform:translateX(120%); opacity:0; }
+    }
+    @keyframes slideUp{
+      from{ opacity:0; transform:translateY(22px); }
+      to{ opacity:1; transform:translateY(0); }
+    }
+    @keyframes ticker{
+      from{ transform:translateX(0); }
+      to{ transform:translateX(-50%); }
+    }
+    @keyframes logoPulse{
+      0%,100%{ opacity:0; transform:scale(1.1); }
+      50%{ opacity:.6; transform:scale(1); }
+    }
+    @keyframes fadeInCoords{
+      from{ opacity:0; }
+      to{ opacity:1; }
+    }
+    @keyframes glitch{
+      0%{ transform:translate(0); }
+      20%{ transform:translate(-3px,1px); clip-path:polygon(0 30%, 100% 30%, 100% 50%, 0 50%); }
+      40%{ transform:translate(3px,-1px); color:var(--accent); }
+      60%{ transform:translate(-2px,0); clip-path:none; }
+      80%{ transform:translate(1px,2px); }
+      100%{ transform:translate(0); color:var(--text); }
+    }
+    @keyframes glitch2{
+      0%{ transform:rotate(-2deg) translate(0); }
+      25%{ transform:rotate(-2deg) translate(3px,-2px); color:#7ab8e0; }
+      50%{ transform:rotate(-2deg) translate(-2px,1px); }
+      75%{ transform:rotate(-2deg) translate(2px,0); }
+      100%{ transform:rotate(-2deg) translate(0); color:#a0522d; }
     }
 
+    /* ─── RESPONSIVE ─── */
     @media(max-width:980px){
-
-      .nav{
-        padding:18px;
-      }
-
-      .nav-links{
-        gap:14px;
-        padding:10px 12px;
-      }
-
-      .nav-links a{
-        font-size:9px;
-        letter-spacing:.13em;
-      }
-
-      .hero{
-        min-height:100svh;
-      }
-
+      body{ cursor:auto; }
+      #cursor, #cursor-aura, #cursor-crosshair, #spotlight{ display:none; }
+      .nav{ padding:18px; }
+      .nav-links{ gap:14px; padding:10px 12px; }
+      .nav-links a{ font-size:9px; letter-spacing:.13em; }
+      .hero{ min-height:100svh; }
       .hero-image-panel{
-        right:0;
-        top:0;
-        width:100%;
-        height:54vh;
+        right:0; top:0;
+        width:100%; height:54vh;
         transform:none;
-        border-left:0;
-        border-right:0;
-        box-shadow:0 30px 70px rgba(23,20,17,.24);
+        border-left:0; border-right:0;
+        box-shadow:0 30px 70px rgba(7,17,30,.6);
       }
-
-      .hero-image{
-        object-position:center top;
-      }
-
+      .hero-image{ object-position:center top; }
       .hero-content{
         width:100%;
         min-height:100svh;
         justify-content:flex-end;
         padding:58vh 20px 70px;
       }
-
-      .title-top,
-      .title-bottom{
-        font-size:clamp(62px,18vw,96px);
-      }
-
-      .title-bottom{
-        margin-left:clamp(20px, 10vw, 70px);
-      }
-
-      .chem-dictionary::before{
-        display:none;
-      }
-
-      .chem-entry{
-        grid-template-columns:56px 1fr;
-      }
-
-      .chem-symbol{
-        min-height:60px;
-        font-size:25px;
-      }
-
-      .definition{
-        font-size:clamp(32px,8vw,48px);
-      }
-
-      .gallery{
-        padding:80px 18px 95px;
-      }
-
-      .gallery-top{
-        display:block;
-      }
-
-      .gallery-chem{
-        margin-top:18px;
-        grid-template-columns:64px 1fr;
-        max-width:100%;
-      }
-
-      .gallery-chem-symbol{
-        min-height:70px;
-        font-size:20px;
-      }
-
-      .grid{
-        grid-template-columns:1fr;
-      }
-
+      .title-top,.title-bottom{ font-size:clamp(62px,18vw,96px); }
+      .title-bottom{ margin-left:clamp(20px,10vw,70px); }
+      .chem-dictionary::before{ display:none; }
+      .chem-entry{ grid-template-columns:56px 1fr; }
+      .chem-symbol{ min-height:60px; font-size:25px; }
+      .definition{ font-size:clamp(32px,8vw,48px); }
+      .gallery{ padding:80px 18px 95px; }
+      .gallery-top{ display:block; }
+      .gallery-chem{ margin-top:18px; grid-template-columns:64px 1fr; max-width:100%; }
+      .gallery-chem-symbol{ min-height:70px; font-size:20px; }
+      .grid{ grid-template-columns:1fr; }
       .card,
       .card:nth-child(2),
-      .card:nth-child(4){
-        margin-top:0;
-        min-height:520px;
-      }
+      .card:nth-child(4){ margin-top:0; min-height:520px; }
+      #coords{ display:none; }
     }
   </style>
 </head>
-
 <body>
 
+  <!-- Custom cursor -->
+  <div id="cursor"></div>
+  <div id="cursor-aura"></div>
+  <div id="cursor-crosshair"></div>
+  <div id="spotlight"></div>
+
+  <!-- Coords HUD -->
+  <div id="coords">X: 0000 · Y: 0000</div>
+
   <nav class="nav">
-    <div class="logo">FH</div>
 
     <div class="nav-links">
       <a href="#">01 Portfolio</a>
@@ -736,56 +838,56 @@
 
   <section class="hero">
 
-    <div class="hero-image-panel">
-      <img
-        src="images/hero.jpeg"
-        alt="Fabian Harmuth Male Model"
-        class="hero-image"
-      />
+    <div class="hero-image-panel" id="imagePanel">
+      <div class="scan-sweep"></div>
+      <img src="images/hero.jpeg" alt="Fabian Harmuth Male Model" class="hero-image" />
       <div class="image-fade"></div>
       <div class="grain"></div>
+      <div class="blueprint-tag top-right">
+        <span>ULM / 48.3984° N</span>
+        <span>09.9912° E</span>
+        <div class="line"></div>
+        <span>EST. 1995</span>
+      </div>
+      <div class="blueprint-tag bottom-left">
+        <div class="line"></div>
+        <span>SUBJECT: F.HARMUTH</span>
+        <span>REF: ACE-001</span>
+      </div>
     </div>
 
     <div class="hero-content">
 
-      <div class="kicker">
-        Editorial Portfolio · Ulm
-      </div>
+      <div class="kicker">Editorial Portfolio · Ulm</div>
 
-      <h1 class="hero-title">
+      <h1 class="hero-title" id="heroTitle">
         <span class="title-top">Fabian</span>
         <span class="title-bottom">Harmuth</span>
       </h1>
 
       <div class="chem-dictionary">
 
-        <div class="chem-entry">
+        <div class="chem-entry" data-tilt>
           <div class="chem-symbol">Fa</div>
           <div class="chem-content">
             <div class="dict-word">Fa<span>|</span>bi<span>|</span>an</div>
-            <div class="dict-line">
-              Bedeutung: männlicher Vorname · Genitiv: Fabian, Fabians · Plural: die Fabians
-            </div>
+            <div class="dict-line">Bedeutung: männlicher Vorname · Genitiv: Fabian, Fabians · Plural: die Fabians</div>
           </div>
         </div>
 
-        <div class="chem-entry">
+        <div class="chem-entry" data-tilt>
           <div class="chem-symbol">Ha</div>
           <div class="chem-content">
             <div class="dict-word">Har<span>|</span>muth</div>
-            <div class="dict-line">
-              Familienname · deutschsprachig · charakterstark, markant, selten
-            </div>
+            <div class="dict-line">Familienname · deutschsprachig · charakterstark, markant, selten</div>
           </div>
         </div>
 
-        <div class="chem-entry">
+        <div class="chem-entry" data-tilt>
           <div class="chem-symbol">Ac</div>
           <div class="chem-content">
             <div class="dict-word">Ace</div>
-            <div class="dict-line">
-              Künstlername · visuelle Identität · klar, prägnant, einprägsam
-            </div>
+            <div class="dict-line">Künstlername · visuelle Identität · klar, prägnant, einprägsam</div>
           </div>
         </div>
 
@@ -797,64 +899,140 @@
       </div>
 
     </div>
+
+    <!-- Ticker -->
+    <div class="ticker-wrap">
+      <div class="ticker" id="ticker">
+        <span class="ticker-item">Fabian Harmuth <span class="sep">◆</span> Male Model</span>
+        <span class="ticker-item">Ulm, Deutschland <span class="sep">◆</span> Editorial</span>
+        <span class="ticker-item">ACE <span class="sep">◆</span> Visual Identity</span>
+        <span class="ticker-item">29 <span class="sep">◆</span> Charakterstark</span>
+        <span class="ticker-item">Schwarz · Weiß · Grau <span class="sep">◆</span> Kontrast</span>
+        <span class="ticker-item">Agenturen &amp; Auftraggeber <span class="sep">◆</span> Available</span>
+        <span class="ticker-item">Fabian Harmuth <span class="sep">◆</span> Male Model</span>
+        <span class="ticker-item">Ulm, Deutschland <span class="sep">◆</span> Editorial</span>
+        <span class="ticker-item">ACE <span class="sep">◆</span> Visual Identity</span>
+        <span class="ticker-item">29 <span class="sep">◆</span> Charakterstark</span>
+        <span class="ticker-item">Schwarz · Weiß · Grau <span class="sep">◆</span> Kontrast</span>
+        <span class="ticker-item">Agenturen &amp; Auftraggeber <span class="sep">◆</span> Available</span>
+      </div>
+    </div>
+
   </section>
 
   <section class="gallery">
 
     <div class="gallery-top">
-
-      <h2>
-        Schwarz Weiß<br>
-        Serie
-      </h2>
-
+      <h2>Schwarz Weiß<br>Serie</h2>
       <div class="gallery-chem">
-
-        <div class="gallery-chem-symbol">
-          S/W
-        </div>
-
+        <div class="gallery-chem-symbol">S/W</div>
         <div class="gallery-chem-content">
-
-          <div class="gallery-chem-title">
-            Schwarz<span>|</span>Weiß
-          </div>
-
-          <div class="gallery-chem-line">
-            Eine Komposition aus schwarzer und weißer Farbe · reduziert auf Licht, Schatten, Haltung und Ausdruck.
-          </div>
-
+          <div class="gallery-chem-title">Schwarz<span>|</span>Weiß</div>
+          <div class="gallery-chem-line">Eine Komposition aus schwarzer und weißer Farbe · reduziert auf Licht, Schatten, Haltung und Ausdruck.</div>
         </div>
-
       </div>
-
     </div>
 
     <div class="grid">
-
       <div class="card">
         <img src="images/best-01.jpeg" alt="Schwarzweiß Portfolio Frame 01">
         <span>Frame 01</span>
       </div>
-
       <div class="card">
         <img src="images/best-02.jpeg" alt="Schwarzweiß Portfolio Frame 02">
         <span>Frame 02</span>
       </div>
-
       <div class="card">
         <img src="images/best-03.jpeg" alt="Schwarzweiß Portfolio Frame 03">
         <span>Frame 03</span>
       </div>
-
       <div class="card">
         <img src="images/best-04.jpeg" alt="Schwarzweiß Portfolio Frame 04">
         <span>Frame 04</span>
       </div>
-
     </div>
 
   </section>
+
+  <script>
+    // ── Custom cursor ──────────────────────────────────────────────
+    const cursor       = document.getElementById('cursor');
+    const cursorAura   = document.getElementById('cursor-aura');
+    const cursorCross  = document.getElementById('cursor-crosshair');
+    const spotlight    = document.getElementById('spotlight');
+    const coords       = document.getElementById('coords');
+
+    let mx = 0, my = 0;
+    let ax = 0, ay = 0;
+
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      cursor.style.left  = mx + 'px';
+      cursor.style.top   = my + 'px';
+      cursorCross.style.left = mx + 'px';
+      cursorCross.style.top  = my + 'px';
+      spotlight.style.left = mx + 'px';
+      spotlight.style.top  = my + 'px';
+      coords.textContent = `X: ${String(Math.round(mx)).padStart(4,'0')} · Y: ${String(Math.round(my)).padStart(4,'0')}`;
+    });
+
+    // Lagging aura
+    function animateAura(){
+      ax += (mx - ax) * 0.1;
+      ay += (my - ay) * 0.1;
+      cursorAura.style.left = ax + 'px';
+      cursorAura.style.top  = ay + 'px';
+      requestAnimationFrame(animateAura);
+    }
+    animateAura();
+
+    // Cursor states
+    document.querySelectorAll('a, .chem-entry, .card').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        cursor.style.width  = '20px';
+        cursor.style.height = '20px';
+        cursor.style.background = 'rgba(78,145,200,.3)';
+        cursorAura.style.width  = '72px';
+        cursorAura.style.height = '72px';
+      });
+      el.addEventListener('mouseleave', () => {
+        cursor.style.width  = '12px';
+        cursor.style.height = '12px';
+        cursor.style.background = 'var(--accent)';
+        cursorAura.style.width  = '48px';
+        cursorAura.style.height = '48px';
+      });
+    });
+
+    // ── Parallax image on mouse ──────────────────────────────────
+    const panel = document.getElementById('imagePanel');
+    const heroSection = document.querySelector('.hero');
+
+    heroSection.addEventListener('mousemove', e => {
+      const rect  = heroSection.getBoundingClientRect();
+      const cx    = (e.clientX - rect.left)  / rect.width  - 0.5;
+      const cy    = (e.clientY - rect.top)   / rect.height - 0.5;
+      panel.style.transform = `translateY(-50%) translate(${cx * -18}px, ${cy * -12}px)`;
+    });
+    heroSection.addEventListener('mouseleave', () => {
+      panel.style.transform = 'translateY(-50%)';
+    });
+
+    // ── Card tilt ─────────────────────────────────────────────────
+    document.querySelectorAll('[data-tilt]').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const r  = card.getBoundingClientRect();
+        const x  = (e.clientX - r.left) / r.width  - 0.5;
+        const y  = (e.clientY - r.top)  / r.height - 0.5;
+        card.style.setProperty('--rx', `${y * -6}deg`);
+        card.style.setProperty('--ry', `${x *  8}deg`);
+        card.style.transform = `perspective(600px) rotateX(${y * -6}deg) rotateY(${x * 8}deg)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+      });
+    });
+  </script>
 
 </body>
 </html>
