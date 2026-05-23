@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>Kontakt — Fabian Harmuth</title>
+<meta name="description" content="Kontakt zu Fabian Harmuth — Male Model aus Ulm. Anfragen für Shootings, Editorials, Agenturen und Produktionen."/>
+
+<style>
+:root{
+  --bg:#18130f;
+  --bg2:#120e0b;
+  --surface:#221b15;
+  --surface-soft:rgba(34,27,21,.72);
+
+  --text:#eee5d8;
+  --text-dim:#9d8d7b;
+  --muted:rgba(238,229,216,.52);
+
+  --accent:#995732;
+  --accent-light:#c07a49;
+
+  --green:#1f3b2d;
+  --green-light:#d7ebc7;
+
+  --beige:#cab89f;
+  --off:#f2eadf;
+
+  --line:rgba(238,229,216,.08);
+  --line-strong:rgba(238,229,216,.14);
+
+  --serif:Georgia, "Times New Roman", serif;
+  --mono:"Courier New", Courier, monospace;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  background:var(--bg);
+  scroll-behavior:smooth;
+}
+
+body{
+  min-height:100vh;
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--mono);
+  overflow-x:hidden;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+button,
+input,
+textarea{
+  font:inherit;
+}
+
+.page-grain{
+  position:fixed;
+  inset:0;
+  z-index:30;
+  pointer-events:none;
+  opacity:.022;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:220px 220px;
+}
+
+.nav{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  padding:30px 48px;
+  display:flex;
+  justify-content:flex-end;
+  z-index:100;
+}
+
+.nav-links{
+  display:flex;
+  gap:36px;
+  padding:14px 20px;
+  background:rgba(18,14,11,.55);
+  border:1px solid rgba(238,229,216,.06);
+  backdrop-filter:blur(16px);
+}
+
+.nav-links a{
+  position:relative;
+  font-size:10px;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--beige);
+  opacity:.72;
+  padding-bottom:5px;
+  transition:.3s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active{
+  opacity:1;
+  color:var(--off);
+}
+
+.nav-links a::after{
+  content:'';
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:0%;
+  height:1px;
+  background:var(--accent-light);
+  transition:.4s ease;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after{
+  width:100%;
+}
+
+.contact-page{
+  position:relative;
+  min-height:100vh;
+  padding:130px 7vw 90px;
+  background:
+    radial-gradient(circle at 16% 64%, rgba(153,87,50,.25), transparent 36%),
+    radial-gradient(circle at 84% 28%, rgba(31,59,45,.28), transparent 34%),
+    linear-gradient(160deg,#1c1510 0%,#120e0b 62%,#090705 100%);
+  overflow:hidden;
+}
+
+.contact-page::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background-image:
+    linear-gradient(rgba(238,229,216,.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(238,229,216,.012) 1px, transparent 1px);
+  background-size:74px 74px;
+  pointer-events:none;
+}
+
+.contact-shell{
+  position:relative;
+  z-index:5;
+  width:min(1120px,100%);
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:minmax(320px, 0.9fr) minmax(420px, 1.1fr);
+  gap:clamp(42px,6vw,90px);
+  align-items:start;
+}
+
+.contact-intro{
+  padding-top:18px;
+}
+
+.kicker{
+  margin-bottom:24px;
+  font-size:10px;
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  color:var(--text-dim);
+  animation:fadeUp .8s .1s ease both;
+}
+
+.hero-title{
+  margin-bottom:42px;
+  display:flex;
+  flex-direction:column;
+  line-height:.84;
+  font-family:var(--serif);
+  animation:fadeUp .85s .2s ease both;
+}
+
+.title-top{
+  font-size:clamp(70px,9vw,146px);
+  letter-spacing:-.06em;
+  color:var(--off);
+  font-style:italic;
+  font-weight:300;
+}
+
+.title-bottom{
+  font-size:clamp(70px,9vw,146px);
+  letter-spacing:-.06em;
+  margin-left:clamp(28px,7vw,110px);
+  margin-top:-.05em;
+  color:var(--accent);
+  transform:rotate(-1.4deg);
+  font-weight:400;
+}
+
+.contact-definition{
+  max-width:520px;
+  font-family:var(--serif);
+  font-size:clamp(27px,3.2vw,46px);
+  line-height:1.04;
+  letter-spacing:-.035em;
+  font-style:italic;
+  font-weight:300;
+  color:var(--text);
+  animation:fadeUp .8s .34s ease both;
+}
+
+.editorial-line{
+  width:90px;
+  height:1px;
+  margin-top:36px;
+  background:rgba(202,184,159,.28);
+  animation:fadeUp .8s .48s ease both;
+}
+
+.contact-card{
+  position:relative;
+  background:rgba(34,27,21,.7);
+  border:1px solid rgba(238,229,216,.08);
+  backdrop-filter:blur(10px);
+  box-shadow:0 34px 90px rgba(0,0,0,.34);
+  overflow:hidden;
+  animation:fadeUp .9s .3s ease both;
+}
+
+.contact-card::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(100deg, transparent, rgba(255,255,255,.045), transparent);
+  transform:translateX(-120%);
+  animation:cardShimmer 12s ease-in-out infinite;
+  pointer-events:none;
+}
+
+.contact-index{
+  position:relative;
+  display:grid;
+  grid-template-columns:68px 1fr;
+  border-bottom:1px solid rgba(238,229,216,.08);
+  z-index:2;
+}
+
+.index-symbol{
+  position:relative;
+  min-height:76px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:var(--green);
+  color:var(--green-light);
+  font-family:var(--serif);
+  font-size:25px;
+  border-right:1px solid rgba(255,255,255,.06);
+}
+
+.index-symbol::before{
+  content:"79";
+  position:absolute;
+  top:7px;
+  left:7px;
+  font-family:var(--mono);
+  font-size:8px;
+  opacity:.55;
+}
+
+.index-symbol::after{
+  content:'';
+  position:absolute;
+  right:7px;
+  bottom:7px;
+  width:6px;
+  height:6px;
+  border:1px solid rgba(215,235,199,.36);
+}
+
+.index-text{
+  padding:18px 20px 17px;
+}
+
+.index-title{
+  margin-bottom:4px;
+  font-family:var(--serif);
+  font-size:18px;
+  color:var(--off);
+}
+
+.index-title span{
+  color:var(--accent-light);
+}
+
+.index-line{
+  font-size:10.5px;
+  line-height:1.55;
+  color:var(--text-dim);
+}
+
+.form-wrap{
+  position:relative;
+  z-index:2;
+  padding:28px;
+}
+
+.form-intro{
+  margin-bottom:28px;
+  font-family:var(--serif);
+  font-size:20px;
+  line-height:1.45;
+  color:var(--text);
+  font-style:italic;
+}
+
+.form-intro strong{
+  font-style:normal;
+  color:var(--off);
+  font-weight:400;
+}
+
+.contact-form{
+  display:flex;
+  flex-direction:column;
+}
+
+.field-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:0;
+  border-top:1px solid var(--line-strong);
+}
+
+.field-row .field-group:first-child{
+  border-right:1px solid var(--line-strong);
+  padding-right:24px;
+}
+
+.field-row .field-group:last-child{
+  padding-left:24px;
+}
+
+.field-single{
+  border-top:1px solid var(--line-strong);
+}
+
+.field-group{
+  position:relative;
+  padding:20px 0;
+}
+
+.field-group::after{
+  content:'';
+  position:absolute;
+  left:0;
+  bottom:-1px;
+  width:0;
+  height:1px;
+  background:var(--accent-light);
+  transition:.4s ease;
+}
+
+.field-group:focus-within::after{
+  width:100%;
+}
+
+.field-label{
+  display:block;
+  margin-bottom:10px;
+  font-size:9px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--text-dim);
+  transition:.25s ease;
+}
+
+.field-group:focus-within .field-label{
+  color:var(--accent-light);
+}
+
+input,
+textarea{
+  width:100%;
+  border:0;
+  outline:0;
+  background:transparent;
+  color:var(--off);
+  font-family:var(--serif);
+  font-size:18px;
+  line-height:1.5;
+  resize:none;
+  caret-color:var(--accent-light);
+}
+
+input::placeholder,
+textarea::placeholder{
+  color:rgba(238,229,216,.28);
+}
+
+.char-line{
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  padding:12px 0 20px;
+  border-top:1px solid var(--line-strong);
+  border-bottom:1px solid var(--line-strong);
+  font-size:9px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--text-dim);
+}
+
+.char-count.live{
+  color:var(--accent-light);
+}
+
+.form-bottom{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:28px;
+  padding-top:30px;
+}
+
+.reply-note{
+  font-family:var(--serif);
+  font-size:16px;
+  line-height:1.45;
+  color:var(--muted);
+  font-style:italic;
+}
+
+.btn-send{
+  position:relative;
+  min-width:170px;
+  padding:16px 28px;
+  border:1px solid rgba(215,235,199,.46);
+  background:var(--green);
+  color:var(--green-light);
+  font-size:10px;
+  letter-spacing:.24em;
+  text-transform:uppercase;
+  cursor:pointer;
+  overflow:hidden;
+  transition:.35s ease;
+}
+
+.btn-send::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(100deg, transparent, rgba(255,255,255,.16), transparent);
+  transform:translateX(-120%);
+  transition:.45s ease;
+}
+
+.btn-send:hover{
+  transform:translateY(-2px);
+  box-shadow:0 16px 36px rgba(0,0,0,.28);
+}
+
+.btn-send:hover::before{
+  transform:translateX(120%);
+}
+
+.btn-send span{
+  position:relative;
+  z-index:2;
+}
+
+.status{
+  display:none;
+  margin-top:18px;
+  font-size:10px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+
+.status.ok{
+  color:var(--green-light);
+}
+
+.status.err{
+  color:#d78a75;
+}
+
+.direct-contact{
+  margin-top:34px;
+  padding-top:20px;
+  border-top:1px solid var(--line);
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  font-size:10px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--text-dim);
+}
+
+.direct-contact a{
+  color:var(--beige);
+  transition:.3s ease;
+}
+
+.direct-contact a:hover{
+  color:var(--accent-light);
+}
+
+.foot{
+  position:relative;
+  z-index:5;
+  width:min(1120px,100%);
+  margin:70px auto 0;
+  padding-top:18px;
+  border-top:1px solid rgba(238,229,216,.08);
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  color:var(--text-dim);
+  font-size:9px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+
+.foot-dot{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:var(--green-light);
+  opacity:.75;
+  animation:blink 2.8s ease-in-out infinite;
+}
+
+@keyframes fadeUp{
+  from{
+    opacity:0;
+    transform:translateY(18px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+@keyframes cardShimmer{
+  0%,64%{
+    transform:translateX(-120%);
+    opacity:0;
+  }
+  76%{
+    opacity:.7;
+  }
+  100%{
+    transform:translateX(120%);
+    opacity:0;
+  }
+}
+
+@keyframes blink{
+  0%,100%{
+    opacity:.85;
+  }
+  50%{
+    opacity:.24;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  *{
+    animation:none!important;
+    transition:none!important;
+    scroll-behavior:auto!important;
+  }
+}
+
+@media(max-width:900px){
+  .nav{
+    padding:18px 20px;
+  }
+
+  .nav-links{
+    gap:16px;
+    padding:10px 14px;
+  }
+
+  .nav-links a{
+    font-size:9px;
+  }
+
+  .contact-page{
+    padding:96px 22px 70px;
+  }
+
+  .contact-shell{
+    grid-template-columns:1fr;
+    gap:46px;
+  }
+
+  .title-top,
+  .title-bottom{
+    font-size:clamp(64px,18vw,104px);
+  }
+
+  .title-bottom{
+    margin-left:clamp(24px,10vw,70px);
+  }
+
+  .field-row{
+    grid-template-columns:1fr;
+  }
+
+  .field-row .field-group:first-child{
+    border-right:0;
+    border-bottom:1px solid var(--line-strong);
+    padding-right:0;
+  }
+
+  .field-row .field-group:last-child{
+    padding-left:0;
+  }
+
+  .form-wrap{
+    padding:24px 20px;
+  }
+
+  .form-bottom{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .btn-send{
+    width:100%;
+  }
+
+  .direct-contact{
+    flex-direction:column;
+  }
+
+  .foot{
+    flex-direction:column;
+    margin-top:54px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="page-grain"></div>
+
+<nav class="nav">
+  <div class="nav-links">
+    <a href="index.html">01 Landingpage</a>
+    <a href="blaupause-polaroids.html">02 Blaupause-Polaroids</a>
+    <a href="kontakt.html" class="active">03 Kontakt</a>
+  </div>
+</nav>
+
+<main class="contact-page">
+
+  <div class="contact-shell">
+
+    <section class="contact-intro">
+      <div class="kicker">Fabian Harmuth · Kontakt</div>
+
+      <h1 class="hero-title">
+        <span class="title-top">Kontakt</span>
+        <span class="title-bottom">Aufnehmen</span>
+      </h1>
+
+      <div class="contact-definition">
+        Für Shootings, Editorials, Agenturen oder Produktionen:
+        direkte Anfrage, klare Kommunikation, persönliche Rückmeldung.
+      </div>
+
+      <div class="editorial-line"></div>
+    </section>
+
+    <section class="contact-card">
+
+      <div class="contact-index">
+        <div class="index-symbol">Ko</div>
+
+        <div class="index-text">
+          <div class="index-title">
+            Kon<span>|</span>takt
+          </div>
+
+          <div class="index-line">
+            Substantiv · Verbindungspunkt zwischen Projekt, Person und visueller Idee.
+          </div>
+        </div>
+      </div>
+
+      <div class="form-wrap">
+
+        <p class="form-intro">
+          <strong>Schreib mir.</strong> Ob Casting, Produktion, Editorial
+          oder erste Anfrage — ich lese jede Nachricht persönlich.
+        </p>
+
+        <form class="contact-form" id="cf" action="https://api.web3forms.com/submit" method="POST" novalidate>
+
+          <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_KEY_HERE">
+          <input type="hidden" name="redirect" value="false">
+          <input type="hidden" name="subject" value="Neue Anfrage — Fabian Harmuth Portfolio">
+          <input type="checkbox" name="botcheck" style="display:none">
+
+          <div class="field-row">
+            <div class="field-group">
+              <label class="field-label" for="name">Name / Agentur</label>
+              <input id="name" name="name" type="text" placeholder="Name oder Agentur" required autocomplete="name">
+            </div>
+
+            <div class="field-group">
+              <label class="field-label" for="kontakt">E-Mail / Instagram</label>
+              <input id="kontakt" name="kontakt" type="text" placeholder="mail@beispiel.de · @handle" required>
+            </div>
+          </div>
+
+          <div class="field-single">
+            <div class="field-group">
+              <label class="field-label" for="nachricht">Nachricht</label>
+              <textarea id="nachricht" name="nachricht" rows="7" maxlength="2000" placeholder="Projekt, Zeitraum, Idee oder Anfrage ..." required></textarea>
+            </div>
+          </div>
+
+          <div class="char-line">
+            <span>Min. 10 · Max. 2000 Zeichen</span>
+            <span class="char-count" id="cc">0 / 2000</span>
+          </div>
+
+          <div class="form-bottom">
+            <p class="reply-note">
+              Antwort in der Regel<br>
+              innerhalb von 24 Stunden.
+            </p>
+
+            <button class="btn-send" type="submit" id="btn">
+              <span id="btxt">Senden</span>
+            </button>
+          </div>
+
+          <div class="status ok" id="ok">✓ Nachricht erhalten — ich melde mich.</div>
+          <div class="status err" id="err">✕ Fehler beim Senden. Bitte erneut versuchen.</div>
+        </form>
+
+        <div class="direct-contact">
+          <span>Ulm · Germany</span>
+          <a href="mailto:DEINE-MAIL-HIER">Direkte Mail</a>
+        </div>
+
+      </div>
+
+    </section>
+
+  </div>
+
+  <footer class="foot">
+    <span>Ulm · 48°23′54.28″N · 9°59′29.58″E · Fabian Harmuth</span>
+    <span class="foot-dot"></span>
+  </footer>
+
+</main>
+
+<script>
+const textarea = document.getElementById('nachricht');
+const counter = document.getElementById('cc');
+
+textarea.addEventListener('input', () => {
+  const length = textarea.value.length;
+  counter.textContent = length + ' / 2000';
+  counter.classList.toggle('live', length > 0);
+});
+
+const form = document.getElementById('cf');
+const btn = document.getElementById('btn');
+const btxt = document.getElementById('btxt');
+const ok = document.getElementById('ok');
+const err = document.getElementById('err');
+
+form.addEventListener('submit', async e => {
+  e.preventDefault();
+
+  btn.disabled = true;
+  btxt.textContent = 'Sende …';
+  ok.style.display = 'none';
+  err.style.display = 'none';
+
+  try{
+    const response = await fetch('https://api.web3forms.com/submit', {
+      method:'POST',
+      body:new FormData(form)
+    });
+
+    const result = await response.json();
+
+    if(result.success){
+      ok.style.display = 'block';
+      form.reset();
+      counter.textContent = '0 / 2000';
+      counter.classList.remove('live');
+      btxt.textContent = 'Gesendet ✓';
+    }else{
+      throw new Error('Send failed');
+    }
+  }catch{
+    err.style.display = 'block';
+    btxt.textContent = 'Senden';
+    btn.disabled = false;
+  }
+});
+</script>
+
+</body>
+</html>
