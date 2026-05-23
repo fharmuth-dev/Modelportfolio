@@ -5,33 +5,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
 <title>Kontakt — Fabian Harmuth</title>
-<meta name="description" content="Kontakt zu Fabian Harmuth — Male Model aus Ulm. Anfragen für Shootings, Editorials, Agenturen und Produktionen."/>
+<meta name="description" content="Kontakt zu Fabian Harmuth — Male Model aus Ulm."/>
 
 <style>
 :root{
   --bg:#18130f;
   --bg2:#120e0b;
   --surface:#221b15;
-  --surface-soft:rgba(34,27,21,.72);
-
   --text:#eee5d8;
   --text-dim:#9d8d7b;
   --muted:rgba(238,229,216,.52);
-
   --accent:#995732;
   --accent-light:#c07a49;
-
   --green:#1f3b2d;
   --green-light:#d7ebc7;
-
   --beige:#cab89f;
   --off:#f2eadf;
-
   --line:rgba(238,229,216,.08);
   --line-strong:rgba(238,229,216,.14);
-
-  --serif:Georgia, "Times New Roman", serif;
-  --mono:"Courier New", Courier, monospace;
+  --serif:Georgia,"Times New Roman",serif;
+  --mono:"Courier New",Courier,monospace;
 }
 
 *{
@@ -152,16 +145,16 @@ textarea{
 .contact-shell{
   position:relative;
   z-index:5;
-  width:min(1180px,100%);
+  width:min(1120px,100%);
   margin:0 auto;
   display:grid;
-  grid-template-columns:minmax(0, 1fr) minmax(390px, 520px);
-  gap:clamp(70px,8vw,130px);
+  grid-template-columns:1fr 1fr;
+  gap:clamp(56px,7vw,110px);
   align-items:start;
 }
 
 .contact-intro{
-  padding-top:18px;
+  padding-top:12px;
 }
 
 .kicker{
@@ -173,38 +166,33 @@ textarea{
   animation:fadeUp .8s .1s ease both;
 }
 
-.hero-title{
+.contact-title{
   margin-bottom:42px;
-  display:flex;
-  flex-direction:column;
-  line-height:.84;
+  max-width:540px;
   font-family:var(--serif);
+  font-size:clamp(64px,8vw,126px);
+  line-height:.88;
+  letter-spacing:-.06em;
+  color:var(--off);
+  font-weight:300;
+  font-style:italic;
   animation:fadeUp .85s .2s ease both;
 }
 
-.title-top{
-  font-size:clamp(70px,9vw,146px);
-  letter-spacing:-.06em;
-  color:var(--off);
-  font-style:italic;
-  font-weight:300;
-}
-
-.title-bottom{
-  font-size:clamp(70px,9vw,146px);
-  letter-spacing:-.06em;
-  margin-left:clamp(28px,7vw,110px);
-  margin-top:-.05em;
+.contact-title span{
+  display:block;
   color:var(--accent);
-  transform:rotate(-1.4deg);
+  font-style:normal;
   font-weight:400;
+  margin-left:0;
+  transform:none;
 }
 
 .contact-definition{
   max-width:520px;
   font-family:var(--serif);
-  font-size:clamp(27px,3.2vw,46px);
-  line-height:1.04;
+  font-size:clamp(27px,3vw,42px);
+  line-height:1.05;
   letter-spacing:-.035em;
   font-style:italic;
   font-weight:300;
@@ -228,7 +216,6 @@ textarea{
   box-shadow:0 34px 90px rgba(0,0,0,.34);
   overflow:hidden;
   animation:fadeUp .9s .3s ease both;
-  margin-top:90px;
 }
 
 .contact-card::after{
@@ -332,7 +319,6 @@ textarea{
 .field-row{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:0;
   border-top:1px solid var(--line-strong);
 }
 
@@ -578,7 +564,7 @@ textarea::placeholder{
   }
 }
 
-@media(max-width:900px){
+@media(max-width:980px){
   .nav{
     padding:18px 20px;
   }
@@ -601,13 +587,13 @@ textarea::placeholder{
     gap:46px;
   }
 
-  .title-top,
-  .title-bottom{
-    font-size:clamp(64px,18vw,104px);
+  .contact-title{
+    font-size:clamp(62px,17vw,104px);
+    max-width:100%;
   }
 
-  .title-bottom{
-    margin-left:clamp(24px,10vw,70px);
+  .contact-definition{
+    font-size:clamp(28px,7vw,42px);
   }
 
   .field-row{
@@ -668,9 +654,9 @@ textarea::placeholder{
     <section class="contact-intro">
       <div class="kicker">Fabian Harmuth · Kontakt</div>
 
-      <h1 class="hero-title">
-        <span class="title-top">Kontakt</span>
-        <span class="title-bottom">Aufnehmen</span>
+      <h1 class="contact-title">
+        Kontakt
+        <span>Aufnehmen</span>
       </h1>
 
       <div class="contact-definition">
