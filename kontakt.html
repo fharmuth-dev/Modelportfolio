@@ -76,22 +76,28 @@ textarea{
   padding:30px 48px;
   display:flex;
   justify-content:flex-end;
+  align-items:center;
   z-index:100;
+  pointer-events:none;
 }
 
 .nav-links{
   display:flex;
+  align-items:center;
   gap:36px;
   padding:14px 20px;
   background:rgba(18,14,11,.55);
   border:1px solid rgba(238,229,216,.06);
   backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  box-shadow:0 10px 34px rgba(0,0,0,.18);
+  pointer-events:auto;
 }
 
 .nav-links a{
   position:relative;
-  font-size:10px;
-  letter-spacing:.22em;
+  font-size:10.5px;
+  letter-spacing:.2em;
   text-transform:uppercase;
   color:var(--beige);
   opacity:.72;
@@ -160,8 +166,8 @@ textarea{
 
 .kicker{
   margin-bottom:24px;
-  font-size:10px;
-  letter-spacing:.3em;
+  font-size:11px;
+  letter-spacing:.26em;
   text-transform:uppercase;
   color:var(--text-dim);
   animation:fadeUp .8s .1s ease both;
@@ -284,9 +290,9 @@ textarea{
 }
 
 .index-line{
-  font-size:10.5px;
-  line-height:1.55;
-  color:var(--text-dim);
+  font-size:12px;
+  line-height:1.62;
+  color:rgba(238,229,216,.68);
 }
 
 .form-wrap{
@@ -298,8 +304,8 @@ textarea{
 .form-intro{
   margin-bottom:28px;
   font-family:var(--serif);
-  font-size:20px;
-  line-height:1.45;
+  font-size:21px;
+  line-height:1.5;
   color:var(--text);
   font-style:italic;
 }
@@ -357,8 +363,8 @@ textarea{
 .field-label{
   display:block;
   margin-bottom:10px;
-  font-size:9px;
-  letter-spacing:.2em;
+  font-size:10px;
+  letter-spacing:.17em;
   text-transform:uppercase;
   color:var(--text-dim);
   transition:.25s ease;
@@ -384,7 +390,7 @@ textarea{
 
 input[readonly]{
   cursor:default;
-  color:rgba(238,229,216,.64);
+  color:rgba(238,229,216,.78);
 }
 
 input::placeholder,
@@ -395,8 +401,8 @@ textarea::placeholder{
 .contact-method-title{
   padding:18px 0 0;
   border-top:1px solid var(--line-strong);
-  font-size:9px;
-  letter-spacing:.2em;
+  font-size:10px;
+  letter-spacing:.17em;
   text-transform:uppercase;
   color:var(--accent-light);
 }
@@ -425,8 +431,8 @@ textarea::placeholder{
   padding:13px 10px;
   border:1px solid rgba(238,229,216,.1);
   color:var(--text-dim);
-  font-size:9px;
-  letter-spacing:.16em;
+  font-size:10px;
+  letter-spacing:.14em;
   text-transform:uppercase;
   text-align:center;
   cursor:pointer;
@@ -474,8 +480,8 @@ textarea::placeholder{
 .field-error{
   display:none;
   margin-top:10px;
-  font-size:9px;
-  letter-spacing:.12em;
+  font-size:10px;
+  letter-spacing:.1em;
   line-height:1.45;
   text-transform:uppercase;
   color:var(--error);
@@ -492,8 +498,8 @@ textarea::placeholder{
   padding:12px 0 20px;
   border-top:1px solid var(--line-strong);
   border-bottom:1px solid var(--line-strong);
-  font-size:9px;
-  letter-spacing:.14em;
+  font-size:10px;
+  letter-spacing:.12em;
   text-transform:uppercase;
   color:var(--text-dim);
 }
@@ -565,8 +571,8 @@ textarea::placeholder{
 .status{
   display:none;
   margin-top:18px;
-  font-size:10px;
-  letter-spacing:.16em;
+  font-size:10.5px;
+  letter-spacing:.14em;
   text-transform:uppercase;
 }
 
@@ -585,8 +591,8 @@ textarea::placeholder{
   display:flex;
   justify-content:space-between;
   gap:20px;
-  font-size:10px;
-  letter-spacing:.16em;
+  font-size:10.5px;
+  letter-spacing:.14em;
   text-transform:uppercase;
   color:var(--text-dim);
 }
@@ -611,8 +617,8 @@ textarea::placeholder{
   justify-content:space-between;
   gap:20px;
   color:var(--text-dim);
-  font-size:9px;
-  letter-spacing:.16em;
+  font-size:10px;
+  letter-spacing:.14em;
   text-transform:uppercase;
 }
 
@@ -714,7 +720,8 @@ textarea::placeholder{
   }
 
   .nav-links a{
-    font-size:9px;
+    font-size:9.5px;
+    letter-spacing:.14em;
   }
 
   .contact-page{
