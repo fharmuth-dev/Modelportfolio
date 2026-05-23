@@ -23,13 +23,21 @@
   --off:#f2eadf;
   --line:rgba(238,229,216,.08);
   --line-strong:rgba(238,229,216,.14);
+  --error:#d78a75;
   --serif:Georgia,"Times New Roman",serif;
   --mono:"Courier New",Courier,monospace;
 }
 
-*{margin:0;padding:0;box-sizing:border-box;}
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
-html{background:var(--bg);scroll-behavior:smooth;}
+html{
+  background:var(--bg);
+  scroll-behavior:smooth;
+}
 
 body{
   min-height:100vh;
@@ -39,9 +47,16 @@ body{
   overflow-x:hidden;
 }
 
-a{color:inherit;text-decoration:none;}
+a{
+  color:inherit;
+  text-decoration:none;
+}
 
-button,input,textarea,select{font:inherit;}
+button,
+input,
+textarea{
+  font:inherit;
+}
 
 .page-grain{
   position:fixed;
@@ -139,7 +154,9 @@ button,input,textarea,select{font:inherit;}
   align-items:start;
 }
 
-.contact-intro{padding-top:12px;}
+.contact-intro{
+  padding-top:12px;
+}
 
 .kicker{
   margin-bottom:24px;
@@ -251,7 +268,9 @@ button,input,textarea,select{font:inherit;}
   border:1px solid rgba(215,235,199,.36);
 }
 
-.index-text{padding:18px 20px 17px;}
+.index-text{
+  padding:18px 20px 17px;
+}
 
 .index-title{
   margin-bottom:4px;
@@ -260,7 +279,9 @@ button,input,textarea,select{font:inherit;}
   color:var(--off);
 }
 
-.index-title span{color:var(--accent-light);}
+.index-title span{
+  color:var(--accent-light);
+}
 
 .index-line{
   font-size:10.5px;
@@ -289,7 +310,10 @@ button,input,textarea,select{font:inherit;}
   font-weight:400;
 }
 
-.contact-form{display:flex;flex-direction:column;}
+.contact-form{
+  display:flex;
+  flex-direction:column;
+}
 
 .field-row{
   display:grid;
@@ -302,9 +326,13 @@ button,input,textarea,select{font:inherit;}
   padding-right:24px;
 }
 
-.field-row .field-group:last-child{padding-left:24px;}
+.field-row .field-group:last-child{
+  padding-left:24px;
+}
 
-.field-single{border-top:1px solid var(--line-strong);}
+.field-single{
+  border-top:1px solid var(--line-strong);
+}
 
 .field-group{
   position:relative;
@@ -322,7 +350,9 @@ button,input,textarea,select{font:inherit;}
   transition:.4s ease;
 }
 
-.field-group:focus-within::after{width:100%;}
+.field-group:focus-within::after{
+  width:100%;
+}
 
 .field-label{
   display:block;
@@ -334,11 +364,12 @@ button,input,textarea,select{font:inherit;}
   transition:.25s ease;
 }
 
-.field-group:focus-within .field-label{color:var(--accent-light);}
+.field-group:focus-within .field-label{
+  color:var(--accent-light);
+}
 
 input,
-textarea,
-select{
+textarea{
   width:100%;
   border:0;
   outline:0;
@@ -351,9 +382,9 @@ select{
   caret-color:var(--accent-light);
 }
 
-select{
-  appearance:none;
-  cursor:pointer;
+input[readonly]{
+  cursor:default;
+  color:rgba(238,229,216,.64);
 }
 
 input::placeholder,
@@ -361,12 +392,26 @@ textarea::placeholder{
   color:rgba(238,229,216,.28);
 }
 
+.contact-method-title{
+  padding:18px 0 0;
+  border-top:1px solid var(--line-strong);
+  font-size:9px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--accent-light);
+}
+
 .contact-methods{
+  position:relative;
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:10px;
-  padding:18px 0 20px;
-  border-top:1px solid var(--line-strong);
+  padding:14px 0 20px;
+  animation:methodPulse 2.8s ease-in-out infinite;
+}
+
+.contact-methods.is-selected{
+  animation:none;
 }
 
 .method-option input{
@@ -386,6 +431,26 @@ textarea::placeholder{
   text-align:center;
   cursor:pointer;
   transition:.3s ease;
+  position:relative;
+  overflow:hidden;
+}
+
+.method-option span::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(120deg, transparent, rgba(255,255,255,.09), transparent);
+  transform:translateX(-140%);
+  animation:methodShine 3.4s ease-in-out infinite;
+}
+
+.contact-methods.is-selected .method-option span::after{
+  animation:none;
+}
+
+.method-option span:hover{
+  color:var(--off);
+  border-color:rgba(238,229,216,.22);
 }
 
 .method-option input:checked + span{
@@ -413,7 +478,7 @@ textarea::placeholder{
   letter-spacing:.12em;
   line-height:1.45;
   text-transform:uppercase;
-  color:#d78a75;
+  color:var(--error);
 }
 
 .field-error.visible{
@@ -433,7 +498,9 @@ textarea::placeholder{
   color:var(--text-dim);
 }
 
-.char-count.live{color:var(--accent-light);}
+.char-count.live{
+  color:var(--accent-light);
+}
 
 .form-bottom{
   display:flex;
@@ -480,11 +547,19 @@ textarea::placeholder{
   box-shadow:0 16px 36px rgba(0,0,0,.28);
 }
 
-.btn-send:hover::before{transform:translateX(120%);}
+.btn-send:hover::before{
+  transform:translateX(120%);
+}
 
 .btn-send span{
   position:relative;
   z-index:2;
+}
+
+.btn-send:disabled{
+  opacity:.58;
+  cursor:not-allowed;
+  transform:none;
 }
 
 .status{
@@ -495,8 +570,13 @@ textarea::placeholder{
   text-transform:uppercase;
 }
 
-.status.ok{color:var(--green-light);}
-.status.err{color:#d78a75;}
+.status.ok{
+  color:var(--green-light);
+}
+
+.status.err{
+  color:var(--error);
+}
 
 .direct-contact{
   margin-top:34px;
@@ -516,7 +596,9 @@ textarea::placeholder{
   transition:.3s ease;
 }
 
-.direct-contact a:hover{color:var(--accent-light);}
+.direct-contact a:hover{
+  color:var(--accent-light);
+}
 
 .foot{
   position:relative;
@@ -544,36 +626,100 @@ textarea::placeholder{
 }
 
 @keyframes fadeUp{
-  from{opacity:0;transform:translateY(18px);}
-  to{opacity:1;transform:translateY(0);}
+  from{
+    opacity:0;
+    transform:translateY(18px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
 }
 
 @keyframes cardShimmer{
-  0%,64%{transform:translateX(-120%);opacity:0;}
-  76%{opacity:.7;}
-  100%{transform:translateX(120%);opacity:0;}
+  0%,64%{
+    transform:translateX(-120%);
+    opacity:0;
+  }
+  76%{
+    opacity:.7;
+  }
+  100%{
+    transform:translateX(120%);
+    opacity:0;
+  }
 }
 
 @keyframes blink{
-  0%,100%{opacity:.85;}
-  50%{opacity:.24;}
+  0%,100%{
+    opacity:.85;
+  }
+  50%{
+    opacity:.24;
+  }
+}
+
+@keyframes methodPulse{
+  0%{
+    transform:translateY(0);
+    filter:brightness(1);
+  }
+
+  20%{
+    transform:translateY(-2px);
+    filter:brightness(1.08);
+  }
+
+  40%{
+    transform:translateY(0);
+    filter:brightness(1);
+  }
+
+  100%{
+    transform:translateY(0);
+    filter:brightness(1);
+  }
+}
+
+@keyframes methodShine{
+  0%{
+    transform:translateX(-140%);
+  }
+
+  20%{
+    transform:translateX(140%);
+  }
+
+  100%{
+    transform:translateX(140%);
+  }
 }
 
 @media(prefers-reduced-motion:reduce){
-  *{animation:none!important;transition:none!important;scroll-behavior:auto!important;}
+  *{
+    animation:none!important;
+    transition:none!important;
+    scroll-behavior:auto!important;
+  }
 }
 
 @media(max-width:980px){
-  .nav{padding:18px 20px;}
+  .nav{
+    padding:18px 20px;
+  }
 
   .nav-links{
     gap:16px;
     padding:10px 14px;
   }
 
-  .nav-links a{font-size:9px;}
+  .nav-links a{
+    font-size:9px;
+  }
 
-  .contact-page{padding:96px 22px 70px;}
+  .contact-page{
+    padding:96px 22px 70px;
+  }
 
   .contact-shell{
     grid-template-columns:1fr;
@@ -585,9 +731,13 @@ textarea::placeholder{
     max-width:100%;
   }
 
-  .contact-definition{font-size:clamp(28px,7vw,42px);}
+  .contact-definition{
+    font-size:clamp(28px,7vw,42px);
+  }
 
-  .field-row{grid-template-columns:1fr;}
+  .field-row{
+    grid-template-columns:1fr;
+  }
 
   .field-row .field-group:first-child{
     border-right:0;
@@ -595,22 +745,30 @@ textarea::placeholder{
     padding-right:0;
   }
 
-  .field-row .field-group:last-child{padding-left:0;}
+  .field-row .field-group:last-child{
+    padding-left:0;
+  }
 
   .contact-methods{
     grid-template-columns:1fr;
   }
 
-  .form-wrap{padding:24px 20px;}
+  .form-wrap{
+    padding:24px 20px;
+  }
 
   .form-bottom{
     align-items:flex-start;
     flex-direction:column;
   }
 
-  .btn-send{width:100%;}
+  .btn-send{
+    width:100%;
+  }
 
-  .direct-contact{flex-direction:column;}
+  .direct-contact{
+    flex-direction:column;
+  }
 
   .foot{
     flex-direction:column;
@@ -695,7 +853,11 @@ textarea::placeholder{
             </div>
           </div>
 
-          <div class="contact-methods" aria-label="Kontaktweg auswählen">
+          <div class="contact-method-title">
+            Kontaktweg auswählen
+          </div>
+
+          <div class="contact-methods" id="contactMethods" aria-label="Kontaktweg auswählen">
             <label class="method-option">
               <input type="radio" name="contact_method_choice" value="Telefon" data-method="phone">
               <span>Telefon</span>
@@ -717,7 +879,7 @@ textarea::placeholder{
             <div class="contact-input" data-contact-input="phone">
               <div class="field-group">
                 <label class="field-label" for="phone">Telefonnummer</label>
-                <input id="phone" name="phone" type="tel" placeholder="+49 170 1234567">
+                <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+49 170 1234567">
                 <div class="field-error" id="phoneError">Bitte eine plausible Telefonnummer eintragen.</div>
               </div>
             </div>
@@ -725,7 +887,7 @@ textarea::placeholder{
             <div class="contact-input" data-contact-input="email">
               <div class="field-group">
                 <label class="field-label" for="email">E-Mail</label>
-                <input id="email" name="email" type="email" placeholder="mail@beispiel.de">
+                <input id="email" name="email" type="email" autocomplete="email" placeholder="mail@beispiel.de">
                 <div class="field-error" id="emailError">Bitte eine vollständige E-Mail-Adresse eintragen.</div>
               </div>
             </div>
@@ -733,7 +895,7 @@ textarea::placeholder{
             <div class="contact-input" data-contact-input="instagram">
               <div class="field-group">
                 <label class="field-label" for="instagram">Instagram</label>
-                <input id="instagram" name="instagram" type="text" placeholder="@handle">
+                <input id="instagram" name="instagram" type="text" autocomplete="off" placeholder="@handle">
                 <div class="field-error" id="instagramError">Bitte einen plausiblen Instagram-Namen eintragen.</div>
               </div>
             </div>
@@ -799,6 +961,7 @@ const err = document.getElementById('err');
 const methodRadios = document.querySelectorAll('input[name="contact_method_choice"]');
 const methodLabel = document.getElementById('contact_method_label');
 const contactInputs = document.querySelectorAll('.contact-input');
+const contactMethods = document.getElementById('contactMethods');
 
 const phoneInput = document.getElementById('phone');
 const emailInput = document.getElementById('email');
@@ -822,14 +985,24 @@ methodRadios.forEach(radio => {
     selectedMethod = radio.dataset.method;
     methodLabel.value = radio.value;
 
+    contactMethods.classList.add('is-selected');
+
     methodError.classList.remove('visible');
     phoneError.classList.remove('visible');
     emailError.classList.remove('visible');
     instagramError.classList.remove('visible');
 
+    phoneInput.required = false;
+    emailInput.required = false;
+    instagramInput.required = false;
+
     contactInputs.forEach(box => {
       box.classList.toggle('active', box.dataset.contactInput === selectedMethod);
     });
+
+    if(selectedMethod === 'phone') phoneInput.required = true;
+    if(selectedMethod === 'email') emailInput.required = true;
+    if(selectedMethod === 'instagram') instagramInput.required = true;
   });
 });
 
@@ -838,14 +1011,13 @@ function validEmail(value){
 }
 
 function validPhone(value){
-  const cleaned = value.replace(/[^\d+]/g, '');
   const digits = value.replace(/\D/g, '');
-  return /^(\+?\d[\d\s\-()/]{6,20})$/.test(value.trim()) && digits.length >= 7 && digits.length <= 16 && cleaned.length >= 7;
+  return /^(\+?\d[\d\s\-()/]{6,22})$/.test(value.trim()) && digits.length >= 7 && digits.length <= 16;
 }
 
 function validInstagram(value){
   const clean = value.trim().replace(/^@/, '');
-  return /^[a-zA-Z0-9._]{1,30}$/.test(clean) && clean.length >= 2;
+  return /^[a-zA-Z0-9._]{2,30}$/.test(clean);
 }
 
 function validateContactMethod(){
@@ -914,6 +1086,12 @@ form.addEventListener('submit', async e => {
 
       selectedMethod = null;
       methodLabel.value = 'Bitte auswählen';
+      contactMethods.classList.remove('is-selected');
+
+      phoneInput.required = false;
+      emailInput.required = false;
+      instagramInput.required = false;
+
       contactInputs.forEach(box => box.classList.remove('active'));
 
       counter.textContent = '0 / 2000';
