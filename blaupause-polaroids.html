@@ -5,24 +5,30 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
 <title>Blaupause-Polaroids — Fabian Harmuth</title>
-<meta name="description" content="Blaupause-Polaroids — Fabian Harmuth Model Steckbrief."/>
 
 <style>
 :root{
-  --bg:#06111f;
-  --bg2:#081a2e;
-  --paper:#0b2036;
-  --blue:#7bc7ff;
-  --blue-soft:rgba(123,199,255,.22);
-  --blue-line:rgba(123,199,255,.14);
-  --white:#eaf6ff;
-  --muted:rgba(234,246,255,.66);
-  --dim:rgba(234,246,255,.42);
-  --red:#d94b4b;
-  --barber:#f2f6ff;
-  --dark:#03070d;
-  --mono:"Courier New",Courier,monospace;
+  --bg:#07111d;
+  --bg2:#09192c;
+  --panel:#0c2036;
+  --line:rgba(128,197,255,.16);
+  --line-strong:rgba(128,197,255,.26);
+
+  --blue:#83cfff;
+  --blue-soft:rgba(131,207,255,.18);
+
+  --green:#1e3b2c;
+  --green-light:#d4edc3;
+
+  --text:#edf7ff;
+  --muted:rgba(237,247,255,.78);
+  --dim:rgba(237,247,255,.52);
+
+  --red:#d64f4f;
+  --paper:#f4f5f7;
+
   --serif:Georgia,"Times New Roman",serif;
+  --mono:"Courier New",Courier,monospace;
 }
 
 *{
@@ -39,15 +45,17 @@ html{
 body{
   min-height:100vh;
   overflow-x:hidden;
-  background:var(--bg);
-  color:var(--white);
+  background:
+    radial-gradient(circle at 22% 38%, rgba(131,207,255,.12), transparent 28%),
+    radial-gradient(circle at 80% 24%, rgba(131,207,255,.08), transparent 34%),
+    linear-gradient(160deg,#07111d 0%,#09192c 54%,#03070d 100%);
+  color:var(--text);
   font-family:var(--mono);
 }
 
-a{
-  color:inherit;
-  text-decoration:none;
-}
+/* =========================
+NAV
+========================= */
 
 .nav{
   position:fixed;
@@ -61,34 +69,35 @@ a{
   display:flex;
   gap:30px;
   padding:14px 20px;
-  background:rgba(3,7,13,.58);
-  border:1px solid rgba(123,199,255,.18);
+  background:rgba(4,10,18,.58);
+  border:1px solid rgba(131,207,255,.16);
   backdrop-filter:blur(16px);
   -webkit-backdrop-filter:blur(16px);
-  box-shadow:0 18px 40px rgba(0,0,0,.28);
+  box-shadow:0 16px 40px rgba(0,0,0,.28);
 }
 
 .nav-links a{
   position:relative;
-  font-size:10px;
-  letter-spacing:.22em;
+  font-size:11px;
+  letter-spacing:.2em;
   text-transform:uppercase;
   color:var(--muted);
+  text-decoration:none;
   padding-bottom:6px;
   transition:.3s ease;
 }
 
 .nav-links a:hover,
 .nav-links a.active{
-  color:var(--white);
+  color:var(--text);
 }
 
 .nav-links a::after{
-  content:"";
+  content:'';
   position:absolute;
   left:0;
   bottom:0;
-  width:0;
+  width:0%;
   height:1px;
   background:var(--blue);
   transition:.35s ease;
@@ -99,64 +108,77 @@ a{
   width:100%;
 }
 
+/* =========================
+BACKGROUND
+========================= */
+
 .page{
   position:relative;
   min-height:100vh;
-  padding:130px 7vw 90px;
   overflow:hidden;
-  background:
-    radial-gradient(circle at 22% 50%, rgba(123,199,255,.16), transparent 30%),
-    radial-gradient(circle at 82% 26%, rgba(123,199,255,.12), transparent 32%),
-    linear-gradient(160deg,#06111f 0%,#081a2e 54%,#03070d 100%);
+  padding:130px 7vw 90px;
 }
 
 .grid-bg{
   position:absolute;
   inset:0;
   z-index:0;
+  opacity:.5;
   background-image:
-    linear-gradient(rgba(123,199,255,.18) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(123,199,255,.18) 1px, transparent 1px),
-    linear-gradient(rgba(123,199,255,.07) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(123,199,255,.07) 1px, transparent 1px);
+    linear-gradient(rgba(131,207,255,.14) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(131,207,255,.14) 1px, transparent 1px),
+    linear-gradient(rgba(131,207,255,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(131,207,255,.04) 1px, transparent 1px);
+
   background-size:
-    120px 120px,
-    120px 120px,
-    24px 24px,
-    24px 24px;
-  animation:gridDrift 18s linear infinite;
+    140px 140px,
+    140px 140px,
+    28px 28px,
+    28px 28px;
+
+  animation:gridMove 22s linear infinite;
 }
 
-.grid-fade{
+.grid-overlay{
   position:absolute;
   inset:0;
   z-index:1;
   pointer-events:none;
   background:
-    linear-gradient(90deg, rgba(3,7,13,.72), transparent 30%, transparent 72%, rgba(3,7,13,.56)),
-    radial-gradient(circle at 50% 48%, transparent 0%, rgba(3,7,13,.38) 74%);
+    radial-gradient(circle at center, transparent 0%, rgba(3,7,13,.42) 78%),
+    linear-gradient(90deg, rgba(3,7,13,.72), transparent 22%, transparent 78%, rgba(3,7,13,.72));
 }
 
-.scan{
+.scan-line{
   position:absolute;
   inset:0;
   z-index:2;
   pointer-events:none;
-  height:26vh;
-  background:linear-gradient(180deg, transparent, rgba(123,199,255,.14), transparent);
-  animation:scanMove 8s ease-in-out infinite;
-  opacity:.6;
+  background:
+    linear-gradient(
+      180deg,
+      transparent,
+      rgba(131,207,255,.07),
+      transparent
+    );
+
+  height:28vh;
+  animation:scanMove 12s linear infinite;
 }
 
 .blueprint-noise{
   position:fixed;
   inset:0;
-  z-index:50;
+  z-index:40;
   pointer-events:none;
-  opacity:.035;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.68' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity:.03;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size:220px 220px;
 }
+
+/* =========================
+FOOTSTEPS
+========================= */
 
 .footprints{
   position:absolute;
@@ -168,58 +190,69 @@ a{
 .footprints span{
   position:absolute;
   width:18px;
-  height:31px;
-  border:1px solid rgba(234,246,255,.24);
-  border-radius:45% 45% 55% 55%;
+  height:32px;
+  border:1px solid rgba(237,247,255,.16);
+  border-radius:46% 46% 56% 56%;
   opacity:0;
-  transform:rotate(22deg);
-  animation:footFade 7s ease-in-out infinite;
+  animation:footFade 9s ease-in-out infinite;
 }
 
-.footprints span:nth-child(1){left:13%;top:72%;animation-delay:.2s;}
-.footprints span:nth-child(2){left:18%;top:66%;animation-delay:1s;transform:rotate(-18deg);}
-.footprints span:nth-child(3){left:31%;top:54%;animation-delay:1.9s;}
-.footprints span:nth-child(4){left:47%;top:38%;animation-delay:2.7s;transform:rotate(-14deg);}
-.footprints span:nth-child(5){left:68%;top:28%;animation-delay:3.6s;}
-.footprints span:nth-child(6){left:79%;top:44%;animation-delay:4.5s;transform:rotate(-22deg);}
+.footprints span:nth-child(1){left:10%;top:76%;animation-delay:0s;}
+.footprints span:nth-child(2){left:17%;top:69%;animation-delay:1s;}
+.footprints span:nth-child(3){left:30%;top:57%;animation-delay:2s;}
+.footprints span:nth-child(4){left:46%;top:43%;animation-delay:3s;}
+.footprints span:nth-child(5){left:67%;top:31%;animation-delay:4s;}
+.footprints span:nth-child(6){left:79%;top:45%;animation-delay:5s;}
+
+/* =========================
+LAYOUT
+========================= */
 
 .shell{
   position:relative;
-  z-index:6;
+  z-index:10;
+
   width:min(1180px,100%);
   margin:0 auto;
+
   display:grid;
-  grid-template-columns:minmax(320px,.92fr) minmax(390px,1.08fr);
-  gap:clamp(42px,6vw,90px);
+  grid-template-columns:minmax(320px,.92fr) minmax(380px,1.08fr);
+  gap:clamp(46px,6vw,90px);
+
   align-items:center;
 }
+
+/* =========================
+PHOTO
+========================= */
 
 .photo-frame{
   position:relative;
   padding:16px;
+
   background:
     repeating-linear-gradient(
       135deg,
       var(--red) 0 14px,
       var(--red) 14px 28px,
-      var(--barber) 28px 42px,
-      var(--barber) 42px 56px,
+      var(--paper) 28px 42px,
+      var(--paper) 42px 56px,
       var(--blue) 56px 70px,
       var(--blue) 70px 84px,
-      var(--barber) 84px 98px,
-      var(--barber) 98px 112px
+      var(--paper) 84px 98px,
+      var(--paper) 98px 112px
     );
+
   box-shadow:
-    0 50px 110px rgba(0,0,0,.54),
-    0 0 0 1px rgba(234,246,255,.16);
-  animation:photoFloat 8s ease-in-out infinite;
+    0 40px 100px rgba(0,0,0,.55),
+    0 0 0 1px rgba(237,247,255,.12);
 }
 
 .photo-inner{
   position:relative;
   overflow:hidden;
-  border:1px solid rgba(234,246,255,.28);
   background:#050b12;
+  border:1px solid rgba(237,247,255,.24);
 }
 
 .photo-inner::before{
@@ -228,88 +261,116 @@ a{
   inset:0;
   z-index:3;
   pointer-events:none;
+
   background:
-    linear-gradient(120deg, transparent 34%, rgba(255,255,255,.12) 50%, transparent 66%);
+    linear-gradient(
+      120deg,
+      transparent,
+      rgba(255,255,255,.08),
+      transparent
+    );
+
   transform:translateX(-120%);
-  animation:photoSweep 7s ease-in-out infinite;
+  animation:photoSweep 9s ease-in-out infinite;
 }
 
 .photo-inner::after{
-  content:"POLA-01 · VISUAL ID TEST";
+  content:"POLA-01 · MODEL IDENTIFICATION";
   position:absolute;
   left:14px;
   bottom:14px;
   z-index:4;
-  font-size:10px;
+
+  font-size:11px;
   letter-spacing:.18em;
   text-transform:uppercase;
-  color:rgba(234,246,255,.78);
-  text-shadow:0 2px 10px rgba(0,0,0,.7);
+
+  color:rgba(237,247,255,.82);
+  text-shadow:0 2px 12px rgba(0,0,0,.7);
 }
 
 .photo-inner img{
   width:100%;
   height:min(72vh,760px);
+
   object-fit:cover;
   object-position:center top;
-  filter:contrast(1.04) brightness(.92) saturate(.92);
-  transform:scale(1.025);
-  animation:slowZoom 18s ease-in-out infinite alternate;
+
+  filter:
+    contrast(1.03)
+    brightness(.93)
+    saturate(.94);
 }
+
+/* =========================
+CARD
+========================= */
 
 .card{
   position:relative;
-  background:rgba(5,18,32,.66);
-  border:1px solid rgba(123,199,255,.24);
+
+  background:rgba(5,18,32,.7);
+  border:1px solid rgba(131,207,255,.22);
+
   box-shadow:
-    0 34px 90px rgba(0,0,0,.36),
-    inset 0 0 70px rgba(123,199,255,.045);
+    0 30px 90px rgba(0,0,0,.38),
+    inset 0 0 60px rgba(131,207,255,.04);
+
   backdrop-filter:blur(14px);
   -webkit-backdrop-filter:blur(14px);
-  overflow:hidden;
-}
 
-.card::before{
-  content:"BLUEPRINT DOSSIER";
-  position:absolute;
-  top:12px;
-  right:14px;
-  z-index:3;
-  font-size:9px;
-  letter-spacing:.24em;
-  color:rgba(234,246,255,.38);
-  text-transform:uppercase;
+  overflow:hidden;
 }
 
 .card::after{
   content:"";
   position:absolute;
   inset:0;
-  background:linear-gradient(105deg, transparent, rgba(255,255,255,.055), transparent);
+
+  background:
+    linear-gradient(
+      110deg,
+      transparent,
+      rgba(255,255,255,.05),
+      transparent
+    );
+
   transform:translateX(-120%);
-  animation:cardShimmer 10s ease-in-out infinite;
+  animation:cardShimmer 11s ease-in-out infinite;
+
   pointer-events:none;
 }
 
 .card-head{
   position:relative;
   z-index:2;
+
   display:grid;
   grid-template-columns:78px 1fr;
-  border-bottom:1px solid rgba(123,199,255,.18);
+
+  border-bottom:1px solid rgba(131,207,255,.18);
 }
+
+/* =========================
+GREEN PERIODIC BLOCK
+========================= */
 
 .symbol{
   position:relative;
-  min-height:86px;
+
+  min-height:88px;
+
   display:flex;
   align-items:center;
   justify-content:center;
-  background:#0b2a46;
-  border-right:1px solid rgba(123,199,255,.22);
+
+  background:var(--green);
+
+  border-right:1px solid rgba(255,255,255,.08);
+
   font-family:var(--serif);
   font-size:30px;
-  color:var(--white);
+  color:var(--green-light);
 }
 
 .symbol::before{
@@ -317,9 +378,11 @@ a{
   position:absolute;
   top:8px;
   left:8px;
+
   font-family:var(--mono);
-  font-size:9px;
-  color:var(--muted);
+  font-size:10px;
+
+  color:rgba(212,237,195,.72);
 }
 
 .symbol::after{
@@ -327,20 +390,24 @@ a{
   position:absolute;
   right:8px;
   bottom:8px;
+
   width:7px;
   height:7px;
-  border:1px solid rgba(234,246,255,.5);
+
+  border:1px solid rgba(212,237,195,.46);
 }
 
 .head-text{
-  padding:22px 20px 18px;
+  padding:22px 22px 18px;
 }
 
 .head-title{
+  margin-bottom:5px;
+
   font-family:var(--serif);
-  font-size:22px;
-  color:var(--white);
-  margin-bottom:4px;
+  font-size:24px;
+
+  color:var(--text);
 }
 
 .head-title span{
@@ -348,12 +415,18 @@ a{
 }
 
 .head-line{
-  font-size:11px;
+  font-size:12px;
   line-height:1.55;
-  letter-spacing:.04em;
+  letter-spacing:.05em;
+
   color:var(--muted);
+
   text-transform:uppercase;
 }
+
+/* =========================
+INFO
+========================= */
 
 .info{
   position:relative;
@@ -364,53 +437,72 @@ a{
 .info-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  border-top:1px solid rgba(123,199,255,.22);
+
+  border-top:1px solid var(--line-strong);
 }
 
 .info-item{
   padding:18px 0;
-  border-bottom:1px solid rgba(123,199,255,.14);
+  border-bottom:1px solid var(--line);
 }
 
 .info-item:nth-child(odd){
-  padding-right:22px;
-  border-right:1px solid rgba(123,199,255,.14);
+  padding-right:24px;
+  border-right:1px solid var(--line);
 }
 
 .info-item:nth-child(even){
-  padding-left:22px;
+  padding-left:24px;
 }
 
 .label{
   display:block;
-  margin-bottom:7px;
-  font-size:10px;
-  letter-spacing:.24em;
+
+  margin-bottom:8px;
+
+  font-size:11px;
+  letter-spacing:.22em;
+  line-height:1.4;
+
   text-transform:uppercase;
+
   color:var(--dim);
 }
 
 .value{
   font-family:var(--serif);
-  font-size:24px;
-  color:var(--white);
+  font-size:27px;
   line-height:1.1;
+  color:var(--text);
 }
 
+/* =========================
+BUTTON
+========================= */
+
 .measure-toggle{
-  margin-top:28px;
+  margin-top:30px;
   width:100%;
-  padding:18px 20px;
-  border:1px solid rgba(123,199,255,.32);
-  background:rgba(123,199,255,.08);
-  color:var(--white);
+
+  padding:20px 22px;
+
+  border:1px solid rgba(131,207,255,.34);
+
+  background:rgba(131,207,255,.08);
+
+  color:var(--text);
+
   font-family:var(--mono);
-  font-size:11px;
+  font-size:12px;
   letter-spacing:.2em;
+
   text-transform:uppercase;
+
   cursor:pointer;
+
   position:relative;
   overflow:hidden;
+
   transition:.35s ease;
 }
 
@@ -418,15 +510,25 @@ a{
   content:"";
   position:absolute;
   inset:0;
-  background:linear-gradient(110deg, transparent, rgba(255,255,255,.12), transparent);
+
+  background:
+    linear-gradient(
+      110deg,
+      transparent,
+      rgba(255,255,255,.12),
+      transparent
+    );
+
   transform:translateX(-120%);
-  animation:buttonSweep 3.6s ease-in-out infinite;
+  animation:buttonSweep 3.8s ease-in-out infinite;
 }
 
 .measure-toggle:hover{
-  background:rgba(123,199,255,.16);
-  border-color:rgba(123,199,255,.52);
   transform:translateY(-2px);
+
+  background:rgba(131,207,255,.15);
+
+  border-color:rgba(131,207,255,.56);
 }
 
 .measure-toggle span{
@@ -434,36 +536,50 @@ a{
   z-index:2;
 }
 
+/* =========================
+MEASURE PANEL
+========================= */
+
 .measure-panel{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:18px;
+
   max-height:0;
   opacity:0;
   overflow:hidden;
+
   transform:translateY(-8px);
-  transition:max-height .7s ease, opacity .45s ease, transform .45s ease, margin-top .45s ease;
+
+  transition:
+    max-height .7s ease,
+    opacity .45s ease,
+    transform .45s ease,
+    margin-top .45s ease;
 }
 
 .measure-panel.open{
   max-height:900px;
   opacity:1;
   transform:translateY(0);
-  margin-top:22px;
+  margin-top:24px;
 }
 
 .measure-box{
-  border:1px solid rgba(123,199,255,.22);
-  background:rgba(3,7,13,.26);
-  padding:20px;
+  border:1px solid rgba(131,207,255,.22);
+  background:rgba(3,7,13,.24);
+
+  padding:22px;
 }
 
 .measure-box h3{
+  margin-bottom:16px;
+
   font-family:var(--serif);
-  font-size:22px;
+  font-size:24px;
   font-weight:400;
-  color:var(--white);
-  margin-bottom:14px;
+
+  color:var(--text);
 }
 
 .measure-box h3 span{
@@ -472,94 +588,140 @@ a{
 
 .measure-list{
   display:grid;
-  gap:10px;
+  gap:12px;
 }
 
 .measure-row{
   display:flex;
   justify-content:space-between;
   gap:20px;
-  padding-bottom:8px;
-  border-bottom:1px solid rgba(123,199,255,.12);
-  font-size:12px;
-  line-height:1.45;
+
+  padding-bottom:9px;
+
+  border-bottom:1px solid rgba(131,207,255,.12);
+
+  font-size:13px;
+  line-height:1.5;
 }
 
 .measure-row em{
-  color:var(--muted);
   font-style:normal;
+  color:var(--muted);
 }
 
 .measure-row strong{
-  color:var(--white);
   font-weight:400;
+  color:var(--text);
   text-align:right;
 }
 
 .note{
-  margin-top:20px;
+  margin-top:22px;
+
   color:var(--dim);
-  font-size:10px;
+
+  font-size:11px;
   letter-spacing:.16em;
-  text-transform:uppercase;
   line-height:1.55;
+
+  text-transform:uppercase;
 }
 
-@keyframes gridDrift{
-  from{background-position:0 0,0 0,0 0,0 0;}
-  to{background-position:120px 120px,120px 120px,24px 24px,24px 24px;}
+/* =========================
+ANIMATIONS
+========================= */
+
+@keyframes gridMove{
+  from{
+    background-position:
+      0 0,
+      0 0,
+      0 0,
+      0 0;
+  }
+
+  to{
+    background-position:
+      140px 140px,
+      140px 140px,
+      28px 28px,
+      28px 28px;
+  }
 }
 
 @keyframes scanMove{
-  0%{transform:translateY(-34vh);}
-  50%{transform:translateY(108vh);}
-  100%{transform:translateY(-34vh);}
+  0%{
+    transform:translateY(-34vh);
+  }
+
+  50%{
+    transform:translateY(108vh);
+  }
+
+  100%{
+    transform:translateY(-34vh);
+  }
 }
 
 @keyframes footFade{
-  0%,100%{opacity:0;transform:translateY(12px) rotate(22deg);}
-  28%,54%{opacity:.45;transform:translateY(0) rotate(22deg);}
-}
+  0%,100%{
+    opacity:0;
+    transform:translateY(10px);
+  }
 
-@keyframes photoFloat{
-  0%,100%{transform:translateY(0) rotate(-.8deg);}
-  50%{transform:translateY(-10px) rotate(.4deg);}
+  26%,52%{
+    opacity:.42;
+    transform:translateY(0);
+  }
 }
 
 @keyframes photoSweep{
-  0%,58%{transform:translateX(-120%);opacity:0;}
-  72%{opacity:.8;}
-  100%{transform:translateX(120%);opacity:0;}
-}
+  0%,62%{
+    transform:translateX(-120%);
+    opacity:0;
+  }
 
-@keyframes slowZoom{
-  from{transform:scale(1.025);}
-  to{transform:scale(1.075);}
+  74%{
+    opacity:.8;
+  }
+
+  100%{
+    transform:translateX(120%);
+    opacity:0;
+  }
 }
 
 @keyframes cardShimmer{
-  0%,60%{transform:translateX(-120%);opacity:0;}
-  74%{opacity:.75;}
-  100%{transform:translateX(120%);opacity:0;}
+  0%,64%{
+    transform:translateX(-120%);
+    opacity:0;
+  }
+
+  78%{
+    opacity:.7;
+  }
+
+  100%{
+    transform:translateX(120%);
+    opacity:0;
+  }
 }
 
 @keyframes buttonSweep{
-  0%,62%{transform:translateX(-120%);}
-  100%{transform:translateX(120%);}
-}
+  0%,64%{
+    transform:translateX(-120%);
+  }
 
-@media(prefers-reduced-motion:reduce){
-  *{
-    animation:none!important;
-    transition:none!important;
-    scroll-behavior:auto!important;
+  100%{
+    transform:translateX(120%);
   }
 }
+
+/* =========================
+RESPONSIVE
+========================= */
 
 @media(max-width:980px){
-  body{
-    overflow:auto;
-  }
 
   .nav{
     left:0;
@@ -597,13 +759,14 @@ a{
   .info-item,
   .info-item:nth-child(odd),
   .info-item:nth-child(even){
-    padding:16px 0;
+    padding:17px 0;
     border-right:0;
-    border-bottom:1px solid rgba(123,199,255,.14);
+    border-bottom:1px solid var(--line);
   }
 }
 
 @media(max-width:560px){
+
   .nav-links{
     gap:12px;
   }
@@ -622,12 +785,16 @@ a{
     font-size:26px;
   }
 
-  .info{
-    padding:22px 18px;
+  .head-title{
+    font-size:22px;
   }
 
   .value{
-    font-size:22px;
+    font-size:24px;
+  }
+
+  .info{
+    padding:22px 18px;
   }
 }
 </style>
@@ -646,8 +813,8 @@ a{
 <main class="page">
 
   <div class="grid-bg"></div>
-  <div class="grid-fade"></div>
-  <div class="scan"></div>
+  <div class="grid-overlay"></div>
+  <div class="scan-line"></div>
   <div class="blueprint-noise"></div>
 
   <div class="footprints">
@@ -662,25 +829,33 @@ a{
   <div class="shell">
 
     <section class="photo-frame">
+
       <div class="photo-inner">
-        <img src="images/pola1.jpeg" alt="Fabian Harmuth Polaroid Blaupause">
+        <img src="images/pola1.jpeg" alt="Fabian Harmuth Blueprint Polaroid">
       </div>
+
     </section>
 
     <section class="card">
 
       <div class="card-head">
-        <div class="symbol">FH</div>
+
+        <div class="symbol">
+          FH
+        </div>
 
         <div class="head-text">
+
           <div class="head-title">
             Blau<span>|</span>pause
           </div>
 
           <div class="head-line">
-            Model Dossier · Casting Sheet · Personal Reference
+            Model Dossier · Casting Sheet · Visual Reference
           </div>
+
         </div>
+
       </div>
 
       <div class="info">
@@ -719,42 +894,100 @@ a{
 
         </div>
 
-        <button class="measure-toggle" id="measureToggle" type="button" aria-expanded="false">
+        <button class="measure-toggle" id="measureToggle">
           <span>Konfektionsmaße einsehen</span>
         </button>
 
         <div class="measure-panel" id="measurePanel">
 
           <div class="measure-box">
-            <h3>Körper<span>|</span>maße</h3>
+
+            <h3>
+              Körper<span>|</span>maße
+            </h3>
 
             <div class="measure-list">
-              <div class="measure-row"><em>Kopf</em><strong>57 cm</strong></div>
-              <div class="measure-row"><em>Hals / Kragen</em><strong>42 cm</strong></div>
-              <div class="measure-row"><em>Brust</em><strong>104 cm</strong></div>
-              <div class="measure-row"><em>Taille / Bauch</em><strong>94 cm</strong></div>
-              <div class="measure-row"><em>Hüfte</em><strong>102 cm</strong></div>
+
+              <div class="measure-row">
+                <em>Kopf</em>
+                <strong>57 cm</strong>
+              </div>
+
+              <div class="measure-row">
+                <em>Hals / Kragen</em>
+                <strong>42 cm</strong>
+              </div>
+
+              <div class="measure-row">
+                <em>Brust</em>
+                <strong>104 cm</strong>
+              </div>
+
+              <div class="measure-row">
+                <em>Taille / Bauch</em>
+                <strong>94 cm</strong>
+              </div>
+
+              <div class="measure-row">
+                <em>Hüfte</em>
+                <strong>102 cm</strong>
+              </div>
+
             </div>
+
           </div>
 
           <div class="measure-box">
-            <h3>Kleider<span>|</span>größen</h3>
+
+            <h3>
+              Kleider<span>|</span>größen
+            </h3>
 
             <div class="measure-list">
-              <div class="measure-row"><em>Jacke</em><strong>L / 52</strong></div>
-              <div class="measure-row"><em>Hemd</em><strong>40 / 41</strong></div>
-              <div class="measure-row"><em>Pullover</em><strong>52 / L</strong></div>
-              <div class="measure-row"><em>T-Shirt</em><strong>L</strong></div>
-              <div class="measure-row"><em>Polohemden</em><strong>M</strong></div>
-              <div class="measure-row"><em>Jeans</em><strong>W34 / L32</strong></div>
-              <div class="measure-row"><em>Schuhgröße</em><strong>45</strong></div>
+
+              <div class="measure-row">
+                <em>Jacke</em>
+                <strong>L / 52</strong>
+              </div>
+
+              <div class="measure-row">
+                <em>Hemd</em>
+                <strong>40 / 41</strong>
+              </div>
+
+              <div class="measure-row">
+                <em>Pullover</em>
+                <strong>52 / L</strong>
+              </div>
+
+              <div class="measure-row">
+                <em>T-Shirt</em>
+                <strong>L</strong>
+              </div>
+
+              <div class="measure-row">
+                <em>Polohemden</em>
+                <strong>M</strong>
+              </div>
+
+              <div class="measure-row">
+                <em>Jeans</em>
+                <strong>W34 / L32</strong>
+              </div>
+
+              <div class="measure-row">
+                <em>Schuhgröße</em>
+                <strong>45</strong>
+              </div>
+
             </div>
+
           </div>
 
         </div>
 
         <div class="note">
-          Klickbares Maßraster · Agentur-Referenz · Stand Portfolio-Dossier
+          Interaktive Blaupause · Portfolio Referenz · Editorial Casting Dossier
         </div>
 
       </div>
@@ -770,11 +1003,13 @@ const toggle = document.getElementById('measureToggle');
 const panel = document.getElementById('measurePanel');
 
 toggle.addEventListener('click', () => {
+
   const isOpen = panel.classList.toggle('open');
-  toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+
   toggle.querySelector('span').textContent = isOpen
     ? 'Konfektionsmaße ausblenden'
     : 'Konfektionsmaße einsehen';
+
 });
 </script>
 
