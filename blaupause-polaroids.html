@@ -10,15 +10,17 @@
 :root{
   --bg:#07111d;
   --bg2:#09192c;
+
   --panel:#0c2036;
+
   --line:rgba(128,197,255,.16);
   --line-strong:rgba(128,197,255,.26);
 
   --blue:#83cfff;
   --blue-soft:rgba(131,207,255,.18);
 
-  --green:#1e3b2c;
-  --green-light:#d4edc3;
+  --green:#1f3b2d;
+  --green-light:#d7ebc7;
 
   --text:#edf7ff;
   --muted:rgba(237,247,255,.78);
@@ -45,16 +47,59 @@ html{
 body{
   min-height:100vh;
   overflow-x:hidden;
+
   background:
     radial-gradient(circle at 22% 38%, rgba(131,207,255,.12), transparent 28%),
     radial-gradient(circle at 80% 24%, rgba(131,207,255,.08), transparent 34%),
     linear-gradient(160deg,#07111d 0%,#09192c 54%,#03070d 100%);
+
   color:var(--text);
   font-family:var(--mono);
+
+  cursor:none;
 }
 
 /* =========================
-NAV
+CUSTOM CURSOR
+========================= */
+
+.cursor{
+  position:fixed;
+  top:0;
+  left:0;
+
+  width:18px;
+  height:18px;
+
+  border:1px solid rgba(131,207,255,.85);
+  border-radius:50%;
+
+  pointer-events:none;
+
+  transform:translate(-50%,-50%);
+
+  z-index:9999;
+
+  backdrop-filter:invert(1);
+
+  transition:
+    width .22s ease,
+    height .22s ease,
+    border-color .22s ease,
+    background .22s ease;
+}
+
+.cursor.hover{
+  width:46px;
+  height:46px;
+
+  background:rgba(131,207,255,.08);
+
+  border-color:rgba(131,207,255,.36);
+}
+
+/* =========================
+NAVIGATION
 ========================= */
 
 .nav{
@@ -62,28 +107,40 @@ NAV
   top:0;
   right:0;
   z-index:100;
+
   padding:30px 48px;
 }
 
 .nav-links{
   display:flex;
   gap:30px;
+
   padding:14px 20px;
+
   background:rgba(4,10,18,.58);
+
   border:1px solid rgba(131,207,255,.16);
+
   backdrop-filter:blur(16px);
   -webkit-backdrop-filter:blur(16px);
+
   box-shadow:0 16px 40px rgba(0,0,0,.28);
 }
 
 .nav-links a{
   position:relative;
+
   font-size:11px;
   letter-spacing:.2em;
+
   text-transform:uppercase;
+
   color:var(--muted);
+
   text-decoration:none;
+
   padding-bottom:6px;
+
   transition:.3s ease;
 }
 
@@ -94,12 +151,16 @@ NAV
 
 .nav-links a::after{
   content:'';
+
   position:absolute;
   left:0;
   bottom:0;
+
   width:0%;
   height:1px;
+
   background:var(--blue);
+
   transition:.35s ease;
 }
 
@@ -114,16 +175,22 @@ BACKGROUND
 
 .page{
   position:relative;
+
   min-height:100vh;
+
   overflow:hidden;
+
   padding:130px 7vw 90px;
 }
 
 .grid-bg{
   position:absolute;
   inset:0;
+
   z-index:0;
+
   opacity:.5;
+
   background-image:
     linear-gradient(rgba(131,207,255,.14) 1px, transparent 1px),
     linear-gradient(90deg, rgba(131,207,255,.14) 1px, transparent 1px),
@@ -136,24 +203,36 @@ BACKGROUND
     28px 28px,
     28px 28px;
 
-  animation:gridMove 22s linear infinite;
+  animation:gridMove 24s linear infinite;
 }
 
 .grid-overlay{
   position:absolute;
   inset:0;
+
   z-index:1;
+
   pointer-events:none;
+
   background:
     radial-gradient(circle at center, transparent 0%, rgba(3,7,13,.42) 78%),
-    linear-gradient(90deg, rgba(3,7,13,.72), transparent 22%, transparent 78%, rgba(3,7,13,.72));
+    linear-gradient(
+      90deg,
+      rgba(3,7,13,.72),
+      transparent 22%,
+      transparent 78%,
+      rgba(3,7,13,.72)
+    );
 }
 
 .scan-line{
   position:absolute;
   inset:0;
+
   z-index:2;
+
   pointer-events:none;
+
   background:
     linear-gradient(
       180deg,
@@ -163,16 +242,22 @@ BACKGROUND
     );
 
   height:28vh;
+
   animation:scanMove 12s linear infinite;
 }
 
 .blueprint-noise{
   position:fixed;
   inset:0;
+
   z-index:40;
+
   pointer-events:none;
+
   opacity:.03;
+
   background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+
   background-size:220px 220px;
 }
 
@@ -183,17 +268,23 @@ FOOTSTEPS
 .footprints{
   position:absolute;
   inset:0;
+
   z-index:3;
+
   pointer-events:none;
 }
 
 .footprints span{
   position:absolute;
+
   width:18px;
   height:32px;
+
   border:1px solid rgba(237,247,255,.16);
   border-radius:46% 46% 56% 56%;
+
   opacity:0;
+
   animation:footFade 9s ease-in-out infinite;
 }
 
@@ -217,6 +308,7 @@ LAYOUT
 
   display:grid;
   grid-template-columns:minmax(320px,.92fr) minmax(380px,1.08fr);
+
   gap:clamp(46px,6vw,90px);
 
   align-items:center;
@@ -228,6 +320,7 @@ PHOTO
 
 .photo-frame{
   position:relative;
+
   padding:16px;
 
   background:
@@ -250,16 +343,22 @@ PHOTO
 
 .photo-inner{
   position:relative;
+
   overflow:hidden;
+
   background:#050b12;
+
   border:1px solid rgba(237,247,255,.24);
 }
 
 .photo-inner::before{
   content:"";
+
   position:absolute;
   inset:0;
+
   z-index:3;
+
   pointer-events:none;
 
   background:
@@ -271,21 +370,26 @@ PHOTO
     );
 
   transform:translateX(-120%);
+
   animation:photoSweep 9s ease-in-out infinite;
 }
 
 .photo-inner::after{
   content:"POLA-01 · MODEL IDENTIFICATION";
+
   position:absolute;
   left:14px;
   bottom:14px;
+
   z-index:4;
 
   font-size:11px;
   letter-spacing:.18em;
+
   text-transform:uppercase;
 
   color:rgba(237,247,255,.82);
+
   text-shadow:0 2px 12px rgba(0,0,0,.7);
 }
 
@@ -310,6 +414,7 @@ CARD
   position:relative;
 
   background:rgba(5,18,32,.7);
+
   border:1px solid rgba(131,207,255,.22);
 
   box-shadow:
@@ -324,6 +429,7 @@ CARD
 
 .card::after{
   content:"";
+
   position:absolute;
   inset:0;
 
@@ -336,6 +442,7 @@ CARD
     );
 
   transform:translateX(-120%);
+
   animation:cardShimmer 11s ease-in-out infinite;
 
   pointer-events:none;
@@ -352,7 +459,7 @@ CARD
 }
 
 /* =========================
-GREEN PERIODIC BLOCK
+GREEN SYMBOL
 ========================= */
 
 .symbol{
@@ -370,11 +477,13 @@ GREEN PERIODIC BLOCK
 
   font-family:var(--serif);
   font-size:30px;
+
   color:var(--green-light);
 }
 
 .symbol::before{
   content:"29";
+
   position:absolute;
   top:8px;
   left:8px;
@@ -387,6 +496,7 @@ GREEN PERIODIC BLOCK
 
 .symbol::after{
   content:"";
+
   position:absolute;
   right:8px;
   bottom:8px;
@@ -417,6 +527,7 @@ GREEN PERIODIC BLOCK
 .head-line{
   font-size:12px;
   line-height:1.55;
+
   letter-spacing:.05em;
 
   color:var(--muted);
@@ -431,6 +542,7 @@ INFO
 .info{
   position:relative;
   z-index:2;
+
   padding:28px;
 }
 
@@ -443,6 +555,7 @@ INFO
 
 .info-item{
   padding:18px 0;
+
   border-bottom:1px solid var(--line);
 }
 
@@ -473,6 +586,7 @@ INFO
   font-family:var(--serif);
   font-size:27px;
   line-height:1.1;
+
   color:var(--text);
 }
 
@@ -482,6 +596,7 @@ BUTTON
 
 .measure-toggle{
   margin-top:30px;
+
   width:100%;
 
   padding:20px 22px;
@@ -494,6 +609,7 @@ BUTTON
 
   font-family:var(--mono);
   font-size:12px;
+
   letter-spacing:.2em;
 
   text-transform:uppercase;
@@ -508,6 +624,7 @@ BUTTON
 
 .measure-toggle::before{
   content:"";
+
   position:absolute;
   inset:0;
 
@@ -520,6 +637,7 @@ BUTTON
     );
 
   transform:translateX(-120%);
+
   animation:buttonSweep 3.8s ease-in-out infinite;
 }
 
@@ -537,15 +655,17 @@ BUTTON
 }
 
 /* =========================
-MEASURE PANEL
+PANEL
 ========================= */
 
 .measure-panel{
   display:grid;
   grid-template-columns:1fr 1fr;
+
   gap:18px;
 
   max-height:0;
+
   opacity:0;
   overflow:hidden;
 
@@ -560,13 +680,17 @@ MEASURE PANEL
 
 .measure-panel.open{
   max-height:900px;
+
   opacity:1;
+
   transform:translateY(0);
+
   margin-top:24px;
 }
 
 .measure-box{
   border:1px solid rgba(131,207,255,.22);
+
   background:rgba(3,7,13,.24);
 
   padding:22px;
@@ -594,6 +718,7 @@ MEASURE PANEL
 .measure-row{
   display:flex;
   justify-content:space-between;
+
   gap:20px;
 
   padding-bottom:9px;
@@ -615,6 +740,10 @@ MEASURE PANEL
   text-align:right;
 }
 
+/* =========================
+NOTES
+========================= */
+
 .note{
   margin-top:22px;
 
@@ -627,11 +756,25 @@ MEASURE PANEL
   text-transform:uppercase;
 }
 
+.future-note{
+  margin-top:14px;
+
+  font-size:11px;
+  line-height:1.7;
+
+  letter-spacing:.08em;
+
+  color:rgba(237,247,255,.44);
+
+  font-style:italic;
+}
+
 /* =========================
 ANIMATIONS
 ========================= */
 
 @keyframes gridMove{
+
   from{
     background-position:
       0 0,
@@ -650,6 +793,7 @@ ANIMATIONS
 }
 
 @keyframes scanMove{
+
   0%{
     transform:translateY(-34vh);
   }
@@ -664,6 +808,7 @@ ANIMATIONS
 }
 
 @keyframes footFade{
+
   0%,100%{
     opacity:0;
     transform:translateY(10px);
@@ -676,6 +821,7 @@ ANIMATIONS
 }
 
 @keyframes photoSweep{
+
   0%,62%{
     transform:translateX(-120%);
     opacity:0;
@@ -692,6 +838,7 @@ ANIMATIONS
 }
 
 @keyframes cardShimmer{
+
   0%,64%{
     transform:translateX(-120%);
     opacity:0;
@@ -708,6 +855,7 @@ ANIMATIONS
 }
 
 @keyframes buttonSweep{
+
   0%,64%{
     transform:translateX(-120%);
   }
@@ -723,9 +871,18 @@ RESPONSIVE
 
 @media(max-width:980px){
 
+  body{
+    cursor:auto;
+  }
+
+  .cursor{
+    display:none;
+  }
+
   .nav{
     left:0;
     right:auto;
+
     padding:18px 20px;
   }
 
@@ -759,7 +916,9 @@ RESPONSIVE
   .info-item,
   .info-item:nth-child(odd),
   .info-item:nth-child(even){
+
     padding:17px 0;
+
     border-right:0;
     border-bottom:1px solid var(--line);
   }
@@ -802,12 +961,16 @@ RESPONSIVE
 
 <body>
 
+<div class="cursor"></div>
+
 <nav class="nav">
+
   <div class="nav-links">
     <a href="index.html">01 Landingpage</a>
     <a href="blaupause-polaroids.html" class="active">02 Blaupause-Polaroids</a>
     <a href="kontakt.html">03 Kontakt</a>
   </div>
+
 </nav>
 
 <main class="page">
@@ -989,23 +1152,13 @@ RESPONSIVE
         <div class="note">
           Interaktive Blaupause · Portfolio Referenz · Editorial Casting Dossier
         </div>
-<div class="future-note">
-  Weitere Polaroids und Referenzaufnahmen befinden sich derzeit in Ausarbeitung.
-</div>
+
+        <div class="future-note">
+          Weitere Polaroids und Referenzaufnahmen befinden sich derzeit in Ausarbeitung.
+        </div>
+
       </div>
-.future-note{
-  margin-top:14px;
 
-  font-size:11px;
-  line-height:1.7;
-  letter-spacing:.08em;
-
-  color:rgba(237,247,255,.44);
-
-  font-style:italic;
-
-  opacity:.9;
-}
     </section>
 
   </div>
@@ -1023,7 +1176,29 @@ toggle.addEventListener('click', () => {
   toggle.querySelector('span').textContent = isOpen
     ? 'Konfektionsmaße ausblenden'
     : 'Konfektionsmaße einsehen';
+});
 
+/* =========================
+CURSOR
+========================= */
+
+const cursor = document.querySelector('.cursor');
+
+window.addEventListener('mousemove', e => {
+
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top = e.clientY + 'px';
+});
+
+document.querySelectorAll('a, button').forEach(el => {
+
+  el.addEventListener('mouseenter', () => {
+    cursor.classList.add('hover');
+  });
+
+  el.addEventListener('mouseleave', () => {
+    cursor.classList.remove('hover');
+  });
 });
 </script>
 
