@@ -7,6 +7,11 @@
 <meta name="description" content="Fabian Harmuth — Male Model aus Ulm. Editorial Portfolio mit charakterstarker visueller Präsenz."/>
 
 <style>
+/* =========================================================
+   02 · CSS — Design, Layout, Animationen
+   ========================================================= */
+
+/* 02.01 · Design-Variablen */
 :root{
   --bg:#18130f;
   --bg2:#120e0b;
@@ -26,6 +31,7 @@
   --mono: "Courier New", Courier, monospace;
 }
 
+/* 02.02 · Reset / Grundlayout */
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;background:var(--bg);}
 body{
@@ -38,6 +44,7 @@ body{
 img{display:block;max-width:100%;}
 a{color:inherit;text-decoration:none;}
 
+/* 02.03 · Custom Cursor */
 #cursor{
   position:fixed;
   width:6px;
@@ -73,6 +80,7 @@ a{color:inherit;text-decoration:none;}
   background-size:220px 220px;
 }
 
+/* 02.04 · Navigation */
 .nav{
   position:fixed;
   top:0;
@@ -151,6 +159,7 @@ a{color:inherit;text-decoration:none;}
   }
 }
 
+/* 02.05 · Hero-Bereich */
 .hero{
   position:relative;
   min-height:100vh;
@@ -414,6 +423,7 @@ a{color:inherit;text-decoration:none;}
   animation:fadeUp .8s 1s ease forwards;
 }
 
+/* 02.06 · Galerie-Grundlayout */
 .gallery{
   padding:110px 48px 135px;
   background:linear-gradient(180deg,var(--gallery) 0%,var(--gallery2) 40%,#c0ab92 100%);
@@ -626,7 +636,7 @@ a{color:inherit;text-decoration:none;}
   color:rgba(23,20,17,.58);
 }
 
-/* DARK SERIES */
+/* 02.07 · Dunkle Serienvarianten */
 
 .street-gallery,
 .adapt-gallery,
@@ -794,9 +804,7 @@ a{color:inherit;text-decoration:none;}
   transform:translateX(60%);
 }
 
-
-}
-
+/* 02.08 · Animationen */
 @keyframes grain{
   from{transform:translate(0,0);}
   to{transform:translate(-3%,2%);}
@@ -819,6 +827,7 @@ a{color:inherit;text-decoration:none;}
   to{opacity:1;transform:translateY(0);}
 }
 
+/* 02.09 · Barrierefreiheit & Responsive */
 @media(prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important;scroll-behavior:auto!important;}
 }
@@ -901,10 +910,16 @@ a{color:inherit;text-decoration:none;}
 
 <body>
 
+<!-- =========================================================
+     01 · HTML — Sichtbare Seitenstruktur
+     ========================================================= -->
+
+<!-- 01.01 · Custom Cursor -->
 <div id="cursor"></div>
 <div id="cursor-ring"></div>
 <div class="hero-grain"></div>
 
+<!-- 01.02 · Navigation -->
 <nav class="nav">
   <div class="nav-links">
     <a href="index.html" class="active">01 Landingpage</a>
@@ -913,6 +928,7 @@ a{color:inherit;text-decoration:none;}
   </div>
 </nav>
 
+<!-- 01.03 · Hero / Einstieg -->
 <section class="hero">
   <div class="hero-bg"></div>
 
@@ -965,6 +981,7 @@ a{color:inherit;text-decoration:none;}
   </div>
 </section>
 
+<!-- 01.04 · Serie 1: Schwarz Weiß -->
 <section class="gallery">
   <div class="gallery-top">
     <h2>
@@ -1015,6 +1032,7 @@ a{color:inherit;text-decoration:none;}
   </div>
 </section>
 
+<!-- 01.05 · Serie 2: Streetstyle Editorial -->
 <section class="gallery street-gallery">
   <div class="gallery-top">
     <h2>
@@ -1065,6 +1083,7 @@ a{color:inherit;text-decoration:none;}
   </div>
 </section>
 
+<!-- 01.06 · Serie 3: Wandlungsfähig -->
 <section class="gallery adapt-gallery">
   <div class="gallery-top">
     <h2>
@@ -1115,6 +1134,7 @@ a{color:inherit;text-decoration:none;}
   </div>
 </section>
 
+<!-- 01.07 · Serie 4: Charakterstark -->
 <section class="gallery character-gallery">
   <div class="gallery-top">
     <h2>
@@ -1164,6 +1184,10 @@ a{color:inherit;text-decoration:none;}
 </section>
 
 <script>
+/* =========================================================
+   03 · JAVASCRIPT — Custom Cursor ohne Hero-Wackeln
+   ========================================================= */
+
 const cursor = document.getElementById('cursor');
 const ring = document.getElementById('cursor-ring');
 
@@ -1196,6 +1220,7 @@ document.querySelectorAll('a,.chem-entry,.card').forEach(el => {
   el.addEventListener('mouseenter', () => {
     cursor.style.width = '12px';
     cursor.style.height = '12px';
+
     ring.style.width = '42px';
     ring.style.height = '42px';
     ring.style.borderColor = 'rgba(192,122,73,.38)';
@@ -1204,16 +1229,11 @@ document.querySelectorAll('a,.chem-entry,.card').forEach(el => {
   el.addEventListener('mouseleave', () => {
     cursor.style.width = '6px';
     cursor.style.height = '6px';
+
     ring.style.width = '26px';
     ring.style.height = '26px';
     ring.style.borderColor = 'rgba(202,184,159,.2)';
   });
-
-
-
-hero.addEventListener('mouseleave', () => {
-  if(window.innerWidth <= 980) return;
-  panel.style.transform = 'translateY(-50%)';
 });
 </script>
 
