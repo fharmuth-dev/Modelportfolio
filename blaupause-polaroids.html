@@ -1156,7 +1156,74 @@ RESPONSIVE
         <div class="future-note">
           Weitere Polaroids und Referenzaufnahmen befinden sich derzeit in Ausarbeitung.
         </div>
+        <a class="sedcard-download" href="Fabian%20Harmuth%20Sedcard.pdf" download>
+  Sedcard PDF herunterladen
+</a>
+.sedcard-download{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
 
+  margin-top:24px;
+  padding:16px 20px;
+
+  border:1px solid rgba(131,207,255,.34);
+
+  background:rgba(131,207,255,.08);
+
+  color:var(--text);
+  text-decoration:none;
+
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.18em;
+  line-height:1.4;
+
+  text-transform:uppercase;
+
+  position:relative;
+  overflow:hidden;
+
+  transition:
+    transform .35s ease,
+    background .35s ease,
+    border-color .35s ease;
+
+  box-shadow:
+    0 10px 24px rgba(0,0,0,.18);
+}
+
+.sedcard-download::before{
+  content:"";
+
+  position:absolute;
+  inset:0;
+
+  background:
+    linear-gradient(
+      110deg,
+      transparent,
+      rgba(255,255,255,.12),
+      transparent
+    );
+
+  transform:translateX(-120%);
+
+  animation:buttonSweep 4s ease-in-out infinite;
+}
+
+.sedcard-download:hover{
+  transform:translateY(-2px);
+
+  background:rgba(131,207,255,.15);
+
+  border-color:rgba(131,207,255,.56);
+}
+
+.sedcard-download span{
+  position:relative;
+  z-index:2;
+}
       </div>
 
     </section>
