@@ -59,6 +59,7 @@ textarea{
   font:inherit;
 }
 
+
 /* Custom Cursor wie Landingpage */
 #cursor{
   position:fixed;
@@ -83,12 +84,7 @@ textarea{
   z-index:9998;
   transform:translate(-50%,-50%);
   opacity:.58;
-  transition:
-    width .25s ease,
-    height .25s ease,
-    border-color .25s ease;
 }
-
 
 .page-grain{
   position:fixed;
@@ -742,14 +738,10 @@ textarea::placeholder{
 }
 
 @media(max-width:980px){
-  body{
-    cursor:auto;
-  }
+  body{cursor:auto;}
 
   #cursor,
-  #cursor-ring{
-    display:none;
-  }
+  #cursor-ring{display:none;}
 
   .nav{
     padding:18px 20px;
@@ -830,7 +822,6 @@ textarea::placeholder{
 
 <div id="cursor"></div>
 <div id="cursor-ring"></div>
-
 <div class="page-grain"></div>
 
 <nav class="nav">
@@ -1189,10 +1180,11 @@ function animateCursor(){
 
 animateCursor();
 
-document.querySelectorAll('a, button, input, textarea, .method-option span').forEach(el => {
+document.querySelectorAll('a,button,input,textarea,.method-option span,.contact-card').forEach(el => {
   el.addEventListener('mouseenter', () => {
     cursor.style.width = '12px';
     cursor.style.height = '12px';
+
     ring.style.width = '42px';
     ring.style.height = '42px';
     ring.style.borderColor = 'rgba(192,122,73,.38)';
@@ -1201,6 +1193,7 @@ document.querySelectorAll('a, button, input, textarea, .method-option span').for
   el.addEventListener('mouseleave', () => {
     cursor.style.width = '6px';
     cursor.style.height = '6px';
+
     ring.style.width = '26px';
     ring.style.height = '26px';
     ring.style.borderColor = 'rgba(202,184,159,.2)';
