@@ -827,6 +827,197 @@ a{color:inherit;text-decoration:none;}
   to{opacity:1;transform:translateY(0);}
 }
 
+
+
+/* 02.10 · Legal Footer / Impressum / Datenschutz */
+.legal-footer{
+  position:relative;
+  padding:120px 48px 80px;
+  background:
+    radial-gradient(circle at 20% 40%, rgba(31,59,45,.18), transparent 32%),
+    linear-gradient(180deg,#090705 0%,#050403 100%);
+  border-top:1px solid rgba(238,229,216,.06);
+  overflow:hidden;
+  z-index:10;
+}
+
+.legal-footer::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background-image:
+    linear-gradient(rgba(238,229,216,.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(238,229,216,.012) 1px, transparent 1px);
+  background-size:72px 72px;
+  pointer-events:none;
+}
+
+.legal-inner{
+  position:relative;
+  z-index:2;
+  max-width:1180px;
+  margin:auto;
+}
+
+.legal-headline{
+  margin-bottom:52px;
+}
+
+.legal-kicker{
+  display:block;
+  margin-bottom:18px;
+  font-size:10px;
+  letter-spacing:.24em;
+  text-transform:uppercase;
+  color:rgba(202,184,159,.48);
+}
+
+.legal-headline h3{
+  font-family:var(--serif);
+  font-size:clamp(46px,6vw,92px);
+  line-height:.9;
+  letter-spacing:-.05em;
+  font-weight:400;
+  color:var(--off);
+  margin-bottom:24px;
+}
+
+.legal-headline p{
+  max-width:620px;
+  font-size:14px;
+  line-height:1.8;
+  color:rgba(238,229,216,.58);
+}
+
+.legal-actions{
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+
+.legal-toggle{
+  width:fit-content;
+  padding:16px 22px;
+  border:1px solid rgba(238,229,216,.08);
+  background:rgba(22,18,14,.72);
+  color:var(--off);
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  cursor:pointer;
+  transition:
+    transform .35s ease,
+    border-color .35s ease,
+    background .35s ease;
+}
+
+.legal-toggle:hover{
+  transform:translateY(-2px);
+  border-color:rgba(192,122,73,.38);
+  background:rgba(32,24,18,.92);
+}
+
+.legal-panel{
+  display:none;
+  padding:34px;
+  border:1px solid rgba(238,229,216,.06);
+  background:rgba(14,11,9,.82);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  margin-bottom:12px;
+}
+
+.legal-panel.active{
+  display:block;
+}
+
+.legal-block{
+  margin-bottom:42px;
+}
+
+.legal-block:last-child{
+  margin-bottom:0;
+}
+
+.legal-block h4{
+  margin-bottom:16px;
+  color:var(--off);
+  font-family:var(--serif);
+  font-size:28px;
+  font-weight:400;
+}
+
+.legal-block p{
+  margin-bottom:16px;
+  font-size:13px;
+  line-height:1.9;
+  color:rgba(238,229,216,.68);
+}
+
+.legal-block ul{
+  margin:18px 0 22px 18px;
+}
+
+.legal-block li{
+  margin-bottom:10px;
+  color:rgba(238,229,216,.62);
+  font-size:12px;
+  line-height:1.7;
+}
+
+.legal-block a{
+  color:var(--beige);
+  border-bottom:1px solid rgba(192,122,73,.35);
+}
+
+.imprint-verify{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:18px;
+}
+
+.imprint-verify p{
+  max-width:560px;
+  color:rgba(238,229,216,.62);
+  line-height:1.8;
+  font-size:13px;
+}
+
+.imprint-verify button{
+  padding:15px 18px;
+  border:1px solid rgba(192,122,73,.35);
+  background:rgba(31,59,45,.24);
+  color:var(--off);
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  cursor:pointer;
+  transition:.35s ease;
+}
+
+.imprint-verify button:hover{
+  background:rgba(31,59,45,.42);
+  transform:translateY(-2px);
+}
+
+.imprint-verify button:disabled{
+  cursor:default;
+  opacity:.62;
+  transform:none;
+}
+
+.imprint-content{
+  display:none;
+  margin-top:34px;
+}
+
+.imprint-content.visible{
+  display:block;
+}
+
 /* 02.09 · Barrierefreiheit & Responsive */
 @media(prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important;scroll-behavior:auto!important;}
@@ -1183,6 +1374,193 @@ a{color:inherit;text-decoration:none;}
   </div>
 </section>
 
+
+
+<!-- 01.08 · Legal Footer / Impressum / Datenschutz -->
+<footer class="legal-footer">
+  <div class="legal-inner">
+    <div class="legal-headline">
+      <span class="legal-kicker">Legal · Privacy · Identity</span>
+
+      <h3>
+        Informationen &<br>
+        Datenschutz
+      </h3>
+
+      <p>
+        Transparenz bezüglich Datenverarbeitung, Kontaktaufnahme
+        und Verantwortlichkeit dieser Portfolioseite.
+      </p>
+    </div>
+
+    <div class="legal-actions">
+      <button class="legal-toggle" type="button" data-legal="privacy">
+        Datenschutz öffnen
+      </button>
+
+      <div class="legal-panel" id="privacy">
+        <div class="legal-block">
+          <h4>Datenschutzerklärung</h4>
+
+          <p>
+            Verantwortlicher im Sinne der Datenschutzgesetze, insbesondere der
+            Datenschutz-Grundverordnung (DSGVO), ist Fabian Harmuth.
+            Kontakt per E-Mail: <a href="mailto:fabianharmuth@web.de">fabianharmuth@web.de</a>.
+          </p>
+
+          <p>
+            Diese Website dient der Darstellung eines persönlichen Model- und
+            Editorial-Portfolios. Es werden keine Waren verkauft und keine
+            kostenpflichtigen digitalen Produkte direkt über diese Website angeboten.
+          </p>
+        </div>
+
+        <div class="legal-block">
+          <h4>Hosting & technische Zugriffsdaten</h4>
+
+          <p>
+            Beim Besuch dieser Website können durch den Hostinganbieter automatisch
+            technisch notwendige Zugriffsdaten verarbeitet werden. Dazu zählen
+            insbesondere IP-Adresse, Datum und Uhrzeit des Zugriffs, Browsertyp,
+            Betriebssystem, aufgerufene Dateien sowie Referrer-Informationen.
+          </p>
+
+          <p>
+            Die Verarbeitung erfolgt zur technischen Bereitstellung, Stabilität,
+            Sicherheit und Performance der Website. Rechtsgrundlage ist Art. 6 Abs. 1
+            lit. f DSGVO. Das berechtigte Interesse liegt im sicheren und zuverlässigen
+            Betrieb dieser Website.
+          </p>
+        </div>
+
+        <div class="legal-block">
+          <h4>Cloudflare</h4>
+
+          <p>
+            Diese Website wird über Cloudflare Pages beziehungsweise Cloudflare Workers
+            bereitgestellt. Dabei können technische Zugriffsdaten über Server von
+            Cloudflare verarbeitet werden. Die Verarbeitung dient insbesondere der
+            Auslieferung, Absicherung, Performance-Optimierung und Abwehr von Angriffen
+            auf die Website.
+          </p>
+        </div>
+
+        <div class="legal-block">
+          <h4>Kontaktformular / Web3Forms</h4>
+
+          <p>
+            Bei Nutzung des Kontaktformulars werden die eingegebenen Daten verarbeitet.
+            Dazu können insbesondere Name, bevorzugter Kontaktweg, E-Mail-Adresse,
+            Telefonnummer, Instagram-Handle und der Nachrichtentext gehören.
+          </p>
+
+          <p>
+            Für die technische Übermittlung des Formulars wird Web3Forms genutzt. Die
+            eingegebenen Daten werden zur Bearbeitung der Anfrage übermittelt und an die
+            hinterlegte E-Mail-Adresse weitergeleitet.
+          </p>
+
+          <p>
+            Die Verarbeitung erfolgt zur Bearbeitung der jeweiligen Anfrage.
+            Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO, soweit die Anfrage auf eine
+            mögliche Zusammenarbeit gerichtet ist, sowie Art. 6 Abs. 1 lit. f DSGVO bei
+            allgemeinen Kontaktanfragen.
+          </p>
+        </div>
+
+        <div class="legal-block">
+          <h4>Cookies & Tracking</h4>
+
+          <p>
+            Diese Website verwendet derzeit keine Analyse- oder Marketingtools wie
+            Google Analytics, Meta Pixel oder vergleichbare Trackingdienste. Es werden
+            keine Tracking-Cookies gesetzt und keine personenbezogenen Daten zu
+            Werbezwecken weitergegeben.
+          </p>
+        </div>
+
+        <div class="legal-block">
+          <h4>Speicherdauer</h4>
+
+          <p>
+            Personenbezogene Daten werden nur so lange gespeichert, wie dies zur
+            Bearbeitung der jeweiligen Anfrage erforderlich ist oder gesetzliche
+            Aufbewahrungspflichten bestehen.
+          </p>
+        </div>
+
+        <div class="legal-block">
+          <h4>Betroffenenrechte</h4>
+
+          <p>
+            Betroffene Personen haben nach Maßgabe der DSGVO insbesondere das Recht auf
+            Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung,
+            Datenübertragbarkeit sowie Widerspruch gegen die Verarbeitung. Außerdem
+            besteht ein Beschwerderecht bei einer zuständigen Datenschutzaufsichtsbehörde.
+          </p>
+        </div>
+
+        <div class="legal-block">
+          <h4>Stand</h4>
+
+          <p>
+            Stand dieser Datenschutzerklärung: Mai 2026.
+          </p>
+        </div>
+      </div>
+
+      <button class="legal-toggle" type="button" data-legal="imprint">
+        Impressum anzeigen
+      </button>
+
+      <div class="legal-panel" id="imprint">
+        <div class="imprint-verify">
+          <p>
+            Zur Reduzierung automatisierter Datenauslesung wird die ladungsfähige
+            Anschrift erst nach manueller Bestätigung angezeigt. Dies ersetzt kein echtes
+            externes Captcha, verhindert aber die direkte sichtbare Darstellung im normalen
+            Seitenfluss.
+          </p>
+
+          <button id="showImprintBtn" type="button">
+            Adresse freischalten
+          </button>
+        </div>
+
+        <div class="imprint-content" id="imprintContent">
+          <div class="legal-block">
+            <h4>Impressum</h4>
+
+            <p>
+              Angaben gemäß § 5 DDG
+            </p>
+
+            <p>
+              Fabian Harmuth<br>
+              Schneckweg 1<br>
+              89079 Ulm<br>
+              Deutschland
+            </p>
+
+            <p>
+              E-Mail: <a href="mailto:fabianharmuth@web.de">fabianharmuth@web.de</a>
+            </p>
+
+            <p>
+              Verantwortlich für den Inhalt dieser Website: Fabian Harmuth.
+            </p>
+
+            <p>
+              Diese Website dient der Präsentation eines persönlichen Model- und
+              Editorial-Portfolios.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
 <script>
 /* =========================================================
    03 · JAVASCRIPT — Custom Cursor ohne Hero-Wackeln
@@ -1216,7 +1594,7 @@ function animateCursor(){
 
 animateCursor();
 
-document.querySelectorAll('a,.chem-entry,.card').forEach(el => {
+document.querySelectorAll('a,button,.chem-entry,.card').forEach(el => {
   el.addEventListener('mouseenter', () => {
     cursor.style.width = '12px';
     cursor.style.height = '12px';
@@ -1235,6 +1613,34 @@ document.querySelectorAll('a,.chem-entry,.card').forEach(el => {
     ring.style.borderColor = 'rgba(202,184,159,.2)';
   });
 });
+
+
+/* 03.02 · Legal Toggle / Impressum-Freischaltung */
+document.querySelectorAll('.legal-toggle').forEach(button => {
+  button.addEventListener('click', () => {
+    const target = document.getElementById(button.dataset.legal);
+
+    document.querySelectorAll('.legal-panel').forEach(panel => {
+      if(panel !== target){
+        panel.classList.remove('active');
+      }
+    });
+
+    target.classList.toggle('active');
+  });
+});
+
+const imprintBtn = document.getElementById('showImprintBtn');
+const imprintContent = document.getElementById('imprintContent');
+
+if(imprintBtn && imprintContent){
+  imprintBtn.addEventListener('click', () => {
+    imprintContent.classList.add('visible');
+    imprintBtn.innerText = 'Adresse freigeschaltet';
+    imprintBtn.disabled = true;
+  });
+}
+
 </script>
 
 </body>
