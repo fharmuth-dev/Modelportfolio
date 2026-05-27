@@ -610,6 +610,26 @@ a{color:inherit;text-decoration:none;}
   transition:1.2s ease;
 }
 
+
+/* 02.06.01 · Progressive Upgrade nur für Streetstyle-Serie
+   Erst werden best-05 bis best-08 angezeigt. Nach vollständigem Seitenaufbau
+   laden After-01 bis After-04 im Hintergrund und ersetzen die kleinen Dateien weich. */
+.upgrade-img{
+  opacity:1;
+  transition:
+    opacity .55s ease,
+    filter 1.2s ease,
+    transform 1.2s ease;
+}
+
+.upgrade-img.is-swapping{
+  opacity:.68;
+}
+
+.upgrade-img.is-upgraded{
+  opacity:1;
+}
+
 .card:hover img{
   transform:scale(1.085);
   filter:grayscale(.55) contrast(1.08) brightness(1.03);
@@ -1373,22 +1393,22 @@ a{color:inherit;text-decoration:none;}
 
   <div class="grid">
     <div class="card">
-      <img src="images/best-05.jpg" alt="" loading="lazy">
+      <img src="images/best-05.jpg" data-after="images/After-01.jpg" alt="" loading="lazy" class="upgrade-img">
       <span>Frame 05</span>
     </div>
 
     <div class="card">
-      <img src="images/best-06.jpg" alt="" loading="lazy">
+      <img src="images/best-06.jpg" data-after="images/After-02.jpg" alt="" loading="lazy" class="upgrade-img">
       <span>Frame 06</span>
     </div>
 
     <div class="card">
-      <img src="images/best-07.jpg" alt="" loading="lazy">
+      <img src="images/best-07.jpg" data-after="images/After-03.jpg" alt="" loading="lazy" class="upgrade-img">
       <span>Frame 07</span>
     </div>
 
     <div class="card">
-      <img src="images/best-08.jpg" alt="" loading="lazy">
+      <img src="images/best-08.jpg" data-after="images/After-04.jpg" alt="" loading="lazy" class="upgrade-img">
       <span>Frame 08</span>
     </div>
   </div>
@@ -1749,6 +1769,55 @@ document.querySelectorAll('a,button,.chem-entry,.card').forEach(el => {
     ring.style.height = '26px';
     ring.style.borderColor = 'rgba(202,184,159,.2)';
   });
+});
+
+
+/* 03.02 · Progressive Image Upgrade — Streetstyle Serie
+   Wichtig: Lädt erst nach vollständigem Seitenaufbau.
+   Sichtbar bleiben sofort best-05 bis best-08; danach werden After-01 bis After-04
+   im Hintergrund geladen und erst nach vollständigem Laden ersetzt. */
+window.addEventListener('load', () => {
+  const upgradeImages = Array.from(document.querySelectorAll('.upgrade-img[data-after]'));
+
+  if(!upgradeImages.length) return;
+
+  const upgradeSingleImage = img => {
+    const afterSrc = img.dataset.after;
+
+    if(!afterSrc || img.dataset.upgraded === 'true') return;
+
+    const afterImage = new Image();
+
+    afterImage.onload = () => {
+      img.classList.add('is-swapping');
+
+      window.setTimeout(() => {
+        img.src = afterSrc;
+        img.dataset.upgraded = 'true';
+        img.classList.remove('is-swapping');
+        img.classList.add('is-upgraded');
+      }, 180);
+    };
+
+    afterImage.onerror = () => {
+      img.dataset.upgraded = 'failed';
+    };
+
+    afterImage.src = afterSrc;
+  };
+
+  const runQueue = async () => {
+    for(const img of upgradeImages){
+      upgradeSingleImage(img);
+      await new Promise(resolve => setTimeout(resolve, 260));
+    }
+  };
+
+  if('requestIdleCallback' in window){
+    requestIdleCallback(runQueue, {timeout:2500});
+  }else{
+    window.setTimeout(runQueue, 900);
+  }
 });
 
 
