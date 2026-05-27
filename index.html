@@ -1,545 +1,1875 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
-  <title>Fabian Harmuth — Male Model aus Ulm</title>
-  <meta name="description" content="Fabian Harmuth — Male Model aus Ulm. Editorial Portfolio mit charakterstarker visueller Präsenz."/>
-  <meta name="theme-color" content="#18130f"/>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Fabian Harmuth — Male Model aus Ulm</title>
+<meta name="description" content="Fabian Harmuth — Male Model aus Ulm. Editorial Portfolio mit charakterstarker visueller Präsenz."/>
 
-  <!-- Performance: Hero-Bild früh laden, weil es sofort sichtbar ist -->
-  <link rel="preload" as="image" href="images/hero.jpeg"/>
+<style>
+/* =========================================================
+   02 · CSS — Design, Layout, Animationen
+   ========================================================= */
 
-  <!-- Ausgelagerter Style-Code -->
-  <link rel="stylesheet" href="css/main.css"/>
+/* 02.01 · Design-Variablen */
+:root{
+  --bg:#18130f;
+  --bg2:#120e0b;
+  --text:#eee5d8;
+  --text-dim:#9d8d7b;
+  --accent:#995732;
+  --accent-light:#c07a49;
+  --green:#1f3b2d;
+  --green-light:#d7ebc7;
+  --beige:#cab89f;
+  --off:#f2eadf;
+  --gallery:#c6b59d;
+  --gallery2:#dfd1bf;
+  --dark:#110d0a;
+  --dark2:#221711;
+  --serif: Georgia, "Times New Roman", serif;
+  --mono: "Courier New", Courier, monospace;
+}
+
+/* 02.02 · Reset / Grundlayout */
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;background:var(--bg);}
+body{
+  background:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
+  font-family:var(--mono);
+  cursor:none;
+}
+img{display:block;max-width:100%;}
+a{color:inherit;text-decoration:none;}
+
+/* 02.03 · Custom Cursor */
+#cursor{
+  position:fixed;
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:var(--beige);
+  pointer-events:none;
+  z-index:9999;
+  transform:translate(-50%,-50%);
+  mix-blend-mode:difference;
+  opacity:.82;
+}
+
+#cursor-ring{
+  position:fixed;
+  width:26px;
+  height:26px;
+  border:1px solid rgba(202,184,159,.2);
+  border-radius:50%;
+  pointer-events:none;
+  z-index:9998;
+  transform:translate(-50%,-50%);
+  opacity:.58;
+}
+
+.hero-grain{
+  position:fixed;
+  inset:0;
+  z-index:50;
+  pointer-events:none;
+  opacity:.022;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:220px 220px;
+}
+
+/* 02.04 · Navigation */
+.nav{
+  position:fixed;
+  top:0;
+  right:0;
+  z-index:100;
+  padding:30px 48px;
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+  pointer-events:none;
+}
+
+.nav-links{
+  display:flex;
+  align-items:center;
+  gap:36px;
+  padding:14px 20px;
+  background:rgba(18,14,11,.55);
+  border:1px solid rgba(238,229,216,.06);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  box-shadow:0 10px 34px rgba(0,0,0,.18);
+  pointer-events:auto;
+}
+
+.nav-links a{
+  position:relative;
+  font-size:10px;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--beige);
+  opacity:.72;
+  padding-bottom:5px;
+  transition:
+    opacity .3s ease,
+    color .3s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active{
+  opacity:1;
+  color:var(--off);
+}
+
+.nav-links a::after{
+  content:'';
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:0%;
+  height:1px;
+  background:var(--accent-light);
+  transition:width .4s ease;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after{
+  width:100%;
+}
+
+@media(max-width:980px){
+
+  .nav{
+    right:0;
+    left:auto;
+    padding:18px 20px;
+  }
+
+  .nav-links{
+    gap:16px;
+    padding:10px 14px;
+  }
+
+  .nav-links a{
+    font-size:9px;
+  }
+}
+
+/* 02.05 · Hero-Bereich */
+.hero{
+  position:relative;
+  min-height:100vh;
+  overflow:hidden;
+  background:var(--bg2);
+}
+
+.hero-bg{
+  position:absolute;
+  inset:0;
+  z-index:0;
+  background:
+    radial-gradient(circle at 18% 60%, rgba(92,57,32,.34), transparent 42%),
+    radial-gradient(circle at 78% 40%, rgba(35,63,45,.24), transparent 38%),
+    linear-gradient(160deg,#1c1510 0%,#120e0b 62%,#090705 100%);
+}
+
+.hero-bg::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background-image:
+    linear-gradient(rgba(238,229,216,.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(238,229,216,.014) 1px, transparent 1px);
+  background-size:74px 74px;
+}
+
+.hero-image-panel{
+  position:absolute;
+  right:clamp(20px,5vw,80px);
+  top:50%;
+  width:min(48vw,700px);
+  height:min(81vh,850px);
+  transform:translateY(-50%);
+  overflow:hidden;
+  z-index:2;
+  border:1px solid rgba(238,229,216,.06);
+  box-shadow:
+    0 50px 110px rgba(0,0,0,.72),
+    0 0 0 1px rgba(238,229,216,.03);
+  background:#080706;
+}
+
+.hero-image-panel::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  z-index:5;
+  background:linear-gradient(
+    120deg,
+    transparent 34%,
+    rgba(255,255,255,.04) 50%,
+    transparent 66%
+  );
+  transform:translateX(-70%);
+  animation:heroShimmer 11s ease-in-out infinite;
+}
+
+.hero-image{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center top;
+  filter:grayscale(.08) contrast(1.03) brightness(.84) sepia(.04);
+  transform:scale(1.035);
+}
+
+.image-vignette{
+  position:absolute;
+  inset:0;
+  z-index:3;
+  background:
+    linear-gradient(90deg, rgba(0,0,0,.24), transparent 32%),
+    linear-gradient(180deg, rgba(0,0,0,.18), transparent 30%),
+    linear-gradient(0deg, rgba(0,0,0,.4), transparent 42%);
+}
+
+.image-grain{
+  position:absolute;
+  inset:-50%;
+  z-index:4;
+  opacity:.03;
+  background-image:radial-gradient(circle, rgba(255,255,255,.35) 1px, transparent 1px);
+  background-size:3px 3px;
+  animation:grain .9s steps(3) infinite;
+}
+
+.hero-content{
+  position:relative;
+  z-index:6;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  width:53vw;
+  max-width:820px;
+  padding:130px 7vw 100px;
+}
+
+.kicker{
+  margin-bottom:22px;
+  font-size:10px;
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  color:var(--text-dim);
+  opacity:0;
+  animation:fadeUp .8s .2s ease forwards;
+}
+
+.hero-title{
+  display:flex;
+  flex-direction:column;
+  margin-bottom:52px;
+  line-height:.84;
+  font-family:var(--serif);
+  opacity:0;
+  animation:fadeUp .9s .38s ease forwards;
+}
+
+.title-top{
+  font-size:clamp(78px,10.8vw,168px);
+  letter-spacing:-.06em;
+  color:var(--off);
+  font-style:italic;
+  font-weight:300;
+}
+
+.title-bottom{
+  font-size:clamp(78px,10.8vw,168px);
+  letter-spacing:-.06em;
+  margin-left:clamp(36px,9vw,140px);
+  margin-top:-.06em;
+  color:var(--accent);
+  transform:rotate(-1.6deg);
+  font-weight:400;
+}
+
+.chem-dictionary{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  max-width:640px;
+  margin-bottom:54px;
+  opacity:0;
+  animation:fadeUp .8s .62s ease forwards;
+}
+
+.chem-dictionary::before{
+  content:"IDENTITY INDEX";
+  position:absolute;
+  top:-22px;
+  right:0;
+  font-size:9px;
+  letter-spacing:.22em;
+  color:rgba(202,184,159,.32);
+}
+
+.chem-entry{
+  position:relative;
+  display:grid;
+  grid-template-columns:56px 1fr;
+  overflow:hidden;
+  background:rgba(34,27,21,.68);
+  border:1px solid rgba(238,229,216,.06);
+  transition:.4s;
+  backdrop-filter:blur(6px);
+}
+
+.chem-entry:hover{
+  transform:translateY(-2px);
+  border-color:rgba(238,229,216,.12);
+  box-shadow:0 10px 32px rgba(0,0,0,.3);
+}
+
+.chem-entry::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(100deg, transparent, rgba(255,255,255,.05), transparent);
+  transform:translateX(-115%);
+  animation:cardShimmer 10s ease-in-out infinite;
+}
+
+.chem-entry:nth-child(2)::after{animation-delay:.7s;}
+.chem-entry:nth-child(3)::after{animation-delay:1.4s;}
+
+.chem-symbol{
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:56px;
+  background:var(--green);
+  color:var(--green-light);
+  font-family:var(--serif);
+  font-size:25px;
+  border-right:1px solid rgba(255,255,255,.06);
+}
+
+.chem-symbol::before{
+  content:"29";
+  position:absolute;
+  top:5px;
+  left:6px;
+  font-size:9px;
+  opacity:.68;
+  font-family:var(--mono);
+}
+
+.chem-symbol::after{
+  content:'';
+  position:absolute;
+  right:5px;
+  bottom:5px;
+  width:6px;
+  height:6px;
+  border:1px solid rgba(215,235,199,.28);
+}
+
+.chem-content{
+  padding:10px 14px 10px 12px;
+  position:relative;
+  z-index:2;
+}
+
+.dict-word{
+  margin-bottom:3px;
+  font-size:17px;
+  color:var(--off);
+  font-family:var(--serif);
+}
+
+.dict-word span{color:var(--accent-light);}
+
+.dict-line{
+  font-size:12.5px;
+  line-height:1.58;
+  color:rgba(238,229,216,.68);
+}
+
+.definition{
+  max-width:620px;
+  font-size:clamp(28px,3.4vw,50px);
+  line-height:1.05;
+  letter-spacing:-.04em;
+  color:var(--text);
+  font-family:var(--serif);
+  font-style:italic;
+  font-weight:300;
+  opacity:0;
+  animation:fadeUp .8s .85s ease forwards;
+}
+
+.editorial-line{
+  width:90px;
+  height:1px;
+  margin-top:36px;
+  background:rgba(202,184,159,.28);
+  opacity:0;
+  animation:fadeUp .8s 1s ease forwards;
+}
+
+/* 02.06 · Galerie-Grundlayout */
+.gallery{
+  padding:110px 48px 135px;
+  background:linear-gradient(180deg,var(--gallery) 0%,var(--gallery2) 40%,#c0ab92 100%);
+  color:#171411;
+}
+
+.gallery-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:42px;
+  margin-bottom:56px;
+  border-top:1px solid rgba(23,20,17,.12);
+  padding-top:24px;
+}
+
+.gallery-top h2{
+  font-size:clamp(42px,5.7vw,88px);
+  line-height:.9;
+  letter-spacing:-.06em;
+  font-family:var(--serif);
+  font-weight:400;
+}
+
+.gallery-chem{
+  position:relative;
+  display:grid;
+  grid-template-columns:68px 1fr;
+  overflow:hidden;
+  max-width:560px;
+  background:rgba(255,255,255,.18);
+  border:1px solid rgba(23,20,17,.1);
+  backdrop-filter:blur(4px);
+}
+
+.gallery-chem::before{
+  content:"MONOCHROME SERIES";
+  position:absolute;
+  top:7px;
+  right:10px;
+  font-size:9px;
+  letter-spacing:.18em;
+  color:rgba(23,20,17,.42);
+  z-index:3;
+}
+
+.gallery-chem::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.16),transparent);
+  transform:translateX(-115%);
+  animation:cardShimmer 11s ease-in-out infinite;
+}
+
+.gallery-chem-symbol{
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:72px;
+  background:var(--green);
+  color:var(--green-light);
+  font-size:20px;
+  font-family:var(--serif);
+}
+
+.gallery-chem-symbol::before{
+  content:"04";
+  position:absolute;
+  top:6px;
+  left:7px;
+  font-size:9px;
+  opacity:.68;
+  font-family:var(--mono);
+}
+
+.gallery-chem-symbol::after{
+  content:'';
+  position:absolute;
+  right:6px;
+  bottom:6px;
+  width:6px;
+  height:6px;
+  border:1px solid rgba(215,235,199,.4);
+}
+
+.gallery-chem-content{
+  position:relative;
+  padding:20px 16px 14px 12px;
+  z-index:2;
+}
+
+.gallery-chem-title{
+  margin-bottom:4px;
+  font-size:17px;
+  font-family:var(--serif);
+}
+
+.gallery-chem-title span{color:var(--accent);}
+
+.gallery-chem-line{
+  position:relative;
+  font-size:12.5px;
+  line-height:1.58;
+  color:rgba(23,20,17,.68);
+  z-index:2;
+}
+
+.location-line{
+  margin-top:10px;
+  font-size:10.5px;
+  line-height:1.5;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  color:rgba(23,20,17,.42);
+  position:relative;
+  z-index:3;
+}
+
+.street-gallery .location-line,
+.adapt-gallery .location-line,
+.character-gallery .location-line{
+  color:rgba(238,229,216,.56);
+}
+
+.ink-splatter{
+  position:absolute;
+  right:-70px;
+  bottom:-60px;
+  width:155px;
+  height:135px;
+  pointer-events:none;
+  opacity:1;
+  z-index:1;
+  background:
+    radial-gradient(circle at 18% 34%, rgba(0,0,0,1) 0 5px, transparent 6px),
+    radial-gradient(circle at 42% 28%, rgba(0,0,0,.74) 0 14px, transparent 15px),
+    radial-gradient(circle at 70% 18%, rgba(0,0,0,.92) 0 4px, transparent 5px),
+    radial-gradient(circle at 78% 52%, rgba(0,0,0,.55) 0 22px, transparent 23px),
+    radial-gradient(circle at 50% 72%, rgba(0,0,0,.86) 0 9px, transparent 10px),
+    radial-gradient(circle at 86% 82%, rgba(0,0,0,.42) 0 6px, transparent 7px),
+    radial-gradient(circle at 28% 78%, rgba(0,0,0,.66) 0 3px, transparent 4px),
+    radial-gradient(circle at 61% 85%, rgba(0,0,0,.95) 0 2px, transparent 3px);
+  transform:rotate(-13deg);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+}
+
+.character-grid{
+  grid-template-columns:repeat(3,1fr);
+}
+
+.card{
+  position:relative;
+  overflow:hidden;
+  min-height:390px;
+  background:#b7a891;
+  border:1px solid rgba(23,20,17,.1);
+  box-shadow:0 22px 54px rgba(23,20,17,.16);
+}
+
+.card:nth-child(2),
+.card:nth-child(4){margin-top:65px;}
+
+.character-grid .card:nth-child(2){
+  margin-top:65px;
+}
+
+.character-grid .card:nth-child(3){
+  margin-top:0;
+}
+
+.card img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  filter:grayscale(1) contrast(1.04);
+  transform:scale(1.03);
+  transition:1.2s ease;
+}
+
+
+/* 02.06.01 · Progressive Upgrade nur für Streetstyle-Serie
+   Erst werden best-05 bis best-08 angezeigt. Nach vollständigem Seitenaufbau
+   laden After-01 bis After-04 im Hintergrund und ersetzen die kleinen Dateien weich. */
+.upgrade-img{
+  opacity:1;
+  transition:
+    opacity .55s ease,
+    filter 1.2s ease,
+    transform 1.2s ease;
+}
+
+.upgrade-img.is-swapping{
+  opacity:.68;
+}
+
+.upgrade-img.is-upgraded{
+  opacity:1;
+}
+
+.card:hover img{
+  transform:scale(1.085);
+  filter:grayscale(.55) contrast(1.08) brightness(1.03);
+}
+
+.card span{
+  position:absolute;
+  left:14px;
+  bottom:14px;
+  font-size:10px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.82);
+  text-shadow:0 2px 10px rgba(0,0,0,.62);
+  z-index:4;
+}
+
+.gallery-credit{
+  margin-top:28px;
+  text-align:right;
+  font-size:11px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:rgba(23,20,17,.58);
+}
+
+/* 02.07 · Dunkle Serienvarianten */
+
+.street-gallery,
+.adapt-gallery,
+.character-gallery{
+  background:
+    radial-gradient(circle at 16% 72%, rgba(153,87,50,.18), transparent 32%),
+    radial-gradient(circle at 82% 24%, rgba(31,59,45,.32), transparent 34%),
+    linear-gradient(180deg,#110d0a 0%,#221711 48%,#100b08 100%);
+  color:var(--text);
+}
+
+.street-gallery .gallery-top,
+.character-gallery .gallery-top{
+  flex-direction:row-reverse;
+  border-top:1px solid rgba(238,229,216,.1);
+}
+
+.adapt-gallery .gallery-top{
+  border-top:1px solid rgba(238,229,216,.1);
+}
+
+.street-gallery .gallery-top h2,
+.adapt-gallery .gallery-top h2,
+.character-gallery .gallery-top h2{
+  color:var(--off);
+}
+
+.street-gallery .gallery-top h2,
+.character-gallery .gallery-top h2{
+  text-align:right;
+}
+
+.street-gallery .gallery-chem,
+.adapt-gallery .gallery-chem,
+.character-gallery .gallery-chem{
+  background:rgba(34,27,21,.72);
+  border:1px solid rgba(238,229,216,.08);
+}
+
+.street-gallery .gallery-chem::before{
+  content:"STREET EDITORIAL";
+  color:rgba(238,229,216,.28);
+}
+
+.adapt-gallery .gallery-chem::before{
+  content:"ADAPTIVE INDEX";
+  color:rgba(238,229,216,.28);
+}
+
+.character-gallery .gallery-chem::before{
+  content:"CHARACTER INDEX";
+  color:rgba(238,229,216,.28);
+}
+
+.street-gallery .gallery-chem-title,
+.adapt-gallery .gallery-chem-title,
+.character-gallery .gallery-chem-title{
+  color:var(--off);
+}
+
+.street-gallery .gallery-chem-line,
+.adapt-gallery .gallery-chem-line,
+.character-gallery .gallery-chem-line{
+  color:rgba(238,229,216,.72);
+}
+
+.street-gallery .gallery-chem-title span,
+.adapt-gallery .gallery-chem-title span,
+.character-gallery .gallery-chem-title span{
+  color:var(--accent-light);
+}
+
+.street-gallery .ink-splatter,
+.adapt-gallery .ink-splatter,
+.character-gallery .ink-splatter{
+  filter:invert(1);
+  opacity:.18;
+}
+
+.street-gallery .card,
+.adapt-gallery .card,
+.character-gallery .card{
+  background:#16110e;
+  border:1px solid rgba(238,229,216,.08);
+  box-shadow:0 24px 60px rgba(0,0,0,.42);
+}
+
+.street-gallery .card img,
+.adapt-gallery .card img{
+  filter:contrast(1.03) saturate(.9) brightness(.9);
+}
+
+.street-gallery .card:hover img,
+.adapt-gallery .card:hover img{
+  filter:contrast(1.08) saturate(1.08) brightness(1.02);
+}
+
+.street-gallery .gallery-credit,
+.adapt-gallery .gallery-credit,
+.character-gallery .gallery-credit{
+  color:rgba(238,229,216,.58);
+  text-align:left;
+}
+
+.adapt-gallery .gallery-chem{
+  max-width:640px;
+}
+
+.adapt-gallery .gallery-chem-line,
+.character-gallery .gallery-chem-line{
+  font-size:12.5px;
+}
+
+.dual-card{
+  min-height:470px;
+}
+
+.dual-card img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.dual-card .base-img{
+  z-index:1;
+  filter:grayscale(1) contrast(1.12) brightness(.82);
+}
+
+.dual-card .color-img{
+  z-index:2;
+  opacity:0;
+  filter:contrast(1.08) saturate(1.12) brightness(.98);
+  transform:scale(1.06);
+  mix-blend-mode:normal;
+}
+
+.dual-card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:3;
+  opacity:0;
+  pointer-events:none;
+  background:
+    linear-gradient(110deg, transparent 0 35%, rgba(215,235,199,.18) 48%, transparent 62%),
+    radial-gradient(circle at 50% 50%, transparent 40%, rgba(0,0,0,.25) 100%);
+  transform:translateX(-60%);
+  transition:opacity .4s ease, transform .9s ease;
+}
+
+.dual-card:hover .base-img{
+  opacity:.18;
+  transform:scale(1.08);
+}
+
+.dual-card:hover .color-img{
+  opacity:1;
+  transform:scale(1.03);
+}
+
+.dual-card:hover::after{
+  opacity:1;
+  transform:translateX(60%);
+}
+
+/* 02.08 · Animationen */
+@keyframes grain{
+  from{transform:translate(0,0);}
+  to{transform:translate(-3%,2%);}
+}
+
+@keyframes heroShimmer{
+  0%,58%{transform:translateX(-70%);opacity:0;}
+  72%{opacity:.65;}
+  100%{transform:translateX(70%);opacity:0;}
+}
+
+@keyframes cardShimmer{
+  0%,60%{transform:translateX(-115%);opacity:0;}
+  73%{opacity:.7;}
+  100%{transform:translateX(115%);opacity:0;}
+}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(16px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+
+
+
+/* 02.10 · Legal Gate / Datenschutz / Impressum */
+.legal-footer{
+  position:relative;
+  padding:78px 48px 80px;
+  background:#080605;
+  border-top:1px solid rgba(238,229,216,.07);
+  overflow:hidden;
+  z-index:10;
+}
+
+.legal-footer::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 22% 40%, rgba(31,59,45,.16), transparent 34%),
+    linear-gradient(180deg, rgba(18,14,11,.55), rgba(5,4,3,.96));
+  pointer-events:none;
+}
+
+.legal-footer::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background-image:
+    linear-gradient(rgba(238,229,216,.014) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(238,229,216,.01) 1px, transparent 1px);
+  background-size:72px 72px;
+  pointer-events:none;
+  opacity:.8;
+}
+
+.legal-shell{
+  position:relative;
+  z-index:2;
+  max-width:1180px;
+  margin:auto;
+}
+
+.legal-separator{
+  position:relative;
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+  gap:24px;
+  margin-bottom:34px;
+}
+
+.legal-separator::before,
+.legal-separator::after{
+  content:'';
+  height:1px;
+  background:linear-gradient(90deg, transparent, rgba(202,184,159,.28), transparent);
+}
+
+.legal-gate{
+  position:relative;
+  padding:16px 22px;
+  border:1px solid rgba(238,229,216,.09);
+  background:rgba(18,14,11,.72);
+  color:var(--off);
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.18em;
+  line-height:1.4;
+  text-transform:uppercase;
+  cursor:pointer;
+  overflow:hidden;
+  transition:
+    transform .35s ease,
+    border-color .35s ease,
+    background .35s ease;
+}
+
+.legal-gate::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(110deg, transparent, rgba(255,255,255,.09), transparent);
+  transform:translateX(-120%);
+  animation:legalSweep 5s ease-in-out infinite;
+}
+
+.legal-gate span{
+  position:relative;
+  z-index:2;
+}
+
+.legal-gate:hover{
+  transform:translateY(-2px);
+  border-color:rgba(192,122,73,.42);
+  background:rgba(32,24,18,.9);
+}
+
+.legal-content{
+  display:none;
+  margin-top:42px;
+  animation:legalReveal .55s ease both;
+}
+
+.legal-content.visible{
+  display:block;
+}
+
+.legal-inner{
+  position:relative;
+  z-index:2;
+}
+
+.legal-headline{
+  margin-bottom:52px;
+}
+
+.legal-kicker{
+  display:block;
+  margin-bottom:18px;
+  font-size:10.5px;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:rgba(202,184,159,.52);
+}
+
+.legal-headline h3{
+  font-family:var(--serif);
+  font-size:clamp(44px,5.5vw,84px);
+  line-height:.92;
+  letter-spacing:-.05em;
+  font-weight:400;
+  color:var(--off);
+  margin-bottom:24px;
+}
+
+.legal-headline p{
+  max-width:680px;
+  font-size:14px;
+  line-height:1.8;
+  color:rgba(238,229,216,.6);
+}
+
+.legal-actions{
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+
+.legal-toggle{
+  width:fit-content;
+  padding:16px 22px;
+  border:1px solid rgba(238,229,216,.08);
+  background:rgba(22,18,14,.72);
+  color:var(--off);
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  cursor:pointer;
+  transition:
+    transform .35s ease,
+    border-color .35s ease,
+    background .35s ease;
+}
+
+.legal-toggle:hover{
+  transform:translateY(-2px);
+  border-color:rgba(192,122,73,.38);
+  background:rgba(32,24,18,.92);
+}
+
+.legal-panel{
+  display:none;
+  padding:34px;
+  border:1px solid rgba(238,229,216,.06);
+  background:rgba(14,11,9,.82);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  margin-bottom:12px;
+}
+
+.legal-panel.active{
+  display:block;
+}
+
+.legal-block{
+  margin-bottom:42px;
+}
+
+.legal-block:last-child{
+  margin-bottom:0;
+}
+
+.legal-block h4{
+  margin-bottom:16px;
+  color:var(--off);
+  font-family:var(--serif);
+  font-size:28px;
+  font-weight:400;
+}
+
+.legal-block p{
+  margin-bottom:16px;
+  font-size:13px;
+  line-height:1.9;
+  color:rgba(238,229,216,.68);
+}
+
+.legal-block ul{
+  margin:18px 0 22px 18px;
+}
+
+.legal-block li{
+  margin-bottom:10px;
+  color:rgba(238,229,216,.62);
+  font-size:12px;
+  line-height:1.7;
+}
+
+.legal-block a{
+  color:var(--beige);
+  border-bottom:1px solid rgba(192,122,73,.35);
+}
+
+.imprint-verify{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:18px;
+}
+
+.imprint-verify p{
+  max-width:620px;
+  color:rgba(238,229,216,.62);
+  line-height:1.8;
+  font-size:13px;
+}
+
+.imprint-verify button{
+  padding:15px 18px;
+  border:1px solid rgba(192,122,73,.35);
+  background:rgba(31,59,45,.24);
+  color:var(--off);
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  cursor:pointer;
+  transition:.35s ease;
+}
+
+.imprint-verify button:hover{
+  background:rgba(31,59,45,.42);
+  transform:translateY(-2px);
+}
+
+.imprint-verify button:disabled{
+  cursor:default;
+  opacity:.62;
+  transform:none;
+}
+
+.imprint-content{
+  display:none;
+  margin-top:34px;
+}
+
+.imprint-content.visible{
+  display:block;
+}
+
+.imprint-address{
+  margin-bottom:16px;
+  font-size:13px;
+  line-height:1.9;
+  color:rgba(238,229,216,.68);
+}
+
+@keyframes legalSweep{
+  0%,68%{transform:translateX(-120%);}
+  100%{transform:translateX(120%);}
+}
+
+@keyframes legalReveal{
+  from{opacity:0;transform:translateY(16px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+/* 02.09 · Barrierefreiheit & Responsive */
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;scroll-behavior:auto!important;}
+}
+
+@media(max-width:980px){
+  body{cursor:auto;}
+
+  #cursor,
+  #cursor-ring{display:none;}
+
+  .nav{padding:18px 20px;}
+
+  .nav-links{
+    gap:16px;
+    padding:10px 14px;
+  }
+
+  .nav-links a{font-size:9px;}
+
+  .hero-image-panel{
+    right:0;
+    top:0;
+    width:100%;
+    height:56vh;
+    transform:none;
+    border-left:0;
+    border-right:0;
+  }
+
+  .hero-content{
+    width:100%;
+    justify-content:flex-end;
+    padding:58vh 22px 80px;
+  }
+
+  .title-top,
+  .title-bottom{font-size:clamp(62px,17vw,96px);}
+
+  .title-bottom{margin-left:clamp(22px,9vw,60px);}
+
+  .chem-dictionary::before{display:none;}
+
+  .definition{font-size:clamp(30px,7vw,44px);}
+
+  .gallery{padding:80px 20px 105px;}
+
+  .gallery-top{display:block;}
+
+  .gallery-chem{
+    margin-top:22px;
+    max-width:100%;
+  }
+
+  .street-gallery .gallery-top h2,
+  .character-gallery .gallery-top h2{
+    text-align:left;
+  }
+
+  .grid,
+  .character-grid{
+    grid-template-columns:1fr;
+  }
+
+  .card,
+  .card:nth-child(2),
+  .card:nth-child(4),
+  .character-grid .card:nth-child(2),
+  .character-grid .card:nth-child(3){
+    margin-top:0;
+    min-height:500px;
+  }
+
+  .gallery-credit{
+    text-align:left;
+    margin-top:22px;
+  }
+
+  .legal-footer{
+    padding:70px 22px 62px;
+  }
+
+  .legal-separator{
+    grid-template-columns:1fr;
+    gap:18px;
+  }
+
+  .legal-separator::before,
+  .legal-separator::after{
+    display:none;
+  }
+
+  .legal-gate,
+  .legal-toggle{
+    width:100%;
+  }
+
+  .legal-panel{
+    padding:24px 20px;
+  }
+
+  .legal-headline h3{
+    font-size:clamp(42px,14vw,62px);
+  }
+}
+</style>
 </head>
 
 <body>
 
 <!-- =========================================================
-     01 · GLOBAL / Cursor / Grain
+     01 · HTML — Sichtbare Seitenstruktur
      ========================================================= -->
-<div id="cursor" aria-hidden="true"></div>
-<div id="cursor-ring" aria-hidden="true"></div>
-<div class="hero-grain" aria-hidden="true"></div>
 
-<!-- =========================================================
-     02 · NAVIGATION
-     ========================================================= -->
-<nav class="nav" aria-label="Hauptnavigation">
+<!-- 01.01 · Custom Cursor -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+<div class="hero-grain"></div>
+
+<!-- 01.02 · Navigation -->
+<nav class="nav">
   <div class="nav-links">
-    <a href="index.html" class="active" aria-current="page">01 Landingpage</a>
+    <a href="index.html" class="active">01 Landingpage</a>
     <a href="blaupause-polaroids.html">02 Blaupause-Polaroids</a>
     <a href="kontakt.html">03 Kontakt</a>
   </div>
 </nav>
 
-<main>
+<!-- 01.03 · Hero / Einstieg -->
+<section class="hero">
+  <div class="hero-bg"></div>
 
-  <!-- =========================================================
-       03 · HERO / Einstieg
-       ========================================================= -->
-  <section class="hero" aria-label="Editorial Portfolio Einstieg">
-    <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-image-panel" id="imagePanel">
+    <img src="images/hero.jpeg" alt="Fabian Harmuth Male Model" class="hero-image">
+    <div class="image-vignette"></div>
+    <div class="image-grain"></div>
+  </div>
 
-    <div class="hero-image-panel" id="imagePanel">
-      <img
-        src="images/hero.jpeg"
-        alt="Fabian Harmuth, Male Model aus Ulm, charakterstarkes Editorial Portrait"
-        class="hero-image"
-        loading="eager"
-        fetchpriority="high"
-        decoding="async"
-      >
-      <div class="image-vignette" aria-hidden="true"></div>
-      <div class="image-grain" aria-hidden="true"></div>
-    </div>
+  <div class="hero-content">
+    <div class="kicker">Editorial Portfolio · Ulm</div>
 
-    <div class="hero-content">
-      <div class="kicker">Editorial Portfolio · Ulm</div>
+    <h1 class="hero-title">
+      <span class="title-top">Fabian</span>
+      <span class="title-bottom">Harmuth</span>
+    </h1>
 
-      <h1 class="hero-title">
-        <span class="title-top">Fabian</span>
-        <span class="title-bottom">Harmuth</span>
-      </h1>
-
-      <div class="chem-dictionary" aria-label="Identity Index">
-        <div class="chem-entry">
-          <div class="chem-symbol" aria-hidden="true">Fa</div>
-          <div class="chem-content">
-            <div class="dict-word">Fa<span>|</span>bi<span>|</span>an</div>
-            <div class="dict-line">Bedeutung: männlicher Vorname · Genitiv: Fabian, Fabians · Plural: die Fabians</div>
-          </div>
-        </div>
-
-        <div class="chem-entry">
-          <div class="chem-symbol" aria-hidden="true">Ha</div>
-          <div class="chem-content">
-            <div class="dict-word">Har<span>|</span>muth</div>
-            <div class="dict-line">Familienname · deutschsprachig · charakterstark, markant, selten</div>
-          </div>
-        </div>
-
-        <div class="chem-entry">
-          <div class="chem-symbol" aria-hidden="true">Ac</div>
-          <div class="chem-content">
-            <div class="dict-word">Ace</div>
-            <div class="dict-line">Künstlername · visuelle Identität · klar, prägnant, einprägsam</div>
-          </div>
+    <div class="chem-dictionary">
+      <div class="chem-entry">
+        <div class="chem-symbol">Fa</div>
+        <div class="chem-content">
+          <div class="dict-word">Fa<span>|</span>bi<span>|</span>an</div>
+          <div class="dict-line">Bedeutung: männlicher Vorname · Genitiv: Fabian, Fabians · Plural: die Fabians</div>
         </div>
       </div>
 
-      <div class="definition">
-        Ein Gesicht für Kontraste:<br>
-        ruhig, kantig, wandelbar.
+      <div class="chem-entry">
+        <div class="chem-symbol">Ha</div>
+        <div class="chem-content">
+          <div class="dict-word">Har<span>|</span>muth</div>
+          <div class="dict-line">Familienname · deutschsprachig · charakterstark, markant, selten</div>
+        </div>
       </div>
 
-      <div class="editorial-line" aria-hidden="true"></div>
-    </div>
-  </section>
-
-  <!-- =========================================================
-       04 · SERIE 1 / Schwarz Weiß
-       ========================================================= -->
-  <section class="gallery" aria-labelledby="sw-title">
-    <div class="gallery-top">
-      <h2 id="sw-title">
-        Schwarz Weiß<br>
-        Serie
-      </h2>
-
-      <div class="gallery-chem">
-        <div class="gallery-chem-symbol" aria-hidden="true">S/W</div>
-
-        <div class="gallery-chem-content">
-          <div class="gallery-chem-title">Schwarz<span>|</span>Weiß</div>
-          <div class="gallery-chem-line">
-            Eine Komposition aus schwarzer und weißer Farbe · reduziert auf Licht, Schatten, Haltung und Ausdruck.
-          </div>
-          <div class="location-line">
-            Göppingen · 48°42′12.74″N · 9°39′7.52″E
-          </div>
-          <div class="ink-splatter" aria-hidden="true"></div>
+      <div class="chem-entry">
+        <div class="chem-symbol">Ac</div>
+        <div class="chem-content">
+          <div class="dict-word">Ace</div>
+          <div class="dict-line">Künstlername · visuelle Identität · klar, prägnant, einprägsam</div>
         </div>
       </div>
     </div>
 
-    <div class="grid">
-      <div class="card">
-        <img src="images/best-01.jpeg" alt="Schwarz-Weiß Editorial Frame 01" loading="lazy" decoding="async">
-        <span>Frame 01</span>
-      </div>
-
-      <div class="card">
-        <img src="images/best-02.jpeg" alt="Schwarz-Weiß Editorial Frame 02" loading="lazy" decoding="async">
-        <span>Frame 02</span>
-      </div>
-
-      <div class="card">
-        <img src="images/best-03.jpeg" alt="Schwarz-Weiß Editorial Frame 03" loading="lazy" decoding="async">
-        <span>Frame 03</span>
-      </div>
-
-      <div class="card">
-        <img src="images/best-04.jpeg" alt="Schwarz-Weiß Editorial Frame 04" loading="lazy" decoding="async">
-        <span>Frame 04</span>
-      </div>
+    <div class="definition">
+      Ein Gesicht für Kontraste:<br>
+      ruhig, kantig, wandelbar.
     </div>
 
-    <div class="gallery-credit">
-      Photography · apanachii_fotoart24
-    </div>
-  </section>
+    <div class="editorial-line"></div>
+  </div>
+</section>
 
-  <!-- =========================================================
-       05 · SERIE 2 / Streetstyle Editorial
-       Progressive Upgrade: best-05 bis best-08 werden nach vollständigem Seitenload durch After-01 bis After-04 ersetzt.
-       ========================================================= -->
-  <section class="gallery street-gallery" aria-labelledby="street-title">
-    <div class="gallery-top">
-      <h2 id="street-title">
-        Streetstyle<br>
-        Editorial
-      </h2>
+<!-- 01.04 · Serie 1: Schwarz Weiß -->
+<section class="gallery">
+  <div class="gallery-top">
+    <h2>
+      Schwarz Weiß<br>
+      Serie
+    </h2>
 
-      <div class="gallery-chem">
-        <div class="gallery-chem-symbol" aria-hidden="true">St</div>
+    <div class="gallery-chem">
+      <div class="gallery-chem-symbol">S/W</div>
 
-        <div class="gallery-chem-content">
-          <div class="gallery-chem-title">Street<span>|</span>Editorial</div>
-          <div class="gallery-chem-line">
-            Eine farbige Serie zwischen urbaner Haltung, Bewegung und kontrollierter Lässigkeit.
-          </div>
-          <div class="location-line">
-            Ulm · 48°23′54.28″N · 9°59′29.58″E
-          </div>
-          <div class="ink-splatter" aria-hidden="true"></div>
+      <div class="gallery-chem-content">
+        <div class="gallery-chem-title">Schwarz<span>|</span>Weiß</div>
+        <div class="gallery-chem-line">
+          Eine Komposition aus schwarzer und weißer Farbe · reduziert auf Licht, Schatten, Haltung und Ausdruck.
         </div>
-      </div>
-    </div>
-
-    <div class="grid">
-      <div class="card">
-        <img
-          src="images/best-05.jpg"
-          data-after="images/After-01.jpg"
-          alt="Streetstyle Editorial Frame 05"
-          loading="lazy"
-          decoding="async"
-          class="after-upgrade-img"
-        >
-        <span>Frame 05</span>
-      </div>
-
-      <div class="card">
-        <img
-          src="images/best-06.jpg"
-          data-after="images/After-02.jpg"
-          alt="Streetstyle Editorial Frame 06"
-          loading="lazy"
-          decoding="async"
-          class="after-upgrade-img"
-        >
-        <span>Frame 06</span>
-      </div>
-
-      <div class="card">
-        <img
-          src="images/best-07.jpg"
-          data-after="images/After-03.jpg"
-          alt="Streetstyle Editorial Frame 07"
-          loading="lazy"
-          decoding="async"
-          class="after-upgrade-img"
-        >
-        <span>Frame 07</span>
-      </div>
-
-      <div class="card">
-        <img
-          src="images/best-08.jpg"
-          data-after="images/After-04.jpg"
-          alt="Streetstyle Editorial Frame 08"
-          loading="lazy"
-          decoding="async"
-          class="after-upgrade-img"
-        >
-        <span>Frame 08</span>
-      </div>
-    </div>
-
-    <div class="gallery-credit">
-      Photography · Sven.Valentin
-    </div>
-  </section>
-
-  <!-- =========================================================
-       06 · SERIE 3 / Wandlungsfähig
-       ========================================================= -->
-  <section class="gallery adapt-gallery" aria-labelledby="adapt-title">
-    <div class="gallery-top">
-      <h2 id="adapt-title">
-        Wandlungs<br>
-        Fähig
-      </h2>
-
-      <div class="gallery-chem">
-        <div class="gallery-chem-symbol" aria-hidden="true">Wa</div>
-
-        <div class="gallery-chem-content">
-          <div class="gallery-chem-title">Wand<span>|</span>lungs<span>|</span>fähig</div>
-          <div class="gallery-chem-line">
-            Adjektiv · Fähigkeit zur sichtbaren Veränderung. Wechsel zwischen Rolle, Haltung und Ausdruck, ohne die eigene Kontur zu verlieren. Im Office-Kontext: kontrolliert, präsent, präzise und anpassungsfähig.
-          </div>
-          <div class="location-line">
-            Stuttgart · 48°46′56.3″N · 9°10.621′E
-          </div>
-          <div class="ink-splatter" aria-hidden="true"></div>
+        <div class="location-line">
+          Göppingen · 48°42′12.74″N · 9°39′7.52″E
         </div>
+        <div class="ink-splatter"></div>
       </div>
     </div>
+  </div>
 
-    <div class="grid">
-      <div class="card">
-        <img src="images/best-09.jpg" alt="Wandlungsfähig Office Editorial Frame 09" loading="lazy" decoding="async">
-        <span>Frame 09</span>
-      </div>
-
-      <div class="card">
-        <img src="images/best-10.jpg" alt="Wandlungsfähig Office Editorial Frame 10" loading="lazy" decoding="async">
-        <span>Frame 10</span>
-      </div>
-
-      <div class="card">
-        <img src="images/best-11.jpg" alt="Wandlungsfähig Office Editorial Frame 11" loading="lazy" decoding="async">
-        <span>Frame 11</span>
-      </div>
-
-      <div class="card">
-        <img src="images/best-12.jpg" alt="Wandlungsfähig Office Editorial Frame 12" loading="lazy" decoding="async">
-        <span>Frame 12</span>
-      </div>
+  <div class="grid">
+    <div class="card">
+      <img src="images/best-01.jpeg" alt="" loading="lazy">
+      <span>Frame 01</span>
     </div>
 
-    <div class="gallery-credit">
-      Photography · 4m.fotografie
+    <div class="card">
+      <img src="images/best-02.jpeg" alt="" loading="lazy">
+      <span>Frame 02</span>
     </div>
-  </section>
 
-  <!-- =========================================================
-       07 · SERIE 4 / Charakterstark
-       ========================================================= -->
-  <section class="gallery character-gallery" aria-labelledby="character-title">
-    <div class="gallery-top">
-      <h2 id="character-title">
-        Charakter<br>
-        Stark
-      </h2>
+    <div class="card">
+      <img src="images/best-03.jpeg" alt="" loading="lazy">
+      <span>Frame 03</span>
+    </div>
 
-      <div class="gallery-chem">
-        <div class="gallery-chem-symbol" aria-hidden="true">Ch</div>
+    <div class="card">
+      <img src="images/best-04.jpeg" alt="" loading="lazy">
+      <span>Frame 04</span>
+    </div>
+  </div>
 
-        <div class="gallery-chem-content">
-          <div class="gallery-chem-title">Charak<span>|</span>ter<span>|</span>stark</div>
-          <div class="gallery-chem-line">
-            Adjektiv · Präsenz mit Widerstand. Ein Ausdruck, der nicht glatt wirkt, sondern Tiefe, Spannung und Wiedererkennbarkeit trägt. Still im ersten Moment, intensiv im zweiten.
-          </div>
-          <div class="location-line">
-            Stuttgart · 48°46′56.3″N · 9°10.621′E
-          </div>
-          <div class="ink-splatter" aria-hidden="true"></div>
+  <div class="gallery-credit">
+    Photography · apanachii_fotoart24
+  </div>
+</section>
+
+<!-- 01.05 · Serie 2: Streetstyle Editorial -->
+<section class="gallery street-gallery">
+  <div class="gallery-top">
+    <h2>
+      Streetstyle<br>
+      Editorial
+    </h2>
+
+    <div class="gallery-chem">
+      <div class="gallery-chem-symbol">St</div>
+
+      <div class="gallery-chem-content">
+        <div class="gallery-chem-title">Street<span>|</span>Editorial</div>
+        <div class="gallery-chem-line">
+          Eine farbige Serie zwischen urbaner Haltung, Bewegung und kontrollierter Lässigkeit.
         </div>
+        <div class="location-line">
+          Ulm · 48°23′54.28″N · 9°59′29.58″E
+        </div>
+        <div class="ink-splatter"></div>
       </div>
     </div>
+  </div>
 
-    <div class="grid character-grid">
-      <div class="card dual-card">
-        <img class="base-img" src="images/best-13.jpg" alt="Charakterstark Schwarzweiß Frame 13" loading="lazy" decoding="async">
-        <img class="color-img" src="images/best-14.jpg" alt="Charakterstark Farbversion Frame 14" loading="lazy" decoding="async">
-        <span>Frame 13/14</span>
-      </div>
-
-      <div class="card dual-card">
-        <img class="base-img" src="images/best-15.jpg" alt="Charakterstark Schwarzweiß Frame 15" loading="lazy" decoding="async">
-        <img class="color-img" src="images/best-16.jpg" alt="Charakterstark Farbversion Frame 16" loading="lazy" decoding="async">
-        <span>Frame 15/16</span>
-      </div>
-
-      <div class="card dual-card">
-        <img class="base-img" src="images/best-17.jpg" alt="Charakterstark Schwarzweiß Frame 17" loading="lazy" decoding="async">
-        <img class="color-img" src="images/best-18.jpg" alt="Charakterstark Farbversion Frame 18" loading="lazy" decoding="async">
-        <span>Frame 17/18</span>
-      </div>
+  <div class="grid">
+    <div class="card">
+      <img src="images/best-05.jpg" data-after="images/After-01.jpg" alt="" loading="lazy" class="upgrade-img">
+      <span>Frame 05</span>
     </div>
 
-    <div class="gallery-credit">
-      Photography · invisibleman73
+    <div class="card">
+      <img src="images/best-06.jpg" data-after="images/After-02.jpg" alt="" loading="lazy" class="upgrade-img">
+      <span>Frame 06</span>
     </div>
-  </section>
 
-  <!-- =========================================================
-       08 · LEGAL / Datenschutz / Impressum
-       ========================================================= -->
-  <footer class="legal-footer">
-    <div class="legal-shell">
+    <div class="card">
+      <img src="images/best-07.jpg" data-after="images/After-03.jpg" alt="" loading="lazy" class="upgrade-img">
+      <span>Frame 07</span>
+    </div>
 
-      <div class="legal-separator">
-        <button class="legal-gate" id="legalGate" type="button" aria-expanded="false" aria-controls="legalContent">
-          <span>Datenschutz & Impressum einsehen</span>
-        </button>
+    <div class="card">
+      <img src="images/best-08.jpg" data-after="images/After-04.jpg" alt="" loading="lazy" class="upgrade-img">
+      <span>Frame 08</span>
+    </div>
+  </div>
+
+  <div class="gallery-credit">
+    Photography · Sven.Valentin
+  </div>
+</section>
+
+<!-- 01.06 · Serie 3: Wandlungsfähig -->
+<section class="gallery adapt-gallery">
+  <div class="gallery-top">
+    <h2>
+      Wandlungs<br>
+      Fähig
+    </h2>
+
+    <div class="gallery-chem">
+      <div class="gallery-chem-symbol">Wa</div>
+
+      <div class="gallery-chem-content">
+        <div class="gallery-chem-title">Wand<span>|</span>lungs<span>|</span>fähig</div>
+        <div class="gallery-chem-line">
+          Adjektiv · Fähigkeit zur sichtbaren Veränderung. Wechsel zwischen Rolle, Haltung und Ausdruck, ohne die eigene Kontur zu verlieren. Im Office-Kontext: kontrolliert, präsent, präzise und anpassungsfähig.
+        </div>
+        <div class="location-line">
+          Stuttgart · 48°46′56.3″N · 9°10.621′E
+        </div>
+        <div class="ink-splatter"></div>
       </div>
+    </div>
+  </div>
 
-      <div class="legal-content" id="legalContent">
-        <div class="legal-inner">
-          <div class="legal-headline">
-            <span class="legal-kicker">Legal · Privacy · Identity</span>
+  <div class="grid">
+    <div class="card">
+      <img src="images/best-09.jpg" alt="" loading="lazy">
+      <span>Frame 09</span>
+    </div>
 
-            <h3>
-              Informationen &<br>
-              Datenschutz
-            </h3>
+    <div class="card">
+      <img src="images/best-10.jpg" alt="" loading="lazy">
+      <span>Frame 10</span>
+    </div>
 
-            <p>
-              Transparenz bezüglich Datenverarbeitung, Kontaktaufnahme und Verantwortlichkeit
-              dieser Portfolioseite. Der Bereich ist bewusst zurückhaltend platziert, bleibt aber
-              jederzeit auffindbar.
-            </p>
-          </div>
+    <div class="card">
+      <img src="images/best-11.jpg" alt="" loading="lazy">
+      <span>Frame 11</span>
+    </div>
 
-          <div class="legal-actions">
-            <button class="legal-toggle" type="button" data-legal="privacy" aria-controls="privacy">
-              Datenschutz öffnen
-            </button>
+    <div class="card">
+      <img src="images/best-12.jpg" alt="" loading="lazy">
+      <span>Frame 12</span>
+    </div>
+  </div>
 
-            <div class="legal-panel" id="privacy">
-              <div class="legal-block">
-                <h4>Datenschutzerklärung</h4>
+  <div class="gallery-credit">
+    Photography · 4m.fotografie
+  </div>
+</section>
 
-                <p>
-                  Verantwortlicher im Sinne der Datenschutzgesetze, insbesondere der
-                  Datenschutz-Grundverordnung (DSGVO), ist Fabian Harmuth.
-                  Kontakt per E-Mail: <a href="mailto:fabianharmuth@web.de">fabianharmuth@web.de</a>.
-                </p>
+<!-- 01.07 · Serie 4: Charakterstark -->
+<section class="gallery character-gallery">
+  <div class="gallery-top">
+    <h2>
+      Charakter<br>
+      Stark
+    </h2>
 
-                <p>
-                  Diese Website dient der Darstellung eines persönlichen Model- und
-                  Editorial-Portfolios. Es werden keine Waren verkauft und keine kostenpflichtigen
-                  digitalen Produkte direkt über diese Website angeboten.
-                </p>
-              </div>
+    <div class="gallery-chem">
+      <div class="gallery-chem-symbol">Ch</div>
 
-              <div class="legal-block">
-                <h4>Hosting & technische Zugriffsdaten</h4>
+      <div class="gallery-chem-content">
+        <div class="gallery-chem-title">Charak<span>|</span>ter<span>|</span>stark</div>
+        <div class="gallery-chem-line">
+          Adjektiv · Präsenz mit Widerstand. Ein Ausdruck, der nicht glatt wirkt, sondern Tiefe, Spannung und Wiedererkennbarkeit trägt. Still im ersten Moment, intensiv im zweiten.
+        </div>
+        <div class="location-line">
+          Stuttgart · 48°46′56.3″N · 9°10.621′E
+        </div>
+        <div class="ink-splatter"></div>
+      </div>
+    </div>
+  </div>
 
-                <p>
-                  Beim Besuch dieser Website können durch den Hostinganbieter automatisch technisch
-                  notwendige Zugriffsdaten verarbeitet werden. Dazu zählen insbesondere IP-Adresse,
-                  Datum und Uhrzeit des Zugriffs, Browsertyp, Betriebssystem, aufgerufene Dateien
-                  sowie Referrer-Informationen.
-                </p>
+  <div class="grid character-grid">
+    <div class="card dual-card">
+      <img class="base-img" src="images/best-13.jpg" alt="" loading="lazy">
+      <img class="color-img" src="images/best-14.jpg" alt="" loading="lazy">
+      <span>Frame 13/14</span>
+    </div>
 
-                <p>
-                  Die Verarbeitung erfolgt zur technischen Bereitstellung, Stabilität, Sicherheit
-                  und Performance der Website. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO.
-                  Das berechtigte Interesse liegt im sicheren und zuverlässigen Betrieb dieser Website.
-                </p>
-              </div>
+    <div class="card dual-card">
+      <img class="base-img" src="images/best-15.jpg" alt="" loading="lazy">
+      <img class="color-img" src="images/best-16.jpg" alt="" loading="lazy">
+      <span>Frame 15/16</span>
+    </div>
 
-              <div class="legal-block">
-                <h4>Cloudflare</h4>
+    <div class="card dual-card">
+      <img class="base-img" src="images/best-17.jpg" alt="" loading="lazy">
+      <img class="color-img" src="images/best-18.jpg" alt="" loading="lazy">
+      <span>Frame 17/18</span>
+    </div>
+  </div>
 
-                <p>
-                  Diese Website wird über Cloudflare Pages beziehungsweise Cloudflare Workers
-                  bereitgestellt. Dabei können technische Zugriffsdaten über Server von Cloudflare
-                  verarbeitet werden. Die Verarbeitung dient insbesondere der Auslieferung,
-                  Absicherung, Performance-Optimierung und Abwehr von Angriffen auf die Website.
-                </p>
-              </div>
+  <div class="gallery-credit">
+    Photography · invisibleman73
+  </div>
+</section>
 
-              <div class="legal-block">
-                <h4>Kontaktformular / Web3Forms</h4>
 
-                <p>
-                  Bei Nutzung des Kontaktformulars werden die eingegebenen Daten verarbeitet.
-                  Dazu können insbesondere Name, bevorzugter Kontaktweg, E-Mail-Adresse,
-                  Telefonnummer, Instagram-Handle und der Nachrichtentext gehören.
-                </p>
 
-                <p>
-                  Für die technische Übermittlung des Formulars wird Web3Forms genutzt. Die
-                  eingegebenen Daten werden zur Bearbeitung der Anfrage übermittelt und an die
-                  hinterlegte E-Mail-Adresse weitergeleitet.
-                </p>
 
-                <p>
-                  Die Verarbeitung erfolgt zur Bearbeitung der jeweiligen Anfrage. Rechtsgrundlage
-                  ist Art. 6 Abs. 1 lit. b DSGVO, soweit die Anfrage auf eine mögliche Zusammenarbeit
-                  gerichtet ist, sowie Art. 6 Abs. 1 lit. f DSGVO bei allgemeinen Kontaktanfragen.
-                </p>
-              </div>
+<!-- 01.08 · Legal Gate / Datenschutz / Impressum -->
+<footer class="legal-footer">
+  <div class="legal-shell">
 
-              <div class="legal-block">
-                <h4>Cookies & Tracking</h4>
+    <div class="legal-separator">
+      <button class="legal-gate" id="legalGate" type="button" aria-expanded="false">
+        <span>Datenschutz & Impressum einsehen</span>
+      </button>
+    </div>
 
-                <p>
-                  Diese Website verwendet derzeit keine Analyse- oder Marketingtools wie Google
-                  Analytics, Meta Pixel oder vergleichbare Trackingdienste. Es werden keine
-                  Tracking-Cookies gesetzt und keine personenbezogenen Daten zu Werbezwecken weitergegeben.
-                </p>
-              </div>
+    <div class="legal-content" id="legalContent">
+      <div class="legal-inner">
+        <div class="legal-headline">
+          <span class="legal-kicker">Legal · Privacy · Identity</span>
 
-              <div class="legal-block">
-                <h4>Sedcard / Dateidownloads</h4>
+          <h3>
+            Informationen &<br>
+            Datenschutz
+          </h3>
 
-                <p>
-                  Sofern auf dieser Website eine Sedcard oder andere Dateien als Download bereitgestellt
-                  werden, können beim Abruf der Datei technisch notwendige Zugriffsdaten durch den
-                  Hostinganbieter verarbeitet werden. Eine gesonderte Auswertung zu Werbezwecken erfolgt nicht.
-                </p>
-              </div>
+          <p>
+            Transparenz bezüglich Datenverarbeitung, Kontaktaufnahme und Verantwortlichkeit
+            dieser Portfolioseite. Der Bereich ist bewusst zurückhaltend platziert, bleibt aber
+            jederzeit auffindbar.
+          </p>
+        </div>
 
-              <div class="legal-block">
-                <h4>Speicherdauer</h4>
+        <div class="legal-actions">
+          <button class="legal-toggle" type="button" data-legal="privacy">
+            Datenschutz öffnen
+          </button>
 
-                <p>
-                  Personenbezogene Daten werden nur so lange gespeichert, wie dies zur Bearbeitung
-                  der jeweiligen Anfrage erforderlich ist oder gesetzliche Aufbewahrungspflichten bestehen.
-                </p>
-              </div>
+          <div class="legal-panel" id="privacy">
+            <div class="legal-block">
+              <h4>Datenschutzerklärung</h4>
 
-              <div class="legal-block">
-                <h4>Betroffenenrechte</h4>
+              <p>
+                Verantwortlicher im Sinne der Datenschutzgesetze, insbesondere der
+                Datenschutz-Grundverordnung (DSGVO), ist Fabian Harmuth.
+                Kontakt per E-Mail: <a href="mailto:fabianharmuth@web.de">fabianharmuth@web.de</a>.
+              </p>
 
-                <p>
-                  Betroffene Personen haben nach Maßgabe der DSGVO insbesondere das Recht auf Auskunft,
-                  Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit sowie
-                  Widerspruch gegen die Verarbeitung. Außerdem besteht ein Beschwerderecht bei einer
-                  zuständigen Datenschutzaufsichtsbehörde.
-                </p>
-              </div>
-
-              <div class="legal-block">
-                <h4>Stand</h4>
-
-                <p>
-                  Stand dieser Datenschutzerklärung: Mai 2026.
-                </p>
-              </div>
+              <p>
+                Diese Website dient der Darstellung eines persönlichen Model- und
+                Editorial-Portfolios. Es werden keine Waren verkauft und keine kostenpflichtigen
+                digitalen Produkte direkt über diese Website angeboten.
+              </p>
             </div>
 
-            <button class="legal-toggle" type="button" data-legal="imprint" aria-controls="imprint">
-              Impressum anzeigen
-            </button>
+            <div class="legal-block">
+              <h4>Hosting & technische Zugriffsdaten</h4>
 
-            <div class="legal-panel" id="imprint">
-              <div class="imprint-verify">
+              <p>
+                Beim Besuch dieser Website können durch den Hostinganbieter automatisch technisch
+                notwendige Zugriffsdaten verarbeitet werden. Dazu zählen insbesondere IP-Adresse,
+                Datum und Uhrzeit des Zugriffs, Browsertyp, Betriebssystem, aufgerufene Dateien
+                sowie Referrer-Informationen.
+              </p>
+
+              <p>
+                Die Verarbeitung erfolgt zur technischen Bereitstellung, Stabilität, Sicherheit
+                und Performance der Website. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO.
+                Das berechtigte Interesse liegt im sicheren und zuverlässigen Betrieb dieser Website.
+              </p>
+            </div>
+
+            <div class="legal-block">
+              <h4>Cloudflare</h4>
+
+              <p>
+                Diese Website wird über Cloudflare Pages beziehungsweise Cloudflare Workers
+                bereitgestellt. Dabei können technische Zugriffsdaten über Server von Cloudflare
+                verarbeitet werden. Die Verarbeitung dient insbesondere der Auslieferung,
+                Absicherung, Performance-Optimierung und Abwehr von Angriffen auf die Website.
+              </p>
+            </div>
+
+            <div class="legal-block">
+              <h4>Kontaktformular / Web3Forms</h4>
+
+              <p>
+                Bei Nutzung des Kontaktformulars werden die eingegebenen Daten verarbeitet.
+                Dazu können insbesondere Name, bevorzugter Kontaktweg, E-Mail-Adresse,
+                Telefonnummer, Instagram-Handle und der Nachrichtentext gehören.
+              </p>
+
+              <p>
+                Für die technische Übermittlung des Formulars wird Web3Forms genutzt. Die
+                eingegebenen Daten werden zur Bearbeitung der Anfrage übermittelt und an die
+                hinterlegte E-Mail-Adresse weitergeleitet.
+              </p>
+
+              <p>
+                Die Verarbeitung erfolgt zur Bearbeitung der jeweiligen Anfrage. Rechtsgrundlage
+                ist Art. 6 Abs. 1 lit. b DSGVO, soweit die Anfrage auf eine mögliche Zusammenarbeit
+                gerichtet ist, sowie Art. 6 Abs. 1 lit. f DSGVO bei allgemeinen Kontaktanfragen.
+              </p>
+            </div>
+
+            <div class="legal-block">
+              <h4>Cookies & Tracking</h4>
+
+              <p>
+                Diese Website verwendet derzeit keine Analyse- oder Marketingtools wie Google
+                Analytics, Meta Pixel oder vergleichbare Trackingdienste. Es werden keine
+                Tracking-Cookies gesetzt und keine personenbezogenen Daten zu Werbezwecken weitergegeben.
+              </p>
+            </div>
+
+            <div class="legal-block">
+              <h4>Sedcard / Dateidownloads</h4>
+
+              <p>
+                Sofern auf dieser Website eine Sedcard oder andere Dateien als Download bereitgestellt
+                werden, können beim Abruf der Datei technisch notwendige Zugriffsdaten durch den
+                Hostinganbieter verarbeitet werden. Eine gesonderte Auswertung zu Werbezwecken erfolgt nicht.
+              </p>
+            </div>
+
+            <div class="legal-block">
+              <h4>Speicherdauer</h4>
+
+              <p>
+                Personenbezogene Daten werden nur so lange gespeichert, wie dies zur Bearbeitung
+                der jeweiligen Anfrage erforderlich ist oder gesetzliche Aufbewahrungspflichten bestehen.
+              </p>
+            </div>
+
+            <div class="legal-block">
+              <h4>Betroffenenrechte</h4>
+
+              <p>
+                Betroffene Personen haben nach Maßgabe der DSGVO insbesondere das Recht auf Auskunft,
+                Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit sowie
+                Widerspruch gegen die Verarbeitung. Außerdem besteht ein Beschwerderecht bei einer
+                zuständigen Datenschutzaufsichtsbehörde.
+              </p>
+            </div>
+
+            <div class="legal-block">
+              <h4>Stand</h4>
+
+              <p>
+                Stand dieser Datenschutzerklärung: Mai 2026.
+              </p>
+            </div>
+          </div>
+
+          <button class="legal-toggle" type="button" data-legal="imprint">
+            Impressum anzeigen
+          </button>
+
+          <div class="legal-panel" id="imprint">
+            <div class="imprint-verify">
+              <p>
+                Zur Reduzierung automatisierter Datenauslesung wird die ladungsfähige Anschrift
+                erst nach manueller Bestätigung angezeigt. Dies ist keine externe Captcha-Prüfung,
+                verhindert aber die direkte sichtbare Darstellung im normalen Seitenfluss.
+              </p>
+
+              <button id="showImprintBtn" type="button">
+                Adresse freischalten
+              </button>
+            </div>
+
+            <div class="imprint-content" id="imprintContent">
+              <div class="legal-block">
+                <h4>Impressum</h4>
+
                 <p>
-                  Zur Reduzierung automatisierter Datenauslesung wird die ladungsfähige Anschrift
-                  erst nach manueller Bestätigung angezeigt. Dies ist keine externe Captcha-Prüfung,
-                  verhindert aber die direkte sichtbare Darstellung im normalen Seitenfluss.
+                  Angaben gemäß § 5 DDG
                 </p>
 
-                <button id="showImprintBtn" type="button">
-                  Adresse freischalten
-                </button>
-              </div>
+                <div class="imprint-address" id="imprintAddress"></div>
 
-              <div class="imprint-content" id="imprintContent">
-                <div class="legal-block">
-                  <h4>Impressum</h4>
+                <p>
+                  E-Mail: <a href="mailto:fabianharmuth@web.de">fabianharmuth@web.de</a>
+                </p>
 
-                  <p>
-                    Angaben gemäß § 5 DDG
-                  </p>
+                <p>
+                  Verantwortlich für den Inhalt dieser Website: Fabian Harmuth.
+                </p>
 
-                  <div class="imprint-address" id="imprintAddress"></div>
-
-                  <p>
-                    E-Mail: <a href="mailto:fabianharmuth@web.de">fabianharmuth@web.de</a>
-                  </p>
-
-                  <p>
-                    Verantwortlich für den Inhalt dieser Website: Fabian Harmuth.
-                  </p>
-
-                  <p>
-                    Diese Website dient der Präsentation eines persönlichen Model- und
-                    Editorial-Portfolios.
-                  </p>
-                </div>
+                <p>
+                  Diese Website dient der Präsentation eines persönlichen Model- und
+                  Editorial-Portfolios.
+                </p>
               </div>
             </div>
           </div>
         </div>
       </div>
-
     </div>
-  </footer>
 
-</main>
+  </div>
+</footer>
 
-<!-- Ausgelagerter JavaScript-Code -->
-<script src="js/main.js" defer></script>
+<script>
+/* =========================================================
+   03 · JAVASCRIPT — Custom Cursor ohne Hero-Wackeln
+   ========================================================= */
+
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+
+let mx = 0;
+let my = 0;
+let rx = 0;
+let ry = 0;
+
+document.addEventListener('mousemove', e => {
+  mx = e.clientX;
+  my = e.clientY;
+
+  cursor.style.left = mx + 'px';
+  cursor.style.top = my + 'px';
+});
+
+function animateCursor(){
+  rx += (mx - rx) * .09;
+  ry += (my - ry) * .09;
+
+  ring.style.left = rx + 'px';
+  ring.style.top = ry + 'px';
+
+  requestAnimationFrame(animateCursor);
+}
+
+animateCursor();
+
+document.querySelectorAll('a,button,.chem-entry,.card').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    cursor.style.width = '12px';
+    cursor.style.height = '12px';
+
+    ring.style.width = '42px';
+    ring.style.height = '42px';
+    ring.style.borderColor = 'rgba(192,122,73,.38)';
+  });
+
+  el.addEventListener('mouseleave', () => {
+    cursor.style.width = '6px';
+    cursor.style.height = '6px';
+
+    ring.style.width = '26px';
+    ring.style.height = '26px';
+    ring.style.borderColor = 'rgba(202,184,159,.2)';
+  });
+});
+
+
+/* 03.02 · Progressive Image Upgrade — Streetstyle Serie
+   Wichtig: Lädt erst nach vollständigem Seitenaufbau.
+   Sichtbar bleiben sofort best-05 bis best-08; danach werden After-01 bis After-04
+   im Hintergrund geladen und erst nach vollständigem Laden ersetzt. */
+window.addEventListener('load', () => {
+  const upgradeImages = Array.from(document.querySelectorAll('.upgrade-img[data-after]'));
+
+  if(!upgradeImages.length) return;
+
+  const upgradeSingleImage = img => {
+    const afterSrc = img.dataset.after;
+
+    if(!afterSrc || img.dataset.upgraded === 'true') return;
+
+    const afterImage = new Image();
+
+    afterImage.onload = () => {
+      img.classList.add('is-swapping');
+
+      window.setTimeout(() => {
+        img.src = afterSrc;
+        img.dataset.upgraded = 'true';
+        img.classList.remove('is-swapping');
+        img.classList.add('is-upgraded');
+      }, 180);
+    };
+
+    afterImage.onerror = () => {
+      img.dataset.upgraded = 'failed';
+    };
+
+    afterImage.src = afterSrc;
+  };
+
+  const runQueue = async () => {
+    for(const img of upgradeImages){
+      upgradeSingleImage(img);
+      await new Promise(resolve => setTimeout(resolve, 260));
+    }
+  };
+
+  if('requestIdleCallback' in window){
+    requestIdleCallback(runQueue, {timeout:2500});
+  }else{
+    window.setTimeout(runQueue, 900);
+  }
+});
+
+
+/* 03.02 · Legal Gate / Datenschutz / Impressum */
+const legalGate = document.getElementById('legalGate');
+const legalContent = document.getElementById('legalContent');
+
+if(legalGate && legalContent){
+  legalGate.addEventListener('click', () => {
+    const isVisible = legalContent.classList.toggle('visible');
+    legalGate.setAttribute('aria-expanded', isVisible ? 'true' : 'false');
+    legalGate.querySelector('span').innerText = isVisible
+      ? 'Datenschutz & Impressum ausblenden'
+      : 'Datenschutz & Impressum einsehen';
+  });
+}
+
+document.querySelectorAll('.legal-toggle').forEach(button => {
+  button.addEventListener('click', () => {
+    const target = document.getElementById(button.dataset.legal);
+
+    document.querySelectorAll('.legal-panel').forEach(panel => {
+      if(panel !== target){
+        panel.classList.remove('active');
+      }
+    });
+
+    target.classList.toggle('active');
+  });
+});
+
+const imprintBtn = document.getElementById('showImprintBtn');
+const imprintContent = document.getElementById('imprintContent');
+const imprintAddress = document.getElementById('imprintAddress');
+
+if(imprintBtn && imprintContent && imprintAddress){
+  imprintBtn.addEventListener('click', () => {
+    const addressLines = [
+      'Fabian Harmuth',
+      'Schneckweg 1',
+      '89079 Ulm',
+      'Deutschland'
+    ];
+
+    imprintAddress.innerHTML = addressLines.join('<br>');
+    imprintContent.classList.add('visible');
+    imprintBtn.innerText = 'Adresse freigeschaltet';
+    imprintBtn.disabled = true;
+  });
+}
+
+</script>
 
 </body>
 </html>
