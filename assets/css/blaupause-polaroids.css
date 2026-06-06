@@ -1,1 +1,1274 @@
+<style>
+:root{
+  --bg:#07111d;
+  --bg2:#09192c;
 
+  --panel:#0c2036;
+
+  --line:rgba(128,197,255,.16);
+  --line-strong:rgba(128,197,255,.26);
+
+  --blue:#83cfff;
+  --blue-soft:rgba(131,207,255,.18);
+
+  --green:#1f3b2d;
+  --green-light:#d7ebc7;
+
+  --text:#edf7ff;
+  --muted:rgba(237,247,255,.78);
+  --dim:rgba(237,247,255,.52);
+
+  --red:#d64f4f;
+  --paper:#f4f5f7;
+
+  --serif:Georgia,"Times New Roman",serif;
+  --mono:"Courier New",Courier,monospace;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  background:var(--bg);
+  scroll-behavior:smooth;
+}
+
+body{
+  min-height:100vh;
+  overflow-x:hidden;
+
+  background:
+    radial-gradient(circle at 22% 38%, rgba(131,207,255,.12), transparent 28%),
+    radial-gradient(circle at 80% 24%, rgba(131,207,255,.08), transparent 34%),
+    linear-gradient(160deg,#07111d 0%,#09192c 54%,#03070d 100%);
+
+  color:var(--text);
+  font-family:var(--mono);
+
+  cursor:none;
+}
+
+/* =========================
+CUSTOM CURSOR
+========================= */
+
+#cursor{
+  position:fixed;
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:var(--text);
+  pointer-events:none;
+  z-index:9999;
+  transform:translate(-50%,-50%);
+  mix-blend-mode:difference;
+  opacity:.82;
+}
+
+#cursor-ring{
+  position:fixed;
+  width:26px;
+  height:26px;
+  border:1px solid rgba(131,207,255,.22);
+  border-radius:50%;
+  pointer-events:none;
+  z-index:9998;
+  transform:translate(-50%,-50%);
+  opacity:.58;
+  transition:
+    width .25s ease,
+    height .25s ease,
+    border-color .25s ease,
+    opacity .25s ease;
+}
+
+#cursor-ring.active{
+  width:58px;
+  height:58px;
+  border-color:rgba(131,207,255,.42);
+  opacity:.95;
+}
+
+.nav{
+  position:fixed;
+  top:0;
+  right:0;
+  z-index:100;
+
+  padding:30px 48px;
+}
+
+.nav-links{
+  display:flex;
+  gap:30px;
+
+  padding:14px 20px;
+
+  background:rgba(4,10,18,.58);
+
+  border:1px solid rgba(131,207,255,.16);
+
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+
+  box-shadow:0 16px 40px rgba(0,0,0,.28);
+}
+
+.nav-links a{
+  position:relative;
+
+  font-size:11px;
+  letter-spacing:.2em;
+
+  text-transform:uppercase;
+
+  color:var(--muted);
+
+  text-decoration:none;
+
+  padding-bottom:6px;
+
+  transition:.3s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active{
+  color:var(--text);
+}
+
+.nav-links a::after{
+  content:'';
+
+  position:absolute;
+  left:0;
+  bottom:0;
+
+  width:0%;
+  height:1px;
+
+  background:var(--blue);
+
+  transition:.35s ease;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after{
+  width:100%;
+}
+
+/* =========================
+BACKGROUND
+========================= */
+
+.page{
+  position:relative;
+
+  min-height:100vh;
+
+  overflow:hidden;
+
+  padding:130px 7vw 90px;
+}
+
+.grid-bg{
+  position:absolute;
+  inset:0;
+
+  z-index:0;
+
+  opacity:.5;
+
+  background-image:
+    linear-gradient(rgba(131,207,255,.14) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(131,207,255,.14) 1px, transparent 1px),
+    linear-gradient(rgba(131,207,255,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(131,207,255,.04) 1px, transparent 1px);
+
+  background-size:
+    140px 140px,
+    140px 140px,
+    28px 28px,
+    28px 28px;
+
+  animation:gridMove 24s linear infinite;
+}
+
+.grid-overlay{
+  position:absolute;
+  inset:0;
+
+  z-index:1;
+
+  pointer-events:none;
+
+  background:
+    radial-gradient(circle at center, transparent 0%, rgba(3,7,13,.42) 78%),
+    linear-gradient(
+      90deg,
+      rgba(3,7,13,.72),
+      transparent 22%,
+      transparent 78%,
+      rgba(3,7,13,.72)
+    );
+}
+
+.scan-line{
+  position:absolute;
+  inset:0;
+
+  z-index:2;
+
+  pointer-events:none;
+
+  background:
+    linear-gradient(
+      180deg,
+      transparent,
+      rgba(131,207,255,.07),
+      transparent
+    );
+
+  height:28vh;
+
+  animation:scanMove 12s linear infinite;
+}
+
+.blueprint-noise{
+  position:fixed;
+  inset:0;
+
+  z-index:40;
+
+  pointer-events:none;
+
+  opacity:.03;
+
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+
+  background-size:220px 220px;
+}
+
+/* =========================
+FOOTSTEPS
+========================= */
+
+.footprints{
+  position:absolute;
+  inset:0;
+
+  z-index:3;
+
+  pointer-events:none;
+}
+
+.footprints span{
+  position:absolute;
+
+  width:18px;
+  height:32px;
+
+  border:1px solid rgba(237,247,255,.16);
+  border-radius:46% 46% 56% 56%;
+
+  opacity:0;
+
+  animation:footFade 9s ease-in-out infinite;
+}
+
+.footprints span:nth-child(1){left:10%;top:76%;animation-delay:0s;}
+.footprints span:nth-child(2){left:17%;top:69%;animation-delay:1s;}
+.footprints span:nth-child(3){left:30%;top:57%;animation-delay:2s;}
+.footprints span:nth-child(4){left:46%;top:43%;animation-delay:3s;}
+.footprints span:nth-child(5){left:67%;top:31%;animation-delay:4s;}
+.footprints span:nth-child(6){left:79%;top:45%;animation-delay:5s;}
+
+/* =========================
+LAYOUT
+========================= */
+
+.shell{
+  position:relative;
+  z-index:10;
+
+  width:min(1180px,100%);
+  margin:0 auto;
+
+  display:grid;
+  grid-template-columns:minmax(320px,.92fr) minmax(380px,1.08fr);
+
+  gap:clamp(46px,6vw,90px);
+
+  align-items:center;
+}
+
+/* =========================
+PHOTO
+========================= */
+
+.photo-frame{
+  position:relative;
+
+  padding:16px;
+
+  background:
+    repeating-linear-gradient(
+      135deg,
+      var(--red) 0 14px,
+      var(--red) 14px 28px,
+      var(--paper) 28px 42px,
+      var(--paper) 42px 56px,
+      var(--blue) 56px 70px,
+      var(--blue) 70px 84px,
+      var(--paper) 84px 98px,
+      var(--paper) 98px 112px
+    );
+
+  box-shadow:
+    0 40px 100px rgba(0,0,0,.55),
+    0 0 0 1px rgba(237,247,255,.12);
+}
+
+.photo-inner{
+  position:relative;
+
+  overflow:hidden;
+
+  background:#050b12;
+
+  border:1px solid rgba(237,247,255,.24);
+}
+
+.photo-inner::before{
+  content:"";
+
+  position:absolute;
+  inset:0;
+
+  z-index:3;
+
+  pointer-events:none;
+
+  background:
+    linear-gradient(
+      120deg,
+      transparent,
+      rgba(255,255,255,.08),
+      transparent
+    );
+
+  transform:translateX(-120%);
+
+  animation:photoSweep 9s ease-in-out infinite;
+}
+
+.photo-inner::after{
+  content:"POLA-01 · MODEL IDENTIFICATION";
+
+  position:absolute;
+  left:14px;
+  bottom:14px;
+
+  z-index:4;
+
+  font-size:11px;
+  letter-spacing:.18em;
+
+  text-transform:uppercase;
+
+  color:rgba(237,247,255,.82);
+
+  text-shadow:0 2px 12px rgba(0,0,0,.7);
+}
+
+.photo-inner img{
+  width:100%;
+  height:min(72vh,760px);
+
+  object-fit:cover;
+  object-position:center top;
+
+  filter:
+    contrast(1.03)
+    brightness(.93)
+    saturate(.94);
+}
+
+/* =========================
+CARD
+========================= */
+
+.card{
+  position:relative;
+
+  background:rgba(5,18,32,.7);
+
+  border:1px solid rgba(131,207,255,.22);
+
+  box-shadow:
+    0 30px 90px rgba(0,0,0,.38),
+    inset 0 0 60px rgba(131,207,255,.04);
+
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+
+  overflow:hidden;
+}
+
+.card::after{
+  content:"";
+
+  position:absolute;
+  inset:0;
+
+  background:
+    linear-gradient(
+      110deg,
+      transparent,
+      rgba(255,255,255,.05),
+      transparent
+    );
+
+  transform:translateX(-120%);
+
+  animation:cardShimmer 11s ease-in-out infinite;
+
+  pointer-events:none;
+}
+
+.card-head{
+  position:relative;
+  z-index:2;
+
+  display:grid;
+  grid-template-columns:78px 1fr;
+
+  border-bottom:1px solid rgba(131,207,255,.18);
+}
+
+/* =========================
+GREEN SYMBOL
+========================= */
+
+.symbol{
+  position:relative;
+
+  min-height:88px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:var(--green);
+
+  border-right:1px solid rgba(255,255,255,.08);
+
+  font-family:var(--serif);
+  font-size:30px;
+
+  color:var(--green-light);
+}
+
+.symbol::before{
+  content:"29";
+
+  position:absolute;
+  top:8px;
+  left:8px;
+
+  font-family:var(--mono);
+  font-size:10px;
+
+  color:rgba(212,237,195,.72);
+}
+
+.symbol::after{
+  content:"";
+
+  position:absolute;
+  right:8px;
+  bottom:8px;
+
+  width:7px;
+  height:7px;
+
+  border:1px solid rgba(212,237,195,.46);
+}
+
+.head-text{
+  padding:22px 22px 18px;
+}
+
+.head-title{
+  margin-bottom:5px;
+
+  font-family:var(--serif);
+  font-size:24px;
+
+  color:var(--text);
+}
+
+.head-title span{
+  color:var(--blue);
+}
+
+.head-line{
+  font-size:12px;
+  line-height:1.55;
+
+  letter-spacing:.05em;
+
+  color:var(--muted);
+
+  text-transform:uppercase;
+}
+
+/* =========================
+INFO
+========================= */
+
+.info{
+  position:relative;
+  z-index:2;
+
+  padding:28px;
+}
+
+.info-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+
+  border-top:1px solid var(--line-strong);
+}
+
+.info-item{
+  padding:18px 0;
+
+  border-bottom:1px solid var(--line);
+}
+
+.info-item:nth-child(odd){
+  padding-right:24px;
+  border-right:1px solid var(--line);
+}
+
+.info-item:nth-child(even){
+  padding-left:24px;
+}
+
+.label{
+  display:block;
+
+  margin-bottom:8px;
+
+  font-size:11px;
+  letter-spacing:.22em;
+  line-height:1.4;
+
+  text-transform:uppercase;
+
+  color:var(--dim);
+}
+
+.value{
+  font-family:var(--serif);
+  font-size:27px;
+  line-height:1.1;
+
+  color:var(--text);
+}
+
+/* =========================
+BUTTON
+========================= */
+
+.measure-toggle{
+  margin-top:30px;
+
+  width:100%;
+
+  padding:20px 22px;
+
+  border:1px solid rgba(131,207,255,.34);
+
+  background:rgba(131,207,255,.08);
+
+  color:var(--text);
+
+  font-family:var(--mono);
+  font-size:12px;
+
+  letter-spacing:.2em;
+
+  text-transform:uppercase;
+
+  cursor:pointer;
+
+  position:relative;
+  overflow:hidden;
+
+  transition:.35s ease;
+}
+
+.measure-toggle::before{
+  content:"";
+
+  position:absolute;
+  inset:0;
+
+  background:
+    linear-gradient(
+      110deg,
+      transparent,
+      rgba(255,255,255,.12),
+      transparent
+    );
+
+  transform:translateX(-120%);
+
+  animation:buttonSweep 3.8s ease-in-out infinite;
+}
+
+.measure-toggle:hover{
+  transform:translateY(-2px);
+
+  background:rgba(131,207,255,.15);
+
+  border-color:rgba(131,207,255,.56);
+}
+
+.measure-toggle span{
+  position:relative;
+  z-index:2;
+}
+
+/* =========================
+PANEL
+========================= */
+
+.measure-panel{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+
+  gap:18px;
+
+  max-height:0;
+
+  opacity:0;
+  overflow:hidden;
+
+  transform:translateY(-8px);
+
+  transition:
+    max-height .7s ease,
+    opacity .45s ease,
+    transform .45s ease,
+    margin-top .45s ease;
+}
+
+.measure-panel.open{
+  max-height:900px;
+
+  opacity:1;
+
+  transform:translateY(0);
+
+  margin-top:24px;
+}
+
+.measure-box{
+  border:1px solid rgba(131,207,255,.22);
+
+  background:rgba(3,7,13,.24);
+
+  padding:22px;
+}
+
+.measure-box h3{
+  margin-bottom:16px;
+
+  font-family:var(--serif);
+  font-size:24px;
+  font-weight:400;
+
+  color:var(--text);
+}
+
+.measure-box h3 span{
+  color:var(--blue);
+}
+
+.measure-list{
+  display:grid;
+  gap:12px;
+}
+
+.measure-row{
+  display:flex;
+  justify-content:space-between;
+
+  gap:20px;
+
+  padding-bottom:9px;
+
+  border-bottom:1px solid rgba(131,207,255,.12);
+
+  font-size:13px;
+  line-height:1.5;
+}
+
+.measure-row em{
+  font-style:normal;
+  color:var(--muted);
+}
+
+.measure-row strong{
+  font-weight:400;
+  color:var(--text);
+  text-align:right;
+}
+
+/* =========================
+NOTES
+========================= */
+
+.note{
+  margin-top:22px;
+
+  color:var(--dim);
+
+  font-size:11px;
+  letter-spacing:.16em;
+  line-height:1.55;
+
+  text-transform:uppercase;
+}
+
+.future-note{.sedcard-download{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+
+  margin-top:24px;
+  padding:16px 20px;
+
+  border:1px solid rgba(131,207,255,.34);
+
+  background:rgba(131,207,255,.08);
+
+  color:var(--text);
+  text-decoration:none;
+
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.18em;
+  line-height:1.4;
+
+  text-transform:uppercase;
+
+  position:relative;
+  overflow:hidden;
+
+  transition:
+    transform .35s ease,
+    background .35s ease,
+    border-color .35s ease;
+
+  box-shadow:
+    0 10px 24px rgba(0,0,0,.18);
+}
+
+.sedcard-download::before{
+  content:"";
+
+  position:absolute;
+  inset:0;
+
+  background:
+    linear-gradient(
+      110deg,
+      transparent,
+      rgba(255,255,255,.12),
+      transparent
+    );
+
+  transform:translateX(-120%);
+
+  animation:buttonSweep 4s ease-in-out infinite;
+}
+
+.sedcard-download:hover{
+  transform:translateY(-2px);
+
+  background:rgba(131,207,255,.15);
+
+  border-color:rgba(131,207,255,.56);
+}
+  margin-top:14px;
+
+  font-size:11px;
+  line-height:1.7;
+
+  letter-spacing:.08em;
+
+  color:rgba(237,247,255,.44);
+
+  font-style:italic;
+}
+
+/* =========================
+ANIMATIONS
+========================= */
+
+@keyframes gridMove{
+
+  from{
+    background-position:
+      0 0,
+      0 0,
+      0 0,
+      0 0;
+  }
+
+  to{
+    background-position:
+      140px 140px,
+      140px 140px,
+      28px 28px,
+      28px 28px;
+  }
+}
+
+@keyframes scanMove{
+
+  0%{
+    transform:translateY(-34vh);
+  }
+
+  50%{
+    transform:translateY(108vh);
+  }
+
+  100%{
+    transform:translateY(-34vh);
+  }
+}
+
+@keyframes footFade{
+
+  0%,100%{
+    opacity:0;
+    transform:translateY(10px);
+  }
+
+  26%,52%{
+    opacity:.42;
+    transform:translateY(0);
+  }
+}
+
+@keyframes photoSweep{
+
+  0%,62%{
+    transform:translateX(-120%);
+    opacity:0;
+  }
+
+  74%{
+    opacity:.8;
+  }
+
+  100%{
+    transform:translateX(120%);
+    opacity:0;
+  }
+}
+
+@keyframes cardShimmer{
+
+  0%,64%{
+    transform:translateX(-120%);
+    opacity:0;
+  }
+
+  78%{
+    opacity:.7;
+  }
+
+  100%{
+    transform:translateX(120%);
+    opacity:0;
+  }
+}
+
+@keyframes buttonSweep{
+
+  0%,64%{
+    transform:translateX(-120%);
+  }
+
+  100%{
+    transform:translateX(120%);
+  }
+}
+
+/* =========================
+RESPONSIVE
+========================= */
+
+@media(max-width:980px){
+
+  body{
+    cursor:auto;
+  }
+
+  .cursor{
+    display:none;
+  }
+
+  .nav{
+    left:0;
+    right:auto;
+
+    padding:18px 20px;
+  }
+
+  .nav-links{
+    gap:16px;
+    padding:10px 14px;
+  }
+
+  .nav-links a{
+    font-size:9px;
+  }
+
+  .page{
+    padding:96px 22px 70px;
+  }
+
+  .shell{
+    grid-template-columns:1fr;
+    gap:42px;
+  }
+
+  .photo-inner img{
+    height:62vh;
+  }
+
+  .info-grid,
+  .measure-panel{
+    grid-template-columns:1fr;
+  }
+
+  .info-item,
+  .info-item:nth-child(odd),
+  .info-item:nth-child(even){
+
+    padding:17px 0;
+
+    border-right:0;
+    border-bottom:1px solid var(--line);
+  }
+}
+
+@media(max-width:560px){
+
+  .nav-links{
+    gap:12px;
+  }
+
+  .nav-links a{
+    font-size:8px;
+    letter-spacing:.12em;
+  }
+
+  .card-head{
+    grid-template-columns:64px 1fr;
+  }
+
+  .symbol{
+    min-height:78px;
+    font-size:26px;
+  }
+
+  .head-title{
+    font-size:22px;
+  }
+
+  .value{
+    font-size:24px;
+  }
+
+  .info{
+    padding:22px 18px;
+  }
+}
+</style>
+</head>
+
+<body>
+  <div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<div class="cursor"></div>
+
+<nav class="nav">
+
+  <div class="nav-links">
+    <a href="index.html">01 Landingpage</a>
+    <a href="blaupause-polaroids.html" class="active">02 Blaupause-Polaroids</a>
+    <a href="kontakt.html">03 Kontakt</a>
+  </div>
+
+</nav>
+
+<main class="page">
+
+  <div class="grid-bg"></div>
+  <div class="grid-overlay"></div>
+  <div class="scan-line"></div>
+  <div class="blueprint-noise"></div>
+
+  <div class="footprints">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <div class="shell">
+
+    <section class="photo-frame">
+
+      <div class="photo-inner">
+        <img src="images/pola1.jpeg" alt="Fabian Harmuth Blueprint Polaroid">
+      </div>
+
+    </section>
+
+    <section class="card">
+
+      <div class="card-head">
+
+        <div class="symbol">
+          FH
+        </div>
+
+        <div class="head-text">
+
+          <div class="head-title">
+            Blau<span>|</span>pause
+          </div>
+
+          <div class="head-line">
+            Model Dossier · Casting Sheet · Visual Reference
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="info">
+
+        <div class="info-grid">
+
+          <div class="info-item">
+            <span class="label">Name</span>
+            <span class="value">Harmuth</span>
+          </div>
+
+          <div class="info-item">
+            <span class="label">Vorname</span>
+            <span class="value">Fabian</span>
+          </div>
+
+          <div class="info-item">
+            <span class="label">Alter</span>
+            <span class="value">29</span>
+          </div>
+
+          <div class="info-item">
+            <span class="label">Wohnort</span>
+            <span class="value">Ulm</span>
+          </div>
+
+          <div class="info-item">
+            <span class="label">Größe</span>
+            <span class="value">1,78 m</span>
+          </div>
+
+          <div class="info-item">
+            <span class="label">Schuhgröße</span>
+            <span class="value">45</span>
+          </div>
+
+        </div>
+
+        <button class="measure-toggle" id="measureToggle">
+          <span>Konfektionsmaße einsehen</span>
+        </button>
+
+        <div class="measure-panel" id="measurePanel">
+
+          <div class="measure-box">
+
+            <h3>
+              Körper<span>|</span>maße
+            </h3>
+
+            <div class="measure-list">
+
+              <div class="measure-row">
+                <em>Kopf</em>
+                <strong>57 cm</strong>
+              </div>
+
+              <div class="measure-row">
+                <em>Hals / Kragen</em>
+                <strong>42 cm</strong>
+              </div>
+
+              <div class="measure-row">
+                <em>Brust</em>
+                <strong>104 cm</strong>
+              </div>
+
+              <div class="measure-row">
+                <em>Taille / Bauch</em>
+                <strong>94 cm</strong>
+              </div>
+
+              <div class="measure-row">
+                <em>Hüfte</em>
+                <strong>102 cm</strong>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="measure-box">
+
+            <h3>
+              Kleider<span>|</span>größen
+            </h3>
+
+            <div class="measure-list">
+
+              <div class="measure-row">
+                <em>Jacke</em>
+                <strong>L / 52</strong>
+              </div>
+
+              <div class="measure-row">
+                <em>Hemd</em>
+                <strong>40 / 41</strong>
+              </div>
+
+              <div class="measure-row">
+                <em>Pullover</em>
+                <strong>52 / L</strong>
+              </div>
+
+              <div class="measure-row">
+                <em>T-Shirt</em>
+                <strong>L</strong>
+              </div>
+
+              <div class="measure-row">
+                <em>Polohemden</em>
+                <strong>M</strong>
+              </div>
+
+              <div class="measure-row">
+                <em>Jeans</em>
+                <strong>W34 / L32</strong>
+              </div>
+
+              <div class="measure-row">
+                <em>Schuhgröße</em>
+                <strong>45</strong>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="note">
+          Interaktive Blaupause · Portfolio Referenz · Editorial Casting Dossier
+        </div>
+
+        <div class="future-note">
+          Weitere Polaroids und Referenzaufnahmen befinden sich derzeit in Ausarbeitung.
+        </div>
+<div class="future-note">
+  Weitere Polaroids und Referenzaufnahmen befinden sich derzeit in Ausarbeitung.
+</div>
+
+<a class="sedcard-download" href="Fabian%20Harmuth%20Sedcard.pdf" download>
+  Sedcard PDF herunterladen
+</a>
+    </section>
+
+  </div>
+
+</main>
+
+<script>
+const toggle = document.getElementById('measureToggle');
+const panel = document.getElementById('measurePanel');
+
+toggle.addEventListener('click', () => {
+
+  const isOpen = panel.classList.toggle('open');
+
+  toggle.querySelector('span').textContent = isOpen
+    ? 'Konfektionsmaße ausblenden'
+    : 'Konfektionsmaße einsehen';
+});
+
+/* =========================
+CURSOR
+========================= */
+
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+
+window.addEventListener('mousemove', e => {
+
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top = e.clientY + 'px';
+
+  ring.style.left = e.clientX + 'px';
+  ring.style.top = e.clientY + 'px';
+});
+
+document.querySelectorAll('a, button').forEach(el => {
+
+  el.addEventListener('mouseenter', () => {
+    ring.classList.add('active');
+  });
+
+  el.addEventListener('mouseleave', () => {
+    ring.classList.remove('active');
+  });
+
+});
+
+document.querySelectorAll('a, button').forEach(el => {
+
+  el.addEventListener('mouseenter', () => {
+    cursor.classList.add('hover');
+  });
+
+  el.addEventListener('mouseleave', () => {
+    cursor.classList.remove('hover');
+  });
+});
+</script>
