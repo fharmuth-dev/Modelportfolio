@@ -2,55 +2,6 @@
    03 · JAVASCRIPT — Custom Cursor ohne Hero-Wackeln
    ========================================================= */
 
-const cursor = document.getElementById('cursor');
-const ring = document.getElementById('cursor-ring');
-
-let mx = 0;
-let my = 0;
-let rx = 0;
-let ry = 0;
-
-document.addEventListener('mousemove', e => {
-  mx = e.clientX;
-  my = e.clientY;
-
-  cursor.style.left = mx + 'px';
-  cursor.style.top = my + 'px';
-});
-
-function animateCursor(){
-  rx += (mx - rx) * .09;
-  ry += (my - ry) * .09;
-
-  ring.style.left = rx + 'px';
-  ring.style.top = ry + 'px';
-
-  requestAnimationFrame(animateCursor);
-}
-
-animateCursor();
-
-document.querySelectorAll('a,button,.chem-entry,.card').forEach(el => {
-  el.addEventListener('mouseenter', () => {
-    cursor.style.width = '12px';
-    cursor.style.height = '12px';
-
-    ring.style.width = '42px';
-    ring.style.height = '42px';
-    ring.style.borderColor = 'rgba(192,122,73,.38)';
-  });
-
-  el.addEventListener('mouseleave', () => {
-    cursor.style.width = '6px';
-    cursor.style.height = '6px';
-
-    ring.style.width = '26px';
-    ring.style.height = '26px';
-    ring.style.borderColor = 'rgba(202,184,159,.2)';
-  });
-});
-
-
 /* 03.02 · Progressive Image Upgrade — Streetstyle Serie
    Wichtig: Lädt erst nach vollständigem Seitenaufbau.
    Sichtbar bleiben sofort best-05 bis best-08; danach werden After-01 bis After-04
