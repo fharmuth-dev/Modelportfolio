@@ -1,4 +1,4 @@
-<script>
+
 
 const toggle = document.getElementById('measureToggle');
 
@@ -100,4 +100,4 @@ document.querySelectorAll('a, button').forEach(el => {
 
 });
 
-</script>
+
