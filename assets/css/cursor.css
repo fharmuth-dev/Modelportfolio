@@ -1,1 +1,39 @@
+body{
+  cursor:none;
+}
 
+#cursor{
+  position:fixed;
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:var(--beige, #cab89f);
+  pointer-events:none;
+  z-index:9999;
+  transform:translate(-50%,-50%);
+  mix-blend-mode:difference;
+  opacity:.82;
+}
+
+#cursor-ring{
+  position:fixed;
+  width:26px;
+  height:26px;
+  border:1px solid rgba(202,184,159,.2);
+  border-radius:50%;
+  pointer-events:none;
+  z-index:9998;
+  transform:translate(-50%,-50%);
+  opacity:.58;
+}
+
+@media(max-width:980px){
+  body{
+    cursor:auto;
+  }
+
+  #cursor,
+  #cursor-ring{
+    display:none;
+  }
+}
