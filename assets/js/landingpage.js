@@ -49,7 +49,78 @@ window.addEventListener('load', () => {
     window.setTimeout(runQueue, 900);
   }
 });
+/* 03.03 · Off The Beaten Track Carousel */
+const offtrackCarousel = document.getElementById('offtrackCarousel');
+const offtrackCounter = document.getElementById('offtrackCounter');
 
+if(offtrackCarousel){
+  const slides = Array.from(offtrackCarousel.querySelectorAll('.offtrack-slide'));
+  const prevBtn = offtrackCarousel.querySelector('.offtrack-prev');
+  const nextBtn = offtrackCarousel.querySelector('.offtrack-next');
+
+  let currentIndex = 0;
+  let wheelLocked = false;
+
+  const formatNumber = number => String(number).padStart(2, '0');
+
+  const renderCarousel = () => {
+    const total = slides.length;
+
+    slides.forEach((slide, index) => {
+      slide.classList.remove('is-active', 'is-prev', 'is-next');
+
+      const prevIndex = (currentIndex - 1 + total) % total;
+      const nextIndex = (currentIndex + 1) % total;
+
+      if(index === currentIndex){
+        slide.classList.add('is-active');
+      }
+
+      if(index === prevIndex){
+        slide.classList.add('is-prev');
+      }
+
+      if(index === nextIndex){
+        slide.classList.add('is-next');
+      }
+    });
+
+    if(offtrackCounter){
+      offtrackCounter.textContent = `${formatNumber(currentIndex + 1)} / ${formatNumber(total)}`;
+    }
+  };
+
+  const goToSlide = direction => {
+    const total = slides.length;
+    currentIndex = (currentIndex + direction + total) % total;
+    renderCarousel();
+  };
+
+  if(prevBtn){
+    prevBtn.addEventListener('click', () => goToSlide(-1));
+  }
+
+  if(nextBtn){
+    nextBtn.addEventListener('click', () => goToSlide(1));
+  }
+
+  offtrackCarousel.addEventListener('wheel', event => {
+    event.preventDefault();
+
+    if(wheelLocked) return;
+
+    wheelLocked = true;
+
+    const direction = event.deltaY > 0 || event.deltaX > 0 ? 1 : -1;
+    goToSlide(direction);
+
+    window.setTimeout(() => {
+      wheelLocked = false;
+    }, 420);
+  }, {passive:false});
+
+  renderCarousel();
+}
 
 /* 03.02 · Legal Gate / Datenschutz / Impressum */
 const legalGate = document.getElementById('legalGate');
