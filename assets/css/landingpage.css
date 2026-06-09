@@ -959,7 +959,9 @@ a{color:inherit;text-decoration:none;}
 }
 
 .offtrack-slide.is-active:hover img{
-  transform:scale(1.075);
+  transform:scale(1.025);
+}
+
 }
 
 .offtrack-slide span{
