@@ -1516,3 +1516,129 @@ a{color:inherit;text-decoration:none;}
     font-size:clamp(42px,14vw,62px);
   }
 }
+/* Globaler Portfolio Bild-Viewer */
+body.viewer-open{
+  overflow:hidden;
+}
+
+.portfolio-viewer{
+  position:fixed;
+  inset:0;
+  z-index:9996;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:42px;
+  background:rgba(5,4,3,.94);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+}
+
+.portfolio-viewer.is-open{
+  display:flex;
+}
+
+.portfolio-viewer-stage{
+  position:relative;
+  width:min(92vw,980px);
+  height:min(88vh,760px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  background:#120d0a;
+  border:1px solid rgba(238,229,216,.12);
+  box-shadow:
+    0 45px 140px rgba(0,0,0,.78),
+    0 0 0 1px rgba(238,229,216,.08);
+  cursor:zoom-in;
+}
+
+.portfolio-viewer-stage.is-loupe{
+  cursor:none;
+}
+
+.portfolio-viewer img{
+  max-width:100%;
+  max-height:100%;
+  object-fit:contain;
+  transform:scale(var(--viewer-zoom, 1));
+  transition:
+    transform .18s ease,
+    opacity .45s ease;
+  user-select:none;
+  pointer-events:none;
+}
+
+.portfolio-viewer img.is-swapping{
+  opacity:.45;
+}
+
+.portfolio-viewer-loupe{
+  position:absolute;
+  width:180px;
+  height:180px;
+  border-radius:50%;
+  display:none;
+  pointer-events:none;
+  border:1px solid rgba(238,229,216,.28);
+  box-shadow:
+    0 20px 70px rgba(0,0,0,.62),
+    inset 0 0 0 1px rgba(255,255,255,.08);
+  background-repeat:no-repeat;
+  background-color:#120d0a;
+}
+
+.portfolio-viewer-stage.is-loupe .portfolio-viewer-loupe{
+  display:block;
+}
+
+.portfolio-viewer-close{
+  position:absolute;
+  top:24px;
+  right:28px;
+  width:52px;
+  height:52px;
+  border:1px solid rgba(238,229,216,.16);
+  background:rgba(18,14,11,.78);
+  color:var(--off);
+  font-size:34px;
+  line-height:1;
+  cursor:pointer;
+  z-index:2;
+}
+
+.portfolio-viewer-hint{
+  position:absolute;
+  left:42px;
+  bottom:26px;
+  font-size:10px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:rgba(238,229,216,.52);
+}
+
+@media(max-width:760px){
+  .portfolio-viewer{
+    padding:20px;
+  }
+
+  .portfolio-viewer-stage{
+    width:94vw;
+    height:82vh;
+  }
+
+  .portfolio-viewer-loupe{
+    width:140px;
+    height:140px;
+  }
+
+  .portfolio-viewer-close{
+    top:16px;
+    right:16px;
+  }
+
+  .portfolio-viewer-hint{
+    display:none;
+  }
+}
