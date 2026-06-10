@@ -1,11 +1,13 @@
 /* =========================================================
-   03 · JAVASCRIPT — Custom Cursor ohne Hero-Wackeln
+   03 · JAVASCRIPT — Landingpage
    ========================================================= */
 
-/* 03.02 · Progressive Image Upgrade — Streetstyle Serie
-   Wichtig: Lädt erst nach vollständigem Seitenaufbau.
-   Sichtbar bleiben sofort best-05 bis best-08; danach werden After-01 bis After-04
-   im Hintergrund geladen und erst nach vollständigem Laden ersetzt. */
+
+/* 03.01 · Progressive Image Upgrade
+   Low-Quality-Bilder werden sofort angezeigt.
+   High-Quality-Bilder aus data-after laden im Hintergrund
+   und ersetzen danach weich das sichtbare Bild. */
+
 window.addEventListener('load', () => {
   const upgradeImages = Array.from(document.querySelectorAll('.upgrade-img[data-after]'));
 
@@ -49,7 +51,10 @@ window.addEventListener('load', () => {
     window.setTimeout(runQueue, 900);
   }
 });
-/* 03.03 · Off The Beaten Track Carousel */
+
+
+/* 03.02 · Off The Beaten Track Carousel */
+
 const offtrackCarousel = document.getElementById('offtrackCarousel');
 const offtrackCounter = document.getElementById('offtrackCounter');
 
@@ -155,23 +160,33 @@ if(offtrackCarousel){
   renderCarousel();
 }
 
-/* 03.02 · Legal Gate / Datenschutz / Impressum */
+
+/* 03.03 · Legal Gate / Datenschutz / Impressum */
+
 const legalGate = document.getElementById('legalGate');
 const legalContent = document.getElementById('legalContent');
 
 if(legalGate && legalContent){
   legalGate.addEventListener('click', () => {
     const isVisible = legalContent.classList.toggle('visible');
+
     legalGate.setAttribute('aria-expanded', isVisible ? 'true' : 'false');
-    legalGate.querySelector('span').innerText = isVisible
-      ? 'Datenschutz & Impressum ausblenden'
-      : 'Datenschutz & Impressum einsehen';
+
+    const gateText = legalGate.querySelector('span');
+
+    if(gateText){
+      gateText.innerText = isVisible
+        ? 'Datenschutz & Impressum ausblenden'
+        : 'Datenschutz & Impressum einsehen';
+    }
   });
 }
 
 document.querySelectorAll('.legal-toggle').forEach(button => {
   button.addEventListener('click', () => {
     const target = document.getElementById(button.dataset.legal);
+
+    if(!target) return;
 
     document.querySelectorAll('.legal-panel').forEach(panel => {
       if(panel !== target){
@@ -202,7 +217,15 @@ if(imprintBtn && imprintContent && imprintAddress){
     imprintBtn.disabled = true;
   });
 }
-/* 03.04 · Globaler Portfolio Bild-Viewer */
+
+
+/* 03.04 · Globaler Portfolio Bild-Viewer
+   Doppelklick auf jedes Portfolio-Bild öffnet den Viewer.
+   Mausrad zoomt.
+   Mausbewegung verschiebt den Ausschnitt.
+   Gedrückte Maustaste aktiviert die Lupe.
+   ESC oder X schließt den Viewer. */
+
 const portfolioViewer = document.getElementById('portfolioViewer');
 const portfolioViewerStage = document.getElementById('portfolioViewerStage');
 const portfolioViewerImg = document.getElementById('portfolioViewerImg');
@@ -211,13 +234,27 @@ const portfolioViewerLoupe = document.getElementById('portfolioViewerLoupe');
 
 if(portfolioViewer && portfolioViewerStage && portfolioViewerImg){
   let viewerZoom = 1;
+  let panX = 0;
+  let panY = 0;
   let loupeActive = false;
-  let currentViewerImage = null;
   let currentHighSrc = null;
 
   const setViewerZoom = value => {
-    viewerZoom = Math.min(Math.max(value, 1), 3.5);
+    viewerZoom = Math.min(Math.max(value, 1), 3.8);
     portfolioViewerImg.style.setProperty('--viewer-zoom', viewerZoom);
+  };
+
+  const setViewerPan = (x, y) => {
+    panX = x;
+    panY = y;
+
+    portfolioViewerImg.style.setProperty('--viewer-pan-x', `${panX}px`);
+    portfolioViewerImg.style.setProperty('--viewer-pan-y', `${panY}px`);
+  };
+
+  const resetViewerTransform = () => {
+    setViewerZoom(1);
+    setViewerPan(0, 0);
   };
 
   const getBestImageSrc = img => {
@@ -228,13 +265,30 @@ if(portfolioViewer && portfolioViewerStage && portfolioViewerImg){
     return img.currentSrc || img.src;
   };
 
+  const updateViewerPanFromMouse = event => {
+    if(viewerZoom <= 1 || loupeActive) return;
+
+    const rect = portfolioViewerStage.getBoundingClientRect();
+
+    const relativeX = (event.clientX - rect.left) / rect.width - 0.5;
+    const relativeY = (event.clientY - rect.top) / rect.height - 0.5;
+
+    const maxPanX = rect.width * (viewerZoom - 1) * 0.42;
+    const maxPanY = rect.height * (viewerZoom - 1) * 0.42;
+
+    setViewerPan(
+      -relativeX * maxPanX,
+      -relativeY * maxPanY
+    );
+  };
+
   const openViewer = img => {
-    currentViewerImage = img;
     currentHighSrc = img.dataset.after || null;
 
-    setViewerZoom(1);
+    resetViewerTransform();
 
     portfolioViewerImg.src = getBestImageSrc(img);
+
     portfolioViewer.classList.add('is-open');
     portfolioViewer.setAttribute('aria-hidden', 'false');
     document.body.classList.add('viewer-open');
@@ -264,16 +318,17 @@ if(portfolioViewer && portfolioViewerStage && portfolioViewerImg){
 
     portfolioViewerStage.classList.remove('is-loupe');
     portfolioViewerImg.src = '';
-    currentViewerImage = null;
     currentHighSrc = null;
     loupeActive = false;
-    setViewerZoom(1);
+
+    resetViewerTransform();
   };
 
   document.querySelectorAll('.gallery img, .hero-image').forEach(img => {
     img.addEventListener('dblclick', event => {
       event.preventDefault();
       event.stopPropagation();
+
       openViewer(img);
     });
   });
@@ -281,9 +336,38 @@ if(portfolioViewer && portfolioViewerStage && portfolioViewerImg){
   portfolioViewerStage.addEventListener('wheel', event => {
     event.preventDefault();
 
-    const direction = event.deltaY < 0 ? .18 : -.18;
+    const direction = event.deltaY < 0 ? 0.18 : -0.18;
+
     setViewerZoom(viewerZoom + direction);
+
+    if(viewerZoom <= 1){
+      setViewerPan(0, 0);
+    }else{
+      updateViewerPanFromMouse(event);
+    }
   }, {passive:false});
+
+  portfolioViewerStage.addEventListener('mousemove', event => {
+    updateViewerPanFromMouse(event);
+
+    if(!portfolioViewerLoupe || !portfolioViewerStage.classList.contains('is-loupe')){
+      return;
+    }
+
+    const rect = portfolioViewerStage.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+
+    const src = currentHighSrc || portfolioViewerImg.src;
+    const loupeSize = window.innerWidth <= 760 ? 140 : 180;
+    const loupeZoom = Math.max(viewerZoom, 2.3);
+
+    portfolioViewerLoupe.style.left = `${x - loupeSize / 2}px`;
+    portfolioViewerLoupe.style.top = `${y - loupeSize / 2}px`;
+    portfolioViewerLoupe.style.backgroundImage = `url("${src}")`;
+    portfolioViewerLoupe.style.backgroundSize = `${rect.width * loupeZoom}px ${rect.height * loupeZoom}px`;
+    portfolioViewerLoupe.style.backgroundPosition = `${-(x * loupeZoom - loupeSize / 2)}px ${-(y * loupeZoom - loupeSize / 2)}px`;
+  });
 
   portfolioViewerStage.addEventListener('mousedown', event => {
     event.preventDefault();
@@ -297,24 +381,6 @@ if(portfolioViewer && portfolioViewerStage && portfolioViewerImg){
 
     loupeActive = false;
     portfolioViewerStage.classList.remove('is-loupe');
-  });
-
-  portfolioViewerStage.addEventListener('mousemove', event => {
-    if(!portfolioViewerLoupe || !portfolioViewerStage.classList.contains('is-loupe')) return;
-
-    const rect = portfolioViewerStage.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
-
-    const src = currentHighSrc || portfolioViewerImg.src;
-    const loupeSize = 180;
-    const loupeZoom = Math.max(viewerZoom, 2.2);
-
-    portfolioViewerLoupe.style.left = `${x - loupeSize / 2}px`;
-    portfolioViewerLoupe.style.top = `${y - loupeSize / 2}px`;
-    portfolioViewerLoupe.style.backgroundImage = `url("${src}")`;
-    portfolioViewerLoupe.style.backgroundSize = `${rect.width * loupeZoom}px ${rect.height * loupeZoom}px`;
-    portfolioViewerLoupe.style.backgroundPosition = `${-(x * loupeZoom - loupeSize / 2)}px ${-(y * loupeZoom - loupeSize / 2)}px`;
   });
 
   portfolioViewer.addEventListener('click', event => {
