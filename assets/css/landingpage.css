@@ -842,28 +842,38 @@ a{color:inherit;text-decoration:none;}
 /* 02.09 · Serie 5: Off The Beaten Track */
 .offtrack-gallery{
   background:
-    radial-gradient(circle at 18% 28%, rgba(153,87,50,.18), transparent 32%),
-    radial-gradient(circle at 78% 76%, rgba(31,59,45,.34), transparent 36%),
-    linear-gradient(180deg,#100b08 0%,#221711 44%,#0d0907 100%);
-  color:var(--text);
+    radial-gradient(circle at 20% 25%, rgba(184,154,116,.18), transparent 34%),
+    radial-gradient(circle at 80% 72%, rgba(118,130,136,.12), transparent 36%),
+    linear-gradient(
+      180deg,
+      #f5f2ec 0%,
+      #ece7de 52%,
+      #e3ddd3 100%
+    );
+
+  color:#1d1713;
+}
 }
 
 .offtrack-gallery .gallery-top{
   border-top:1px solid rgba(238,229,216,.1);
 }
 
-.offtrack-gallery .gallery-top h2{
-  color:var(--off);
+..offtrack-gallery .gallery-top h2{
+  color:#17110d;
+}
 }
 
 .offtrack-gallery .gallery-chem{
-  background:rgba(34,27,21,.72);
-  border:1px solid rgba(238,229,216,.08);
+  background:rgba(255,255,255,.52);
+  border:1px solid rgba(0,0,0,.08);
+  backdrop-filter:blur(8px);
 }
-
+}
 .offtrack-gallery .gallery-chem::before{
   content:"OFF TRACK INDEX";
-  color:rgba(238,229,216,.28);
+  color:rgba(0,0,0,.24);
+}
 }
 
 .offtrack-gallery .gallery-chem-title{
@@ -873,13 +883,14 @@ a{color:inherit;text-decoration:none;}
 .offtrack-gallery .gallery-chem-title span{
   color:var(--accent-light);
 }
-
 .offtrack-gallery .gallery-chem-line{
-  color:rgba(238,229,216,.72);
+  color:rgba(20,18,16,.72);
+}
 }
 
 .offtrack-gallery .location-line{
-  color:rgba(238,229,216,.56);
+  color:rgba(20,18,16,.52);
+}
 }
 
 .offtrack-gallery .ink-splatter{
