@@ -1163,47 +1163,47 @@ a{color:inherit;text-decoration:none;}
   line-height:1;
   cursor:pointer;
 }
-/* 03.04 · Offtrack Lightbox */
-const imageLightbox = document.getElementById('imageLightbox');
-const imageLightboxImg = document.getElementById('imageLightboxImg');
-const imageLightboxClose = document.querySelector('.image-lightbox-close');
+.photo-viewer{
+  position:fixed;
+  inset:0;
+  z-index:9996;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:42px;
+  background:rgba(5,4,3,.92);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+}
 
-if(imageLightbox && imageLightboxImg){
-  document.querySelectorAll('.offtrack-slide img').forEach(img => {
-    img.addEventListener('click', event => {
-      event.stopPropagation();
+.photo-viewer.is-open{
+  display:flex;
+}
 
-      const largeSrc = img.dataset.upgraded === 'true' && img.dataset.after
-        ? img.dataset.after
-        : img.src;
+.photo-viewer img{
+  width:auto;
+  height:auto;
+  max-width:min(92vw,900px);
+  max-height:92vh;
+  object-fit:contain;
+  background:#120d0a;
+  box-shadow:
+    0 45px 140px rgba(0,0,0,.78),
+    0 0 0 1px rgba(238,229,216,.12);
+}
 
-      imageLightboxImg.src = largeSrc;
-      imageLightbox.classList.add('is-open');
-      imageLightbox.setAttribute('aria-hidden', 'false');
-    });
-  });
-
-  const closeLightbox = () => {
-    imageLightbox.classList.remove('is-open');
-    imageLightbox.setAttribute('aria-hidden', 'true');
-    imageLightboxImg.src = '';
-  };
-
-  imageLightbox.addEventListener('click', event => {
-    if(event.target === imageLightbox){
-      closeLightbox();
-    }
-  });
-
-  if(imageLightboxClose){
-    imageLightboxClose.addEventListener('click', closeLightbox);
-  }
-
-  document.addEventListener('keydown', event => {
-    if(event.key === 'Escape' && imageLightbox.classList.contains('is-open')){
-      closeLightbox();
-    }
-  });
+.photo-viewer-close{
+  position:absolute;
+  top:24px;
+  right:28px;
+  width:50px;
+  height:50px;
+  border:1px solid rgba(238,229,216,.16);
+  background:rgba(18,14,11,.78);
+  color:var(--off);
+  font-size:34px;
+  line-height:1;
+  cursor:pointer;
 }
 /* 02.10 · Legal Gate / Datenschutz / Impressum */
 .legal-footer{
