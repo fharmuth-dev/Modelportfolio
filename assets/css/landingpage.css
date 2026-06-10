@@ -1126,7 +1126,43 @@ a{color:inherit;text-decoration:none;}
     opacity:.26;
   }
 }
+.image-lightbox{
+  position:fixed;
+  inset:0;
+  z-index:9997;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:32px;
+  background:rgba(5,4,3,.92);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+}
 
+.image-lightbox.is-open{
+  display:flex;
+}
+
+.image-lightbox img{
+  max-width:96vw;
+  max-height:92vh;
+  object-fit:contain;
+  box-shadow:0 40px 120px rgba(0,0,0,.72);
+}
+
+.image-lightbox-close{
+  position:absolute;
+  top:24px;
+  right:28px;
+  width:48px;
+  height:48px;
+  border:1px solid rgba(238,229,216,.18);
+  background:rgba(18,14,11,.72);
+  color:var(--off);
+  font-size:34px;
+  line-height:1;
+  cursor:pointer;
+}
 /* 02.10 · Legal Gate / Datenschutz / Impressum */
 .legal-footer{
   position:relative;
