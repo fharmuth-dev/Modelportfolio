@@ -838,7 +838,7 @@ a{color:inherit;text-decoration:none;}
   to{opacity:1;transform:translateY(0);}
 }
 
-
+/* 02.09 · Serie 5: Off The Beaten Track */
 /* 02.09 · Serie 5: Off The Beaten Track */
 .offtrack-gallery{
   background:linear-gradient(180deg,var(--gallery) 0%,var(--gallery2) 40%,#c0ab92 100%);
@@ -890,11 +890,9 @@ a{color:inherit;text-decoration:none;}
   position:relative;
   min-height:760px;
   overflow:hidden;
-  border:1px solid rgba(23,20,17,.12);
-  background:
-    radial-gradient(circle at 50% 52%, rgba(153,87,50,.11), transparent 44%),
-    rgba(255,255,255,.16);
-  box-shadow:0 30px 90px rgba(23,20,17,.18);
+  border:none;
+  background:transparent;
+  box-shadow:none;
 }
 
 .offtrack-stage{
