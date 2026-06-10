@@ -60,6 +60,8 @@ if(offtrackCarousel){
 
   let currentIndex = 0;
   let wheelLocked = false;
+  let carouselHover = false;
+  let isExpanded = false;
 
   const formatNumber = number => String(number).padStart(2, '0');
 
@@ -90,9 +92,15 @@ if(offtrackCarousel){
     }
   };
 
+  const closeExpandedImage = () => {
+    isExpanded = false;
+    offtrackCarousel.classList.remove('is-expanded');
+  };
+
   const goToSlide = direction => {
     const total = slides.length;
     currentIndex = (currentIndex + direction + total) % total;
+    closeExpandedImage();
     renderCarousel();
   };
 
@@ -104,7 +112,18 @@ if(offtrackCarousel){
     nextBtn.addEventListener('click', () => goToSlide(1));
   }
 
+  offtrackCarousel.addEventListener('mouseenter', () => {
+    carouselHover = true;
+  });
+
+  offtrackCarousel.addEventListener('mouseleave', () => {
+    carouselHover = false;
+    wheelLocked = false;
+  });
+
   offtrackCarousel.addEventListener('wheel', event => {
+    if(!carouselHover) return;
+
     event.preventDefault();
 
     if(wheelLocked) return;
@@ -116,8 +135,22 @@ if(offtrackCarousel){
 
     window.setTimeout(() => {
       wheelLocked = false;
-    }, 420);
+    }, 360);
   }, {passive:false});
+
+  slides.forEach((slide, index) => {
+    slide.addEventListener('click', () => {
+      if(index !== currentIndex){
+        currentIndex = index;
+        closeExpandedImage();
+        renderCarousel();
+        return;
+      }
+
+      isExpanded = !isExpanded;
+      offtrackCarousel.classList.toggle('is-expanded', isExpanded);
+    });
+  });
 
   renderCarousel();
 }
