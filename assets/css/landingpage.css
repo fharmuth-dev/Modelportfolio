@@ -841,72 +841,60 @@ a{color:inherit;text-decoration:none;}
 
 /* 02.09 · Serie 5: Off The Beaten Track */
 .offtrack-gallery{
-  background:
-    radial-gradient(circle at 20% 25%, rgba(184,154,116,.18), transparent 34%),
-    radial-gradient(circle at 80% 72%, rgba(118,130,136,.12), transparent 36%),
-    linear-gradient(
-      180deg,
-      #f5f2ec 0%,
-      #ece7de 52%,
-      #e3ddd3 100%
-    );
-
-  color:#1d1713;
-}
+  background:linear-gradient(180deg,var(--gallery) 0%,var(--gallery2) 40%,#c0ab92 100%);
+  color:#171411;
 }
 
 .offtrack-gallery .gallery-top{
-  border-top:1px solid rgba(238,229,216,.1);
+  border-top:1px solid rgba(23,20,17,.12);
 }
 
-..offtrack-gallery .gallery-top h2{
-  color:#17110d;
-}
+.offtrack-gallery .gallery-top h2{
+  color:#171411;
 }
 
 .offtrack-gallery .gallery-chem{
-  background:rgba(255,255,255,.52);
-  border:1px solid rgba(0,0,0,.08);
-  backdrop-filter:blur(8px);
+  background:rgba(255,255,255,.18);
+  border:1px solid rgba(23,20,17,.1);
+  backdrop-filter:blur(4px);
+  -webkit-backdrop-filter:blur(4px);
 }
-}
+
 .offtrack-gallery .gallery-chem::before{
   content:"OFF TRACK INDEX";
-  color:rgba(0,0,0,.24);
-}
+  color:rgba(23,20,17,.42);
 }
 
 .offtrack-gallery .gallery-chem-title{
-  color:var(--off);
+  color:#171411;
 }
 
 .offtrack-gallery .gallery-chem-title span{
-  color:var(--accent-light);
+  color:var(--accent);
 }
+
 .offtrack-gallery .gallery-chem-line{
-  color:rgba(20,18,16,.72);
-}
+  color:rgba(23,20,17,.68);
 }
 
 .offtrack-gallery .location-line{
-  color:rgba(20,18,16,.52);
-}
+  color:rgba(23,20,17,.42);
 }
 
 .offtrack-gallery .ink-splatter{
-  filter:invert(1);
-  opacity:.18;
+  filter:none;
+  opacity:1;
 }
 
 .offtrack-carousel{
   position:relative;
   min-height:760px;
   overflow:hidden;
-  border:1px solid rgba(238,229,216,.08);
+  border:1px solid rgba(23,20,17,.12);
   background:
-    radial-gradient(circle at 50% 52%, rgba(192,122,73,.14), transparent 44%),
-    rgba(14,10,8,.64);
-  box-shadow:0 36px 110px rgba(0,0,0,.42);
+    radial-gradient(circle at 50% 52%, rgba(153,87,50,.11), transparent 44%),
+    rgba(255,255,255,.16);
+  box-shadow:0 30px 90px rgba(23,20,17,.18);
 }
 
 .offtrack-stage{
@@ -928,10 +916,10 @@ a{color:inherit;text-decoration:none;}
     opacity .55s ease,
     filter .55s ease;
   pointer-events:none;
-  filter:grayscale(.55) brightness(.66) contrast(1.08);
-  border:1px solid rgba(238,229,216,.08);
-  box-shadow:0 28px 85px rgba(0,0,0,.48);
-  background:#120d0a;
+  filter:grayscale(.55) brightness(.78) contrast(1.08);
+  border:1px solid rgba(23,20,17,.12);
+  box-shadow:0 28px 85px rgba(23,20,17,.24);
+  background:#b7a891;
   overflow:hidden;
 }
 
@@ -940,7 +928,7 @@ a{color:inherit;text-decoration:none;}
   opacity:1;
   transform:translate(-50%,-50%) scale(1);
   pointer-events:auto;
-  filter:grayscale(.08) brightness(.96) contrast(1.05);
+  filter:grayscale(.08) brightness(.98) contrast(1.05);
 }
 
 .offtrack-slide.is-prev{
@@ -976,7 +964,7 @@ a{color:inherit;text-decoration:none;}
   height:100%;
   object-fit:contain;
   object-position:center;
-  background:#120d0a;
+  background:#b7a891;
   transform:scale(1);
   transition:
     transform 1.2s ease,
@@ -996,7 +984,7 @@ a{color:inherit;text-decoration:none;}
   font-size:10px;
   letter-spacing:.2em;
   text-transform:uppercase;
-  color:rgba(255,255,255,.82);
+  color:rgba(255,255,255,.86);
   text-shadow:0 2px 12px rgba(0,0,0,.72);
 }
 
@@ -1006,9 +994,9 @@ a{color:inherit;text-decoration:none;}
   z-index:9;
   width:58px;
   height:58px;
-  border:1px solid rgba(238,229,216,.12);
-  background:rgba(18,14,11,.72);
-  color:var(--off);
+  border:1px solid rgba(23,20,17,.14);
+  background:rgba(255,255,255,.26);
+  color:#171411;
   font-family:var(--serif);
   font-size:44px;
   line-height:1;
@@ -1017,6 +1005,8 @@ a{color:inherit;text-decoration:none;}
   justify-content:center;
   cursor:pointer;
   transform:translateY(-50%);
+  backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);
   transition:
     background .3s ease,
     border-color .3s ease,
@@ -1025,7 +1015,8 @@ a{color:inherit;text-decoration:none;}
 
 .offtrack-control:hover{
   background:rgba(31,59,45,.72);
-  border-color:rgba(215,235,199,.36);
+  color:var(--green-light);
+  border-color:rgba(31,59,45,.42);
   transform:translateY(-50%) scale(1.04);
 }
 
@@ -1049,16 +1040,14 @@ a{color:inherit;text-decoration:none;}
   font-size:11px;
   letter-spacing:.18em;
   text-transform:uppercase;
-  color:rgba(238,229,216,.58);
+  color:rgba(23,20,17,.58);
 }
 
 .offtrack-credit{
   margin-top:0;
   text-align:right;
-  color:rgba(238,229,216,.58);
+  color:rgba(23,20,17,.58);
 }
-
-
 
 @media(max-width:980px){
   .offtrack-carousel{
@@ -1109,7 +1098,6 @@ a{color:inherit;text-decoration:none;}
   .offtrack-credit{
     text-align:left;
   }
-
 }
 
 @media(max-width:560px){
@@ -1135,6 +1123,7 @@ a{color:inherit;text-decoration:none;}
   .offtrack-slide.is-next{
     opacity:.26;
   }
+}
 
 }
 /* =========================================================
