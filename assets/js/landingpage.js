@@ -202,3 +202,134 @@ if(imprintBtn && imprintContent && imprintAddress){
     imprintBtn.disabled = true;
   });
 }
+/* 03.04 · Globaler Portfolio Bild-Viewer */
+const portfolioViewer = document.getElementById('portfolioViewer');
+const portfolioViewerStage = document.getElementById('portfolioViewerStage');
+const portfolioViewerImg = document.getElementById('portfolioViewerImg');
+const portfolioViewerClose = document.getElementById('portfolioViewerClose');
+const portfolioViewerLoupe = document.getElementById('portfolioViewerLoupe');
+
+if(portfolioViewer && portfolioViewerStage && portfolioViewerImg){
+  let viewerZoom = 1;
+  let loupeActive = false;
+  let currentViewerImage = null;
+  let currentHighSrc = null;
+
+  const setViewerZoom = value => {
+    viewerZoom = Math.min(Math.max(value, 1), 3.5);
+    portfolioViewerImg.style.setProperty('--viewer-zoom', viewerZoom);
+  };
+
+  const getBestImageSrc = img => {
+    if(img.dataset.upgraded === 'true' && img.dataset.after){
+      return img.dataset.after;
+    }
+
+    return img.currentSrc || img.src;
+  };
+
+  const openViewer = img => {
+    currentViewerImage = img;
+    currentHighSrc = img.dataset.after || null;
+
+    setViewerZoom(1);
+
+    portfolioViewerImg.src = getBestImageSrc(img);
+    portfolioViewer.classList.add('is-open');
+    portfolioViewer.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('viewer-open');
+
+    if(currentHighSrc && portfolioViewerImg.src !== currentHighSrc){
+      const highImage = new Image();
+
+      highImage.onload = () => {
+        if(!portfolioViewer.classList.contains('is-open')) return;
+
+        portfolioViewerImg.classList.add('is-swapping');
+
+        window.setTimeout(() => {
+          portfolioViewerImg.src = currentHighSrc;
+          portfolioViewerImg.classList.remove('is-swapping');
+        }, 160);
+      };
+
+      highImage.src = currentHighSrc;
+    }
+  };
+
+  const closeViewer = () => {
+    portfolioViewer.classList.remove('is-open');
+    portfolioViewer.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('viewer-open');
+
+    portfolioViewerStage.classList.remove('is-loupe');
+    portfolioViewerImg.src = '';
+    currentViewerImage = null;
+    currentHighSrc = null;
+    loupeActive = false;
+    setViewerZoom(1);
+  };
+
+  document.querySelectorAll('.gallery img, .hero-image').forEach(img => {
+    img.addEventListener('dblclick', event => {
+      event.preventDefault();
+      event.stopPropagation();
+      openViewer(img);
+    });
+  });
+
+  portfolioViewerStage.addEventListener('wheel', event => {
+    event.preventDefault();
+
+    const direction = event.deltaY < 0 ? .18 : -.18;
+    setViewerZoom(viewerZoom + direction);
+  }, {passive:false});
+
+  portfolioViewerStage.addEventListener('mousedown', event => {
+    event.preventDefault();
+
+    loupeActive = true;
+    portfolioViewerStage.classList.add('is-loupe');
+  });
+
+  document.addEventListener('mouseup', () => {
+    if(!loupeActive) return;
+
+    loupeActive = false;
+    portfolioViewerStage.classList.remove('is-loupe');
+  });
+
+  portfolioViewerStage.addEventListener('mousemove', event => {
+    if(!portfolioViewerLoupe || !portfolioViewerStage.classList.contains('is-loupe')) return;
+
+    const rect = portfolioViewerStage.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+
+    const src = currentHighSrc || portfolioViewerImg.src;
+    const loupeSize = 180;
+    const loupeZoom = Math.max(viewerZoom, 2.2);
+
+    portfolioViewerLoupe.style.left = `${x - loupeSize / 2}px`;
+    portfolioViewerLoupe.style.top = `${y - loupeSize / 2}px`;
+    portfolioViewerLoupe.style.backgroundImage = `url("${src}")`;
+    portfolioViewerLoupe.style.backgroundSize = `${rect.width * loupeZoom}px ${rect.height * loupeZoom}px`;
+    portfolioViewerLoupe.style.backgroundPosition = `${-(x * loupeZoom - loupeSize / 2)}px ${-(y * loupeZoom - loupeSize / 2)}px`;
+  });
+
+  portfolioViewer.addEventListener('click', event => {
+    if(event.target === portfolioViewer){
+      closeViewer();
+    }
+  });
+
+  if(portfolioViewerClose){
+    portfolioViewerClose.addEventListener('click', closeViewer);
+  }
+
+  document.addEventListener('keydown', event => {
+    if(event.key === 'Escape' && portfolioViewer.classList.contains('is-open')){
+      closeViewer();
+    }
+  });
+}
