@@ -1166,10 +1166,9 @@ a{color:inherit;text-decoration:none;}
     transparent
   );
 }
-
 .legal-gate{
   position:relative;
-  min-width:min(100%,420px);
+  width:min(100%,560px);
   padding:18px 26px;
   border:1px solid rgba(238,229,216,.11);
   background:rgba(18,14,11,.78);
@@ -1187,6 +1186,7 @@ a{color:inherit;text-decoration:none;}
     border-color .35s ease,
     background .35s ease,
     box-shadow .35s ease;
+
 }
 
 .legal-gate:hover{
