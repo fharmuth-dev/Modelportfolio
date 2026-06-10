@@ -154,50 +154,7 @@ if(offtrackCarousel){
 
   renderCarousel();
 }
-/* 03.04 · Offtrack großes Bild per Doppelklick */
-const photoViewer = document.getElementById('photoViewer');
-const photoViewerImg = document.getElementById('photoViewerImg');
-const photoViewerClose = document.getElementById('photoViewerClose');
 
-if(photoViewer && photoViewerImg){
-  const openPhotoViewer = img => {
-    const highQualitySrc = img.dataset.after || img.src;
-
-    photoViewerImg.src = highQualitySrc;
-    photoViewer.classList.add('is-open');
-    photoViewer.setAttribute('aria-hidden', 'false');
-  };
-
-  const closePhotoViewer = () => {
-    photoViewer.classList.remove('is-open');
-    photoViewer.setAttribute('aria-hidden', 'true');
-    photoViewerImg.src = '';
-  };
-
-  document.querySelectorAll('.offtrack-slide img').forEach(img => {
-    img.addEventListener('dblclick', event => {
-      event.preventDefault();
-      event.stopPropagation();
-      openPhotoViewer(img);
-    });
-  });
-
-  if(photoViewerClose){
-    photoViewerClose.addEventListener('click', closePhotoViewer);
-  }
-
-  photoViewer.addEventListener('click', event => {
-    if(event.target === photoViewer){
-      closePhotoViewer();
-    }
-  });
-
-  document.addEventListener('keydown', event => {
-    if(event.key === 'Escape' && photoViewer.classList.contains('is-open')){
-      closePhotoViewer();
-    }
-  });
-}
 /* 03.02 · Legal Gate / Datenschutz / Impressum */
 const legalGate = document.getElementById('legalGate');
 const legalContent = document.getElementById('legalContent');
