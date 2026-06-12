@@ -282,8 +282,3 @@ if(polaViewer && polaViewerStage && polaViewerImg){
     }
   });
 }
-
-
-
-
-
