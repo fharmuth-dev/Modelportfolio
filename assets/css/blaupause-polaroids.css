@@ -576,12 +576,11 @@ button{
 }
 
 .pola-controls{
-  position:absolute;
-  right:0;
-  bottom:18px;
-  display:flex;
-  gap:10px;
-  z-index:12;
+  right:auto;
+  transform:none;
+  margin-top:-12px;
+  margin-bottom:24px;
+
 }
 
 .pola-controls button{
@@ -935,14 +934,15 @@ body.viewer-open{
     height:500px;
   }
 
-  .pola-controls{
-    position:relative;
-    right:auto;
-    bottom:auto;
-    justify-content:center;
-    order:3;
-    margin-top:6px;
-  }
+.pola-controls{
+  position:relative;
+  right:auto;
+  bottom:auto;
+  justify-content:center;
+  order:2;
+  margin-top:-18px;
+  margin-bottom:26px;
+}
 
   .measure-grid{
     grid-template-columns:1fr;
