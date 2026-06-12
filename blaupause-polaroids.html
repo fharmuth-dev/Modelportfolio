@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -5,224 +6,299 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
 <title>Blaupause-Polaroids — Fabian Harmuth</title>
+<meta name="description" content="Polaroids, Maße und Casting-Referenzen von Fabian Harmuth — Male Model aus Ulm."/>
 
 <link rel="stylesheet" href="assets/css/blaupause-polaroids.css">
-  <link rel="stylesheet" href="assets/css/cursor.css">
+<link rel="stylesheet" href="assets/css/cursor.css">
 </head>
 
 <body>
-  <div id="cursor"></div>
+
+<div id="cursor"></div>
 <div id="cursor-ring"></div>
 
-<div class="cursor"></div>
+<div class="page-noise"></div>
+<div class="soft-orbit orbit-one"></div>
+<div class="soft-orbit orbit-two"></div>
 
 <nav class="nav">
-
   <div class="nav-links">
     <a href="index.html">01 Landingpage</a>
     <a href="blaupause-polaroids.html" class="active">02 Blaupause-Polaroids</a>
     <a href="kontakt.html">03 Kontakt</a>
     <a href="legal.html">Legal</a>
   </div>
-
 </nav>
 
-<main class="page">
+<main class="pola-page">
 
-  <div class="grid-bg"></div>
-  <div class="grid-overlay"></div>
-  <div class="scan-line"></div>
-  <div class="blueprint-noise"></div>
+  <section class="pola-hero">
 
-  <div class="footprints">
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
+    <div class="hero-copy">
+      <div class="kicker">Agency Digitals · Polaroid Reference · Ulm</div>
 
-  <div class="shell">
+      <h1 class="pola-title">
+        Pola
+        <span>Index</span>
+      </h1>
 
-    <section class="photo-frame">
+      <p class="pola-intro">
+        Reduzierte Model-Referenzen mit Fokus auf Proportion,
+        Präsenz, Gesicht und natürlicher Wirkung. Kein Editorial-Ersatz,
+        sondern ein klarer Casting-Blick auf Form, Haltung und Ausdruck. (Reminder- alle zu sehenden Bilder stammen aus einer reinen Hobby Produktion)
+      </p>
 
-      <div class="photo-inner">
-        <img src="images/pola1.jpeg" alt="Fabian Harmuth Blueprint Polaroid">
+      <div class="hero-tags">
+        <span>Natural Light</span>
+        <span>Digitals</span>
+        <span>Agency View</span>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-polaroid">
+        <img
+          src="images/pola-01.jpg"
+          data-after="images/after-01.jpg"
+          alt="Fabian Harmuth Polaroid Hero"
+          class="pola-upgrade hero-pola-img"
+          loading="eager">
       </div>
 
-    </section>
+      <div class="hero-stamp">
+        <strong>01</strong>
+        <span>Primary<br>Reference</span>
+      </div>
+    </div>
 
-    <section class="card">
+  </section>
 
-      <div class="card-head">
+  <section class="agency-strip" aria-label="Model Basisdaten">
 
-        <div class="symbol">
-          FH
+    <div class="strip-item">
+      <span>Name</span>
+      <strong>Fabian Harmuth</strong>
+    </div>
+
+    <div class="strip-item">
+      <span>Wohnort</span>
+      <strong>Ulm</strong>
+    </div>
+
+    <div class="strip-item">
+      <span>Alter</span>
+      <strong>29</strong>
+    </div>
+
+    <div class="strip-item">
+      <span>Größe</span>
+      <strong>1,78 m</strong>
+    </div>
+
+    <div class="strip-item">
+      <span>Schuhgröße</span>
+      <strong>45</strong>
+    </div>
+
+  </section>
+
+  <section class="pola-lab">
+
+    <div class="lab-head">
+      <div>
+        <div class="kicker dark">Visual Set · Six Frames</div>
+        <h2>Agency<br>Preview</h2>
+      </div>
+
+      <p>
+        Die kleinen Polas laden sofort. Die hochauflösenden After-Dateien
+        werden im Hintergrund weich nachgeladen. Doppelklick öffnet das Bild groß.
+      </p>
+    </div>
+
+    <div class="pola-showcase" id="polaShowcase">
+
+      <aside class="pola-inspector">
+        <div class="inspector-symbol">FH</div>
+
+        <div class="inspector-title">
+          Frame <span id="activeFrameNumber">01</span>
         </div>
 
-        <div class="head-text">
-
-          <div class="head-title">
-            Blau<span>|</span>pause
-          </div>
-
-          <div class="head-line">
-            Model Dossier · Casting Sheet · Visual Reference
-          </div>
-
+        <div class="inspector-text" id="activeFrameText">
+          Frontale Referenz · ruhiger Ausdruck · natürliche Proportion.
         </div>
+
+        <div class="inspector-line"></div>
+
+        <div class="inspector-note">
+          Scroll oder Klick wechselt den aktiven Frame.
+        </div>
+      </aside>
+
+      <div class="pola-stack">
+
+        <article class="pola-card is-active" data-frame="01" data-note="Frontale Referenz · ruhiger Ausdruck · natürliche Proportion.">
+          <img src="images/pola-01.jpg" data-after="images/after-01.jpg" alt="Pola 01 Fabian Harmuth" class="pola-upgrade" loading="lazy">
+          <span>Frame 01</span>
+        </article>
+
+        <article class="pola-card is-next" data-frame="02" data-note="Körperhaltung · gerade Linie · klare Silhouette.">
+          <img src="images/pola-02.jpg" data-after="images/after-02.jpg" alt="Pola 02 Fabian Harmuth" class="pola-upgrade" loading="lazy">
+          <span>Frame 02</span>
+        </article>
+
+        <article class="pola-card" data-frame="03" data-note="Profilwirkung · Kontur · Gesichtslinie und Schulterform.">
+          <img src="images/pola-03.jpg" data-after="images/after-03.jpg" alt="Pola 03 Fabian Harmuth" class="pola-upgrade" loading="lazy">
+          <span>Frame 03</span>
+        </article>
+
+        <article class="pola-card" data-frame="04" data-note="Halbprofil · weicher Ausdruck · natürliche Präsenz.">
+          <img src="images/pola-04.jpg" data-after="images/after-04.jpg" alt="Pola 04 Fabian Harmuth" class="pola-upgrade" loading="lazy">
+          <span>Frame 04</span>
+        </article>
+
+        <article class="pola-card" data-frame="05" data-note="Full-body Eindruck · Proportion und Stand.">
+          <img src="images/pola-05.jpg" data-after="images/after-05.jpg" alt="Pola 05 Fabian Harmuth" class="pola-upgrade" loading="lazy">
+          <span>Frame 05</span>
+        </article>
+
+        <article class="pola-card is-prev" data-frame="06" data-note="Casting-Reserve · alternative Haltung und Bildwirkung.">
+          <img src="images/pola-06.jpg" data-after="images/after-06.jpg" alt="Pola 06 Fabian Harmuth" class="pola-upgrade" loading="lazy">
+          <span>Frame 06</span>
+        </article>
 
       </div>
 
-      <div class="info">
+      <div class="pola-controls">
+        <button type="button" id="polaPrev" aria-label="Vorheriges Pola">‹</button>
+        <button type="button" id="polaNext" aria-label="Nächstes Pola">›</button>
+      </div>
 
-        <div class="info-grid">
+    </div>
 
-          <div class="info-item">
-            <span class="label">Name</span>
-            <span class="value">Harmuth</span>
-          </div>
+  </section>
 
-          <div class="info-item">
-            <span class="label">Vorname</span>
-            <span class="value">Fabian</span>
-          </div>
+  <section class="measure-section">
 
-          <div class="info-item">
-            <span class="label">Alter</span>
-            <span class="value">29</span>
-          </div>
+    <div class="measure-copy">
+      <div class="kicker dark">Measurements · Casting Data</div>
 
-          <div class="info-item">
-            <span class="label">Wohnort</span>
-            <span class="value">Ulm</span>
-          </div>
+      <h2>Maße<br>& Größen</h2>
 
-          <div class="info-item">
-            <span class="label">Größe</span>
-            <span class="value">1,78 m</span>
-          </div>
+      <p>
+        Kompakte Übersicht für Anfragen, Castings und Produktionen.
+        Die Angaben dienen als aktuelle Orientierung für Styling,
+        Wardrobe und Set-Vorbereitung.
+      </p>
+    </div>
 
-          <div class="info-item">
-            <span class="label">Schuhgröße</span>
-            <span class="value">45</span>
-          </div>
+    <div class="measure-grid">
 
+      <div class="measure-card">
+        <h3>Körpermaße</h3>
+
+        <div class="measure-row">
+          <span>Kopf</span>
+          <strong>57 cm</strong>
         </div>
 
-        <button class="measure-toggle" id="measureToggle">
-          <span>Konfektionsmaße einsehen</span>
-        </button>
-
-        <div class="measure-panel" id="measurePanel">
-
-          <div class="measure-box">
-
-            <h3>
-              Körper<span>|</span>maße
-            </h3>
-
-            <div class="measure-list">
-
-              <div class="measure-row">
-                <em>Kopf</em>
-                <strong>57 cm</strong>
-              </div>
-
-              <div class="measure-row">
-                <em>Hals / Kragen</em>
-                <strong>42 cm</strong>
-              </div>
-
-              <div class="measure-row">
-                <em>Brust</em>
-                <strong>104 cm</strong>
-              </div>
-
-              <div class="measure-row">
-                <em>Taille / Bauch</em>
-                <strong>94 cm</strong>
-              </div>
-
-              <div class="measure-row">
-                <em>Hüfte</em>
-                <strong>102 cm</strong>
-              </div>
-
-            </div>
-
-          </div>
-
-          <div class="measure-box">
-
-            <h3>
-              Kleider<span>|</span>größen
-            </h3>
-
-            <div class="measure-list">
-
-              <div class="measure-row">
-                <em>Jacke</em>
-                <strong>L / 52</strong>
-              </div>
-
-              <div class="measure-row">
-                <em>Hemd</em>
-                <strong>40 / 41</strong>
-              </div>
-
-              <div class="measure-row">
-                <em>Pullover</em>
-                <strong>52 / L</strong>
-              </div>
-
-              <div class="measure-row">
-                <em>T-Shirt</em>
-                <strong>L</strong>
-              </div>
-
-              <div class="measure-row">
-                <em>Polohemden</em>
-                <strong>M</strong>
-              </div>
-
-              <div class="measure-row">
-                <em>Jeans</em>
-                <strong>W34 / L32</strong>
-              </div>
-
-              <div class="measure-row">
-                <em>Schuhgröße</em>
-                <strong>45</strong>
-              </div>
-
-            </div>
-
-          </div>
-
+        <div class="measure-row">
+          <span>Hals / Kragen</span>
+          <strong>42 cm</strong>
         </div>
 
-        <div class="note">
-          Interaktive Blaupause · Portfolio Referenz · Editorial Casting Dossier
+        <div class="measure-row">
+          <span>Brust</span>
+          <strong>104 cm</strong>
         </div>
 
-        <div class="future-note">
-          Weitere Polaroids und Referenzaufnahmen befinden sich derzeit in Ausarbeitung.
+        <div class="measure-row">
+          <span>Taille / Bauch</span>
+          <strong>94 cm</strong>
         </div>
-<div class="future-note">
-  Weitere Polaroids und Referenzaufnahmen befinden sich derzeit in Ausarbeitung.
-</div>
 
-<a class="sedcard-download" href="Fabian%20Harmuth%20Sedcard.pdf" download>
-  Sedcard PDF herunterladen
-</a>
-    </section>
+        <div class="measure-row">
+          <span>Hüfte</span>
+          <strong>102 cm</strong>
+        </div>
+      </div>
 
-  </div>
+      <div class="measure-card accent-card">
+        <h3>Kleidergrößen</h3>
+
+        <div class="measure-row">
+          <span>Jacke</span>
+          <strong>L / 52</strong>
+        </div>
+
+        <div class="measure-row">
+          <span>Hemd</span>
+          <strong>40 / 41</strong>
+        </div>
+
+        <div class="measure-row">
+          <span>Pullover</span>
+          <strong>52 / L</strong>
+        </div>
+
+        <div class="measure-row">
+          <span>T-Shirt</span>
+          <strong>L</strong>
+        </div>
+
+        <div class="measure-row">
+          <span>Polohemden</span>
+          <strong>M</strong>
+        </div>
+
+        <div class="measure-row">
+          <span>Jeans</span>
+          <strong>W34 / L32</strong>
+        </div>
+
+        <div class="measure-row">
+          <span>Schuhgröße</span>
+          <strong>45</strong>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <section class="download-section">
+    <div>
+      <div class="kicker dark">Sedcard · PDF</div>
+      <h2>Download</h2>
+    </div>
+
+    <a class="sedcard-download" href="Fabian%20Harmuth%20Sedcard.pdf" download>
+      Sedcard PDF herunterladen
+    </a>
+  </section>
+
+  <footer class="pola-foot">
+    <span>Ulm · Fabian Harmuth · Polaroid Reference</span>
+    <span class="foot-dot"></span>
+  </footer>
 
 </main>
+
+<div class="pola-viewer" id="polaViewer" aria-hidden="true">
+  <button class="pola-viewer-close" id="polaViewerClose" type="button" aria-label="Bild schließen">×</button>
+
+  <div class="pola-viewer-stage" id="polaViewerStage">
+    <img id="polaViewerImg" src="" alt="">
+  </div>
+
+  <div class="pola-viewer-hint">
+    Mausrad = Zoom · Maus bewegen = Ausschnitt · ESC = schließen
+  </div>
+</div>
+
 <script src="assets/js/cursor.js"></script>
 <script src="assets/js/blaupause-polaroids.js"></script>
+
 </body>
 </html>
