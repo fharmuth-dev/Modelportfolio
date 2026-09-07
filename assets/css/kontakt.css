@@ -50,31 +50,7 @@ textarea{
 }
 
 
-/* Custom Cursor wie Landingpage */
-#cursor{
-  position:fixed;
-  width:6px;
-  height:6px;
-  border-radius:50%;
-  background:var(--beige);
-  pointer-events:none;
-  z-index:9999;
-  transform:translate(-50%,-50%);
-  mix-blend-mode:difference;
-  opacity:.82;
-}
-
-#cursor-ring{
-  position:fixed;
-  width:26px;
-  height:26px;
-  border:1px solid rgba(202,184,159,.2);
-  border-radius:50%;
-  pointer-events:none;
-  z-index:9998;
-  transform:translate(-50%,-50%);
-  opacity:.58;
-}
+/* Custom Cursor — Basis-Styles kommen aus assets/css/cursor.css (auf jeder Seite eingebunden) */
 
 .page-grain{
   position:fixed;

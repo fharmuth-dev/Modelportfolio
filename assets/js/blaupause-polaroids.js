@@ -3,16 +3,23 @@
    ========================================================= */
 
 
-/* 01 · Progressive Image Upgrade */
-window.addEventListener('load', () => {
+/* 01 · Progressive Image Upgrade
+   Kleine Polas laden sofort, die HQ-Version aus data-after lädt erst,
+   sobald die jeweilige Karte tatsächlich in den sichtbaren Bereich
+   scrollt (statt pauschal alle sechs HQ-Dateien direkt nachzuladen). */
+(() => {
   const upgradeImages = Array.from(document.querySelectorAll('.pola-upgrade[data-after]'));
 
   if(!upgradeImages.length) return;
 
+  const saveData = 'connection' in navigator && navigator.connection && navigator.connection.saveData;
+
   const upgradeSingleImage = img => {
     const afterSrc = img.dataset.after;
 
-    if(!afterSrc || img.dataset.upgraded === 'true') return;
+    if(!afterSrc || img.dataset.upgraded === 'true' || img.dataset.upgraded === 'loading') return;
+
+    img.dataset.upgraded = 'loading';
 
     const afterImage = new Image();
 
@@ -34,19 +41,27 @@ window.addEventListener('load', () => {
     afterImage.src = afterSrc;
   };
 
-  const runQueue = async () => {
-    for(const img of upgradeImages){
-      upgradeSingleImage(img);
-      await new Promise(resolve => setTimeout(resolve, 240));
-    }
-  };
+  if(saveData) return;
 
-  if('requestIdleCallback' in window){
-    requestIdleCallback(runQueue, {timeout:2200});
+  if('IntersectionObserver' in window){
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if(!entry.isIntersecting) return;
+
+        upgradeSingleImage(entry.target);
+        obs.unobserve(entry.target);
+      });
+    }, {rootMargin:'600px 0px', threshold:0.01});
+
+    upgradeImages.forEach(img => observer.observe(img));
   }else{
-    window.setTimeout(runQueue, 900);
+    window.addEventListener('load', () => {
+      upgradeImages.forEach((img, index) => {
+        window.setTimeout(() => upgradeSingleImage(img), index * 240 + 900);
+      });
+    });
   }
-});
+})();
 
 
 /* 02 · Pola Stack / Carousel */
@@ -233,7 +248,7 @@ if(polaViewer && polaViewerStage && polaViewerImg){
     polaViewer.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('viewer-open');
 
-    polaViewerImg.src = '';
+    polaViewerImg.removeAttribute('src');
     currentHighSrc = null;
 
     resetViewer();

@@ -4,19 +4,28 @@
 
 
 /* 03.01 · Progressive Image Upgrade
-   Low-Quality-Bilder werden sofort angezeigt.
-   High-Quality-Bilder aus data-after laden im Hintergrund
-   und ersetzen danach weich das sichtbare Bild. */
+   Kleine, komprimierte Bilder werden sofort angezeigt.
+   Die HQ-Version aus data-after wird erst geladen, sobald das jeweilige
+   Bild tatsächlich in (oder nahe) den sichtbaren Bereich scrollt, und
+   ersetzt danach weich das sichtbare Bild. So bekommt jeder Besucher am
+   Ende die volle Qualität, ohne dass beim Seitenaufbau pauschal alle
+   HQ-Dateien im Hintergrund geladen werden. */
 
-window.addEventListener('load', () => {
+(() => {
   const upgradeImages = Array.from(document.querySelectorAll('.upgrade-img[data-after]'));
 
   if(!upgradeImages.length) return;
 
+  // Nutzer mit aktivem Datensparmodus bekommen die HQ-Stufe nur noch
+  // auf explizite Aktion hin (z. B. Doppelklick-Zoom), nicht automatisch.
+  const saveData = 'connection' in navigator && navigator.connection && navigator.connection.saveData;
+
   const upgradeSingleImage = img => {
     const afterSrc = img.dataset.after;
 
-    if(!afterSrc || img.dataset.upgraded === 'true') return;
+    if(!afterSrc || img.dataset.upgraded === 'true' || img.dataset.upgraded === 'loading') return;
+
+    img.dataset.upgraded = 'loading';
 
     const afterImage = new Image();
 
@@ -38,19 +47,29 @@ window.addEventListener('load', () => {
     afterImage.src = afterSrc;
   };
 
-  const runQueue = async () => {
-    for(const img of upgradeImages){
-      upgradeSingleImage(img);
-      await new Promise(resolve => setTimeout(resolve, 260));
-    }
-  };
+  if(saveData) return;
 
-  if('requestIdleCallback' in window){
-    requestIdleCallback(runQueue, {timeout:2500});
+  if('IntersectionObserver' in window){
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if(!entry.isIntersecting) return;
+
+        upgradeSingleImage(entry.target);
+        obs.unobserve(entry.target);
+      });
+    }, {rootMargin:'600px 0px', threshold:0.01});
+
+    upgradeImages.forEach(img => observer.observe(img));
   }else{
-    window.setTimeout(runQueue, 900);
+    // Fallback für sehr alte Browser ohne IntersectionObserver:
+    // gestaffelt nach dem Laden nachladen statt aller Bilder auf einmal.
+    window.addEventListener('load', () => {
+      upgradeImages.forEach((img, index) => {
+        window.setTimeout(() => upgradeSingleImage(img), index * 260 + 900);
+      });
+    });
   }
-});
+})();
 
 
 /* 03.02 · Off The Beaten Track Carousel */
@@ -161,65 +180,7 @@ if(offtrackCarousel){
 }
 
 
-/* 03.03 · Legal Gate / Datenschutz / Impressum */
-
-const legalGate = document.getElementById('legalGate');
-const legalContent = document.getElementById('legalContent');
-
-if(legalGate && legalContent){
-  legalGate.addEventListener('click', () => {
-    const isVisible = legalContent.classList.toggle('visible');
-
-    legalGate.setAttribute('aria-expanded', isVisible ? 'true' : 'false');
-
-    const gateText = legalGate.querySelector('span');
-
-    if(gateText){
-      gateText.innerText = isVisible
-        ? 'Datenschutz & Impressum ausblenden'
-        : 'Datenschutz & Impressum einsehen';
-    }
-  });
-}
-
-document.querySelectorAll('.legal-toggle').forEach(button => {
-  button.addEventListener('click', () => {
-    const target = document.getElementById(button.dataset.legal);
-
-    if(!target) return;
-
-    document.querySelectorAll('.legal-panel').forEach(panel => {
-      if(panel !== target){
-        panel.classList.remove('active');
-      }
-    });
-
-    target.classList.toggle('active');
-  });
-});
-
-const imprintBtn = document.getElementById('showImprintBtn');
-const imprintContent = document.getElementById('imprintContent');
-const imprintAddress = document.getElementById('imprintAddress');
-
-if(imprintBtn && imprintContent && imprintAddress){
-  imprintBtn.addEventListener('click', () => {
-    const addressLines = [
-      'Fabian Harmuth',
-      'Schneckweg 1',
-      '89079 Ulm',
-      'Deutschland'
-    ];
-
-    imprintAddress.innerHTML = addressLines.join('<br>');
-    imprintContent.classList.add('visible');
-    imprintBtn.innerText = 'Adresse freigeschaltet';
-    imprintBtn.disabled = true;
-  });
-}
-
-
-/* 03.04 · Globaler Portfolio Bild-Viewer
+/* 03.03 · Globaler Portfolio Bild-Viewer
    Doppelklick auf jedes Portfolio-Bild öffnet den Viewer.
    Mausrad zoomt.
    Mausbewegung verschiebt den Ausschnitt.
@@ -317,7 +278,7 @@ if(portfolioViewer && portfolioViewerStage && portfolioViewerImg){
     document.body.classList.remove('viewer-open');
 
     portfolioViewerStage.classList.remove('is-loupe');
-    portfolioViewerImg.src = '';
+    portfolioViewerImg.removeAttribute('src');
     currentHighSrc = null;
     loupeActive = false;
 

@@ -35,31 +35,7 @@ body{
 img{display:block;max-width:100%;}
 a{color:inherit;text-decoration:none;}
 
-/* 02.03 · Custom Cursor */
-#cursor{
-  position:fixed;
-  width:6px;
-  height:6px;
-  border-radius:50%;
-  background:var(--beige);
-  pointer-events:none;
-  z-index:9999;
-  transform:translate(-50%,-50%);
-  mix-blend-mode:difference;
-  opacity:.82;
-}
-
-#cursor-ring{
-  position:fixed;
-  width:26px;
-  height:26px;
-  border:1px solid rgba(202,184,159,.2);
-  border-radius:50%;
-  pointer-events:none;
-  z-index:9998;
-  transform:translate(-50%,-50%);
-  opacity:.58;
-}
+/* 02.03 · Custom Cursor — Basis-Styles kommen aus assets/css/cursor.css (auf jeder Seite eingebunden) */
 
 .hero-grain{
   position:fixed;
@@ -602,9 +578,10 @@ a{color:inherit;text-decoration:none;}
 }
 
 
-/* 02.06.01 · Progressive Upgrade nur für Streetstyle-Serie
-   Erst werden best-05 bis best-08 angezeigt. Nach vollständigem Seitenaufbau
-   laden After-01 bis After-04 im Hintergrund und ersetzen die kleinen Dateien weich. */
+/* 02.06.01 · Progressive Upgrade (nicht nur Streetstyle, siehe .upgrade-img[data-after])
+   Die kleinen Grid-Bilder (street-01…04.webp) werden sofort angezeigt.
+   Die HQ-Varianten (street-01-hd…04-hd.webp) laden erst nach, sobald das
+   jeweilige Bild in den sichtbaren Bereich scrollt (siehe landingpage.js). */
 .upgrade-img{
   opacity:1;
   transition:
@@ -838,7 +815,6 @@ a{color:inherit;text-decoration:none;}
   to{opacity:1;transform:translateY(0);}
 }
 
-/* 02.09 · Serie 5: Off The Beaten Track */
 /* 02.09 · Serie 5: Off The Beaten Track */
 .offtrack-gallery{
   background:linear-gradient(180deg,var(--gallery) 0%,var(--gallery2) 40%,#c0ab92 100%);
@@ -1125,177 +1101,75 @@ a{color:inherit;text-decoration:none;}
   }
 }
 
-}
-/* =========================================================
-   LEGAL / IMPRESSUM / DATENSCHUTZ
-   ========================================================= */
-
-.legal-footer{
-  position:relative;
-  padding:96px 48px 86px;
-  background:#080605;
-  border-top:1px solid rgba(238,229,216,.07);
-  overflow:hidden;
-  z-index:10;
-}
-
-.legal-shell{
-  position:relative;
-  z-index:2;
-  max-width:1180px;
-  margin:0 auto;
-}
-
-.legal-separator{
-  position:relative;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  margin-bottom:42px;
-
-}
-
-
-}
-.legal-gate{
-  position:relative;
-  width:min(100%,560px);
-  padding:18px 26px;
-  border:1px solid rgba(238,229,216,.11);
-  background:rgba(18,14,11,.78);
-  color:var(--off);
-  font-family:var(--mono);
-  font-size:11px;
-  letter-spacing:.18em;
-  line-height:1.4;
-  text-transform:uppercase;
-  cursor:pointer;
-  overflow:hidden;
-  text-align:center;
-  transition:
-    transform .35s ease,
-    border-color .35s ease,
-    background .35s ease,
-    box-shadow .35s ease;
-
-}
-
-.legal-gate:hover{
-  transform:translateY(-2px);
-  border-color:rgba(192,122,73,.42);
-  background:rgba(32,24,18,.92);
-  box-shadow:0 18px 46px rgba(0,0,0,.28);
-}
-
-.legal-content{
-  max-height:0;
-  overflow:hidden;
-  opacity:0;
-  transition:
-    max-height .7s ease,
-    opacity .4s ease,
-    margin-top .4s ease;
-}
-
-.legal-content.visible{
-  max-height:5000px;
-  opacity:1;
-  margin-top:42px;
-}
-
-.legal-tabs{
-  display:flex;
-  gap:12px;
-  flex-wrap:wrap;
-  margin-bottom:24px;
-}
-
-.legal-toggle{
-  padding:12px 18px;
-  border:1px solid rgba(238,229,216,.1);
-  background:rgba(18,14,11,.72);
+/* 02.09b · Serie 6 (Bonus): Konzept / Charakterrollen
+   Eigenständiger, in sich geschlossener Block statt Erweiterung der
+   bestehenden .street-gallery/.adapt-gallery/.character-gallery-Selektoren,
+   damit die bestehenden Serien unangetastet bleiben. */
+.bonus-gallery{
+  background:
+    radial-gradient(circle at 20% 20%, rgba(153,87,50,.16), transparent 34%),
+    radial-gradient(circle at 84% 70%, rgba(31,59,45,.28), transparent 36%),
+    linear-gradient(180deg,#110d0a 0%,#1b130f 48%,#100b08 100%);
   color:var(--text);
-  font-size:11px;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  cursor:pointer;
-  transition:.3s ease;
 }
 
-.legal-toggle:hover{
-  border-color:rgba(192,122,73,.38);
+.bonus-gallery .gallery-top{
+  border-top:1px solid rgba(238,229,216,.1);
 }
 
-.legal-panel{
-  display:none;
-  padding:32px;
-  background:rgba(18,14,11,.55);
+.bonus-gallery .gallery-top h2{
+  color:var(--off);
+}
+
+.bonus-gallery .gallery-chem{
+  background:rgba(34,27,21,.72);
   border:1px solid rgba(238,229,216,.08);
 }
 
-.legal-panel.active{
-  display:block;
+.bonus-gallery .gallery-chem::before{
+  content:"CONCEPT INDEX";
+  color:rgba(238,229,216,.28);
 }
 
-.legal-panel h3{
-  margin:0 0 18px;
-  font-family:var(--serif);
-  font-size:24px;
+.bonus-gallery .gallery-chem-title{
   color:var(--off);
 }
 
-.legal-panel p,
-.legal-panel li{
-  color:rgba(238,229,216,.76);
-  line-height:1.8;
+.bonus-gallery .gallery-chem-title span{
+  color:var(--accent-light);
 }
 
-.imprint-content{
-  margin-top:18px;
+.bonus-gallery .gallery-chem-line{
+  color:rgba(238,229,216,.72);
+  font-size:12.5px;
 }
 
-.imprint-content.visible{
-  display:block;
+.bonus-gallery .ink-splatter{
+  filter:invert(1);
+  opacity:.18;
 }
 
-.imprint-address{
-  margin-top:18px;
-  color:rgba(238,229,216,.78);
-  line-height:1.8;
+.bonus-gallery .card{
+  background:#16110e;
+  border:1px solid rgba(238,229,216,.08);
+  box-shadow:0 24px 60px rgba(0,0,0,.42);
 }
 
-/* =========================================================
-   MOBILE
-   ========================================================= */
+.bonus-gallery .card img{
+  filter:contrast(1.03) saturate(.9) brightness(.9);
+}
 
-@media(max-width:980px){
+.bonus-gallery .card:hover img{
+  filter:contrast(1.08) saturate(1.08) brightness(1.02);
+}
 
-  .legal-footer{
-    padding:74px 22px 62px;
-  }
+.bonus-gallery .gallery-credit{
+  color:rgba(238,229,216,.58);
+  text-align:left;
+}
 
-  .legal-separator{
-    grid-template-columns:1fr;
-    gap:18px;
-  }
-
-  .legal-separator::before,
-  .legal-separator::after{
-    display:none;
-  }
-
-  .legal-gate{
-    width:100%;
-    min-width:0;
-  }
-
-  .legal-panel{
-    padding:22px;
-  }
-
-  .legal-panel h3{
-    font-size:20px;
-  }
+.bonus-grid{
+  grid-template-columns:repeat(3,1fr);
 }
 
 /* 02.09 · Barrierefreiheit & Responsive */
@@ -1375,34 +1249,175 @@ a{color:inherit;text-decoration:none;}
     text-align:left;
     margin-top:22px;
   }
+}
 
-  .legal-footer{
-    padding:70px 22px 62px;
+/* 02.10 · Hero CTA */
+.hero-cta{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  margin-top:40px;
+  padding-bottom:6px;
+  width:fit-content;
+  font-size:11px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--off);
+  border-bottom:1px solid rgba(202,184,159,.3);
+  opacity:0;
+  animation:fadeUp .8s 1.15s ease forwards;
+  transition:border-color .3s ease, color .3s ease, gap .3s ease;
+}
+
+.hero-cta:hover{
+  color:var(--accent-light);
+  border-color:var(--accent-light);
+  gap:14px;
+}
+
+/* 02.11 · Abschluss / Call To Action */
+.closing-cta{
+  position:relative;
+  padding:130px 48px 140px;
+  background:linear-gradient(180deg,#0c0906 0%,#120e0b 100%);
+  color:var(--text);
+  text-align:center;
+  overflow:hidden;
+}
+
+.closing-cta::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(153,87,50,.16), transparent 46%);
+  pointer-events:none;
+}
+
+.closing-inner{
+  position:relative;
+  z-index:2;
+  max-width:720px;
+  margin:0 auto;
+}
+
+.closing-cta .kicker{
+  justify-content:center;
+  display:flex;
+  animation:none;
+  opacity:1;
+}
+
+.closing-title{
+  margin:18px 0 26px;
+  font-family:var(--serif);
+  font-size:clamp(42px,6vw,80px);
+  line-height:.96;
+  letter-spacing:-.05em;
+  font-weight:400;
+  color:var(--off);
+}
+
+.closing-text{
+  max-width:520px;
+  margin:0 auto 44px;
+  font-size:13.5px;
+  line-height:1.85;
+  color:rgba(238,229,216,.66);
+}
+
+.closing-actions{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:14px;
+}
+
+.btn-primary,
+.btn-secondary{
+  padding:16px 26px;
+  font-size:11px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  border:1px solid transparent;
+  transition:.3s ease;
+}
+
+.btn-primary{
+  background:var(--accent);
+  color:var(--off);
+  border-color:var(--accent);
+}
+
+.btn-primary:hover{
+  background:var(--accent-light);
+  border-color:var(--accent-light);
+  transform:translateY(-2px);
+}
+
+.btn-secondary{
+  background:transparent;
+  color:var(--text);
+  border-color:rgba(238,229,216,.18);
+}
+
+.btn-secondary:hover{
+  border-color:rgba(238,229,216,.42);
+  transform:translateY(-2px);
+}
+
+@media(max-width:640px){
+  .closing-cta{
+    padding:96px 24px 110px;
   }
 
-  .legal-separator{
-    grid-template-columns:1fr;
-    gap:18px;
-  }
-
-  .legal-separator::before,
-  .legal-separator::after{
-    display:none;
-  }
-
-  .legal-gate,
-  .legal-toggle{
-    width:100%;
-  }
-
-  .legal-panel{
-    padding:24px 20px;
-  }
-
-  .legal-headline h3{
-    font-size:clamp(42px,14vw,62px);
+  .closing-actions{
+    flex-direction:column;
+    align-items:stretch;
   }
 }
+
+/* 02.12 · Footer */
+.foot{
+  position:relative;
+  z-index:5;
+  width:min(1120px,100%);
+  margin:0 auto;
+  padding:26px 48px 40px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+  background:#0c0906;
+  color:var(--text-dim);
+  font-size:10px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+
+.foot .foot-dot{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:var(--green-light);
+  opacity:.75;
+  animation:blink 2.8s ease-in-out infinite;
+}
+
+@keyframes blink{
+  0%,100%{opacity:.85;}
+  50%{opacity:.24;}
+}
+
+@media(max-width:640px){
+  .foot{
+    padding:22px 22px 34px;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:10px;
+  }
+}
+
 /* Globaler Portfolio Bild-Viewer */
 body.viewer-open{
   overflow:hidden;

@@ -576,23 +576,32 @@ button{
 }
 
 .pola-controls{
-  right:auto;
-  transform:none;
-  margin-top:-12px;
-  margin-bottom:24px;
-
+  position:absolute;
+  top:50%;
+  left:298px;
+  right:0;
+  z-index:9;
+  display:flex;
+  justify-content:space-between;
+  padding:0 18px;
+  transform:translateY(-50%);
+  pointer-events:none;
 }
 
 .pola-controls button{
   width:54px;
   height:54px;
   border:1px solid rgba(21,16,13,.12);
-  background:rgba(255,250,244,.62);
+  background:rgba(255,250,244,.72);
   color:var(--ink);
   font-family:var(--serif);
   font-size:38px;
   line-height:1;
   cursor:pointer;
+  pointer-events:auto;
+  backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);
+  box-shadow:0 14px 34px rgba(41,28,17,.18);
   transition:.28s ease;
 }
 
@@ -911,18 +920,20 @@ body.viewer-open{
   }
 
   .pola-showcase{
-    grid-template-columns:1fr;
     min-height:auto;
-    gap:26px;
+    display:flex;
+    flex-direction:column;
+    gap:0;
   }
 
   .pola-inspector{
-    order:2;
+    order:3;
   }
 
   .pola-stack{
     order:1;
     height:620px;
+    width:100%;
     overflow:visible;
   }
 
@@ -935,13 +946,13 @@ body.viewer-open{
   }
 
 .pola-controls{
-  position:relative;
-  right:auto;
-  bottom:auto;
+  position:static;
   justify-content:center;
   order:2;
-  margin-top:-18px;
-  margin-bottom:26px;
+  display:flex;
+  gap:12px;
+  margin:18px 0 28px;
+  transform:none;
 }
 
   .measure-grid{
@@ -1075,45 +1086,8 @@ body.viewer-open{
   .pola-foot{
     flex-direction:column;
   }
-}
-@media(max-width:980px){
-  .pola-showcase{
-    display:flex;
-    flex-direction:column;
-    gap:0;
-  }
-
-  .pola-stack{
-    order:1;
-    height:620px;
-    width:100%;
-  }
 
   .pola-controls{
-    order:2;
-    position:static;
-    display:flex;
-    justify-content:center;
-    gap:12px;
-    margin:18px 0 28px;
-    transform:none;
-  }
-
-  .pola-inspector{
-    order:3;
-  }
-}
-
-@media(max-width:560px){
-  .pola-stack{
-    height:560px;
-  }
-
-  .pola-controls{
-    position:static;
     margin:16px 0 26px;
-    transform:none;
-    right:auto;
-    bottom:auto;
   }
 }
